@@ -93,8 +93,8 @@ var levelLoop = function(){
 							switch(levelGrid){
 								case 'g': img = greenBlockImg; break;
 								case 'r': img = redBlockImg; break;
-								case 'G': img = greenBlockImg; break;
-								case 'R': img = redBlockImg; break;
+								case 'G': img = greenPointImg; break;
+								case 'R': img = redPointImg; break;
 								case 't': img = destroyedImg; break;
 								case 'B': img = platformOneImg; break;
 								case 'M': img = platformTwoImg; break;

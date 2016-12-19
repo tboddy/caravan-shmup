@@ -1,6 +1,7 @@
 var startedGame = false, startLoopInterval;
 
 var initStart = function(){
+	// initGame()
 	startLoopInterval = setInterval(startLoop, 1000 / fps);
 	startControls();
 };

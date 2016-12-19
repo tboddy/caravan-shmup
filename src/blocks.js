@@ -5,6 +5,7 @@ var updateBlocks = function(){
 				var gridChar = gridPositions[i].grids[j].char;
 				if(gridChar.indexOf('(') > -1) gridChar = gridChar.substring(0, gridChar.indexOf('('));
 				var gridObj = {x: gridPositions[i].grids[j].x, y: gridPositions[i].y, char: gridChar};
+				gridChar = gridChar.trim();
 				if(gridChar == 'g' || gridChar == 'G' || gridChar == 'r' || gridChar == 'R') checkBlockCollision(gridObj);
 				else if(gridChar == 'k' || gridChar == 'K' || gridChar == 'l' || gridChar == 'L') checkBigBlockCollision(gridObj);
 			});

@@ -6,7 +6,7 @@ var shootingLoop = function(){
 	var update = function(){
 		if(shot && (gameClock % shotClock == 0)){
 			var shotX = playerX + (playerWidth / 2) - (shotWidth / 2);
-			var shotObj = {x: shotX, y: playerY - (grid)};
+			var shotObj = {x: shotX, y: playerY - ((grid / 3) * 2)};
 			switch(currentPowerup){
 				case 1: shots.one.push(shotObj); break;
 				case 2:
@@ -14,17 +14,17 @@ var shootingLoop = function(){
 					shots.twoBottom.push({x: shotX + (grid / 8), y: playerY + (grid * 1.5)});
 					break;
 				case 3:
-					shots.three.push({x: shotX + (grid / 8), y: playerY - grid});
+					shots.three.push({x: shotX + (grid / 8), y: playerY - ((grid / 3) * 2)});
 					shots.threeBottom.push({x: shotX + (grid / 8), y: playerY + (grid * 1.5)});
-					shots.threeLeft.push({x: shotX - grid, y: playerY - (grid / 2)});
-					shots.threeRight.push({x: shotX + grid, y: playerY - (grid / 2)});
+					shots.threeLeft.push({x: shotX - grid, y: playerY - (grid / 4)});
+					shots.threeRight.push({x: shotX + grid, y: playerY - (grid / 4)});
 					break;
 				case 4:
 					shots.four.push(shotObj);
-					shots.fourTopLeft.push({x: shotX - grid, y: playerY - (grid / 2)});
-					shots.fourTopRight.push({x: shotX + grid, y: playerY - (grid / 2)});
-					shots.fourBottomLeft.push({x: shotX - grid, y: playerY + (grid + (grid / 4))});
-					shots.fourBottomRight.push({x: shotX + grid, y: playerY + (grid + (grid / 4))});
+					shots.fourTopLeft.push({x: shotX - grid, y: playerY - (grid / 4)});
+					shots.fourTopRight.push({x: shotX + grid, y: playerY - (grid / 4)});
+					shots.fourBottomLeft.push({x: shotX - grid, y: playerY + (grid * 1.25)});
+					shots.fourBottomRight.push({x: shotX + grid, y: playerY + (grid * 1.25)});
 					break;
 			};
 		}
@@ -120,7 +120,7 @@ var shootBulletThreeBottom = function(shotItem, i){
 	}
 };
 
-var shootSideSpeed = shotSpeed / 2;
+var shootSideSpeed = shotSpeed;
 
 var shootBulletThreeLeft = function(shotItem, i){
 	if(checkBulletBounds(shotItem)){

@@ -1,5 +1,5 @@
 var enemies = {
-	small: {one: [], two: []},
+	small: {one: [], two: [], three: []},
 	medium: {one: []}
 };
 
@@ -18,9 +18,7 @@ var enemiesLoop = function(){
 				if(enemyObj.y + opts.height < 0 && (enemyObj.direction && (enemyObj.direction != 'up') || !enemyObj.direction)) enemyObj.y += levelSpeed;
 				if(enemyObj.y + opts.height >= 0){
 				enemyObj = opts.animation(enemyObj, opts.width, opts.height, i, opts.arr);
-
 					context.drawImage(opts.img, enemyObj.x, enemyObj.y);
-
 					var enemyCollisionEl = {x: enemyObj.x, y: enemyObj.y, width: opts.width, height: opts.height};
 					checkBulletCollision(enemyCollisionEl, function(){
 						explodeEntity(enemyCollisionEl);
@@ -63,7 +61,20 @@ var enemiesLoop = function(){
 				width: grid,
 				height: grid,
 				animation: enemyAnimations.smallTwo,
-				score: 300
+				score: 300,
+				hits: 2
+			};
+			drawEnemy(opts);
+		};
+
+		var drawEnemySmallThree = function(){
+			var opts = {
+				arr: enemies.small.three,
+				img: enemySmallTwoImg,
+				width: grid,
+				height: grid,
+				animation: enemyAnimations.smallThree,
+				score: 500
 			};
 			drawEnemy(opts);
 		};
@@ -76,7 +87,7 @@ var enemiesLoop = function(){
 				height: grid * 2,
 				animation: enemyAnimations.mediumOne,
 				score: 1000,
-				hits: 3
+				hits: 5
 			};
 			drawEnemy(opts);
 		};
@@ -84,6 +95,7 @@ var enemiesLoop = function(){
 
 		if(enemies.small.one.length) drawEnemySmallOne();
 		if(enemies.small.two.length) drawEnemySmallTwo();
+		if(enemies.small.three.length) drawEnemySmallThree();
 		if(enemies.medium.one.length) drawEnemyMediumOne();
 
 	};
@@ -96,19 +108,30 @@ var enemiesLoop = function(){
 // animations
 
 var enemyAnimations = {
-
 	smallOne: function(enemyObj){
 		if(enemyObj.y + grid >= 0) enemyObj.y += (levelSpeed / 4) * 3;
 		enemyObj = sineCurve(enemyObj, (grid / 5) * 2, grid * 4);
 		return enemyObj;
 	},
-
-	smallTwo: function(enemyObj, enemyWidth, enemyHeight, i, enemyArr){
+	smallTwo: function(enemyObj, enemyWidth, enemyHeight){
 		if(enemyObj.y + grid >= 0) enemyObj.y += levelSpeed;
 		enemyObj = sineCurve(enemyObj, grid / 3, grid * 3);
 		return enemyObj;
 	},
-
+	smallThree: function(enemyObj, enemyWidth, enemyHeight, i, enemyArr){
+		if(enemyObj.y + enemyWidth >= 0){
+			let ySpeed = levelSpeed;
+			if(enemyObj.y + grid > grid){
+				if(enemyObj.y + enemyObj.height < playerY){
+					if(enemyObj.x + enemyWidth < playerX) enemyObj.x += grid / 2;
+					else if(enemyObj.x + enemyObj.width > playerX + playerWidth) enemyObj.x -= grid / 2;
+					if(enemyObj.x + enemyWidth >= playerX - grid && enemyObj.x + enemyObj.width < playerX + playerWidth + grid) ySpeed = levelSpeed * 3.5;
+				} else ySpeed = levelSpeed * 3.5;
+			}
+			enemyObj.y += ySpeed;
+		}
+		return enemyObj;
+	},
 	mediumOne: function(enemyObj){
 		if((enemyObj.y + enemyObj.height) >= gameHeight / 2) enemyObj.direction = 'up';
 		if(enemyObj.direction == 'up'){
@@ -120,5 +143,4 @@ var enemyAnimations = {
 		else enemyObj.y += levelSpeed * 2;
 		return enemyObj;
 	}
-
 };

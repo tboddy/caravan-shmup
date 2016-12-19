@@ -1,6 +1,5 @@
 var canvas = document.getElementById('canvas'), canvasEl = $('canvas'), fps = 29.97, gameClock = 0, grid = 16, gameHeight = 240, gameWidth = 256, isFullscreen = false, gameLoopInterval, 
-	browserWindow = require('electron').remote, dropXSpeed = grid  / 3, dropXMax = grid * 6, storage = require('electron-json-storage'), savedData = {},
-	fpsmeter = new FPSMeter({decimals: 0, graph: true, theme: 'dark', left: '5px', top: ((gameHeight * 3) - 45) + 'px'});
+	browserWindow = require('electron').remote, dropXSpeed = grid  / 3, dropXMax = grid * 6, storage = require('electron-json-storage'), savedData = {}, fpsmeter;
 var context = canvas.getContext('2d'), mainWindow = browserWindow.getCurrentWindow();
 
 var init = function(){
@@ -11,15 +10,17 @@ var init = function(){
 };
 
 var initGame = function(){
-	gameLoopInterval = setInterval(gameLoop, 1000 / fps);
+	// fpsmeter = new FPSMeter({decimals: 0, graph: true, theme: 'dark', left: '5px', top: ((gameHeight * 3) - 45) + 'px'});
 	$(window).resize(resizeGame);
 	setupLevel();
 	setupPlayer();
 	setupHighScore();
+	gameLoopInterval = setInterval(gameLoop, 1000 / fps);
+	gameLoop();
 };
 
 var gameLoop = function(){
-	fpsmeter.tickStart();
+	// fpsmeter.tickStart();
 	if(gameClock >= 4000) mainWindow.reload();
 	clearGame();
 	levelLoop();
@@ -32,7 +33,7 @@ var gameLoop = function(){
 	playerLoop();
 	hudLoop();
 	gameClock++;
-	fpsmeter.tick();
+	// fpsmeter.tick();
 };
 
 var resizeGame = function(){
