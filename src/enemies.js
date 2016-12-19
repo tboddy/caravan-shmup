@@ -1,0 +1,124 @@
+var enemies = {
+	small: {one: [], two: []},
+	medium: {one: []}
+};
+
+const enemySmallOneImg = new Image(), enemySmallTwoImg = new Image(),
+	enemyMediumOneImg = new Image();
+enemySmallOneImg.src = 'img/enemysmallone.png';
+enemySmallTwoImg.src = 'img/enemysmalltwo.png';
+enemyMediumOneImg.src = 'img/enemymediumone.png';
+
+var enemiesLoop = function(){
+
+	var draw = function(){
+
+		var drawEnemy = function(opts){
+			opts.arr.forEach(function(enemyObj, i){
+				if(enemyObj.y + opts.height < 0 && (enemyObj.direction && (enemyObj.direction != 'up') || !enemyObj.direction)) enemyObj.y += levelSpeed;
+				if(enemyObj.y + opts.height >= 0){
+				enemyObj = opts.animation(enemyObj, opts.width, opts.height, i, opts.arr);
+
+					context.drawImage(opts.img, enemyObj.x, enemyObj.y);
+
+					var enemyCollisionEl = {x: enemyObj.x, y: enemyObj.y, width: opts.width, height: opts.height};
+					checkBulletCollision(enemyCollisionEl, function(){
+						explodeEntity(enemyCollisionEl);
+						if(enemyObj.hits){
+							enemyObj.hits -= 1;
+						} else {
+							opts.arr.splice(i, 1);
+							score += opts.score;
+						}
+					});
+					if(canGetHit){
+						checkCollision(enemyCollisionEl, {x: playerX, y: playerY, width: opts.width, height: opts.height}, function(){
+							getHit(opts.arr, i);
+						});
+					}
+					if(enemyObj.y + opts.height < 0 && enemyObj.direction){
+						if(enemyObj.direction == 'up') opts.arr.splice(i, 1);
+					}
+					if(enemyObj.y >= gameHeight) opts.arr.splice(i, 1);
+				}
+			});
+		};
+
+		var drawEnemySmallOne = function(){
+			var opts = {
+				arr: enemies.small.one,
+				img: enemySmallOneImg,
+				width: grid,
+				height: grid,
+				animation: enemyAnimations.smallOne,
+				score: 300
+			};
+			drawEnemy(opts);
+		};
+
+		var drawEnemySmallTwo = function(){
+			var opts = {
+				arr: enemies.small.two,
+				img: enemySmallTwoImg,
+				width: grid,
+				height: grid,
+				animation: enemyAnimations.smallTwo,
+				score: 300
+			};
+			drawEnemy(opts);
+		};
+
+		var drawEnemyMediumOne = function(){
+			var opts = {
+				arr: enemies.medium.one,
+				img: enemyMediumOneImg,
+				width: grid * 2,
+				height: grid * 2,
+				animation: enemyAnimations.mediumOne,
+				score: 1000,
+				hits: 3
+			};
+			drawEnemy(opts);
+		};
+
+
+		if(enemies.small.one.length) drawEnemySmallOne();
+		if(enemies.small.two.length) drawEnemySmallTwo();
+		if(enemies.medium.one.length) drawEnemyMediumOne();
+
+	};
+
+	draw();
+
+};
+
+
+// animations
+
+var enemyAnimations = {
+
+	smallOne: function(enemyObj){
+		if(enemyObj.y + grid >= 0) enemyObj.y += (levelSpeed / 4) * 3;
+		enemyObj = sineCurve(enemyObj, (grid / 5) * 2, grid * 4);
+		return enemyObj;
+	},
+
+	smallTwo: function(enemyObj, enemyWidth, enemyHeight, i, enemyArr){
+		if(enemyObj.y + grid >= 0) enemyObj.y += levelSpeed;
+		enemyObj = sineCurve(enemyObj, grid / 3, grid * 3);
+		return enemyObj;
+	},
+
+	mediumOne: function(enemyObj){
+		if((enemyObj.y + enemyObj.height) >= gameHeight / 2) enemyObj.direction = 'up';
+		if(enemyObj.direction == 'up'){
+			enemyObj.y -= levelSpeed / 2;
+			if(gameClock % (grid / 4) == 0){
+				spawnMediumOneShot(enemyObj);
+			}
+		}
+		else enemyObj.y += levelSpeed * 2;
+		return enemyObj;
+	}
+
+};
