@@ -12,15 +12,24 @@ var setupLevel = function(){
 				entity = levelGrid.substring(levelGrid.indexOf('(') + 1, levelGrid.indexOf('(') + 2);
 				var xPos = j * grid, yPos = (i * grid) - (levelStartPos - gameHeight);
 				switch(entity){
+
+					// powerup
 					case 'p':
 						var powerupDirection = (Math.random() >= 0.5) ? 'left' : 'right';
 						powerups.push({x: xPos, y: yPos, initial: xPos, direction: powerupDirection, width: grid});
 						break;
+
+					// enemies
 					case '1': enemies.small.one.push({x: xPos, y: yPos, initial: xPos, width: grid, height: grid}); break;
 					case '2': enemies.small.two.push({x: xPos, y: yPos, initial: xPos, width: grid, height: grid}); break;
 					case '3': enemies.medium.one.push({x: xPos, y: yPos, width: grid * 2, height: grid * 2, hits: 2}); break;
 					case '4': enemies.small.three.push({x: xPos, y: yPos, width: grid, height: grid}); break;
 					case '5': enemies.small.four.push({x: xPos, y: yPos, width: grid, height: grid}); break;
+
+					// bosses
+					case '!': bosses.oneA.push({x: xPos, y: yPos, width: grid * 3.5, height: grid * 3.5, sYDirection: 'up', sXDirection: 'left'}); break;
+					case '@': bosses.oneB.push({x: xPos, y: yPos, width: grid * 3.5, height: grid * 3.5, sYDirection: 'up', sXDirection: 'right'}); break;
+
 				};
 			}
 		});

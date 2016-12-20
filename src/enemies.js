@@ -1,4 +1,4 @@
-var enemies = {
+const enemies = {
 	small: {one: [], two: [], three: [], four: []},
 	medium: {one: []}
 };
@@ -23,91 +23,99 @@ var enemiesLoop = function(){
 					var enemyCollisionEl = {x: enemyObj.x, y: enemyObj.y, width: opts.width, height: opts.height};
 					checkBulletCollision(enemyCollisionEl, function(){
 						explodeEntity(enemyCollisionEl);
-						if(enemyObj.hits){
-							enemyObj.hits -= 1;
+						if(opts.hits && !opts.arr['hits']){
+							opts.arr['hits'] = opts.hits;
+						} else if(opts.arr['hits']) {
+							opts.arr.hits -= 1;
+							if(opts.arr.hits == 0){
+								opts.arr.splice(i, 1);
+								score += opts.score;
+							}
 						} else {
 							opts.arr.splice(i, 1);
 							score += opts.score;
 						}
 					});
 					if(canGetHit){
-						checkCollision(enemyCollisionEl, {x: playerX, y: playerY, width: opts.width, height: opts.height}, function(){
-							getHit(opts.arr, i);
+						checkCollision({x: playerX, y: playerY, width: playerWidth, height: playerHeight}, enemyCollisionEl, function(){
+							opts.onlyDestroysPlayer ? getHit(opts.arr, i, true) : getHit(opts.arr, i);
 						});
 					}
 					if(enemyObj.y + opts.height < 0 && enemyObj.direction){
 						if(enemyObj.direction == 'up') opts.arr.splice(i, 1);
 					}
-					if(enemyObj.y >= gameHeight) opts.arr.splice(i, 1);
+					if((enemyObj.y + opts.height >= gameHeight + (opts.height * 2))) opts.arr.splice(i, 1);
 				}
 			});
 		};
 
-		var drawEnemySmallOne = function(){
-			var opts = {
-				arr: enemies.small.one,
-				img: enemySmallOneImg,
-				width: grid,
-				height: grid,
-				animation: enemyAnimations.smallOne,
-				score: 300
-			};
-			drawEnemy(opts);
-		}, drawEnemySmallTwo = function(){
-			var opts = {
-				arr: enemies.small.two,
-				img: enemySmallTwoImg,
-				width: grid,
-				height: grid,
-				animation: enemyAnimations.smallTwo,
-				score: 300,
-				hits: 2
-			};
-			drawEnemy(opts);
-		}, drawEnemySmallThree = function(){
-			var opts = {
-				arr: enemies.small.three,
-				img: enemySmallTwoImg,
-				width: grid,
-				height: grid,
-				animation: enemyAnimations.smallThree,
-				score: 500
-			};
-			drawEnemy(opts);
-		}, drawEnemySmallFour = function(){
-			var opts = {
-				arr: enemies.small.four,
-				img: enemySmallFourImg,
-				width: grid,
-				height: grid,
-				animation: enemyAnimations.smallFour,
-				score: 200
-			};
-			drawEnemy(opts);
-		}, drawEnemyMediumOne = function(){
-			var opts = {
-				arr: enemies.medium.one,
-				img: enemyMediumOneImg,
-				width: grid * 2,
-				height: grid * 2,
-				animation: enemyAnimations.mediumOne,
-				score: 1000,
-				hits: 5
-			};
-			drawEnemy(opts);
-		};
+		if(enemies.small.one.length) drawEnemySmallOne(drawEnemy);
+		if(enemies.small.two.length) drawEnemySmallTwo(drawEnemy);
+		if(enemies.small.three.length) drawEnemySmallThree(drawEnemy);
+		if(enemies.small.four.length) drawEnemySmallFour(drawEnemy);
+		if(enemies.medium.one.length) drawEnemyMediumOne(drawEnemy);
 
-
-		if(enemies.small.one.length) drawEnemySmallOne();
-		if(enemies.small.two.length) drawEnemySmallTwo();
-		if(enemies.small.three.length) drawEnemySmallThree();
-		if(enemies.small.four.length) drawEnemySmallFour();
-		if(enemies.medium.one.length) drawEnemyMediumOne();
+		if(bosses.oneA.length) drawBossOneA(drawEnemy);
+		if(bosses.oneB.length) drawBossOneB(drawEnemy);
 
 	};
 
 	draw();
 
+};
+
+// draw farm
+var drawEnemySmallOne = function(callback){
+	var opts = {
+		arr: enemies.small.one,
+		img: enemySmallOneImg,
+		width: grid,
+		height: grid,
+		animation: enemyAnimations.smallOne,
+		score: 300
+	};
+	callback(opts);
+}, drawEnemySmallTwo = function(callback){
+	var opts = {
+		arr: enemies.small.two,
+		img: enemySmallTwoImg,
+		width: grid,
+		height: grid,
+		animation: enemyAnimations.smallTwo,
+		score: 300
+	};
+	callback(opts);
+}, drawEnemySmallThree = function(callback){
+	var opts = {
+		arr: enemies.small.three,
+		img: enemySmallTwoImg,
+		width: grid,
+		height: grid,
+		animation: enemyAnimations.smallThree,
+		score: 500
+	};
+	callback(opts);
+}, drawEnemySmallFour = function(callback){
+	var opts = {
+		arr: enemies.small.four,
+		img: enemySmallFourImg,
+		width: grid,
+		height: grid,
+		animation: enemyAnimations.smallFour,
+		score: 200
+	};
+	callback(opts);
+}, drawEnemyMediumOne = function(callback){
+	var opts = {
+		arr: enemies.medium.one,
+		img: enemyMediumOneImg,
+		width: grid * 2,
+		height: grid * 2,
+		animation: enemyAnimations.mediumOne,
+		score: 1000,
+		hits: 3
+	};
+	callback(opts);
 };
 
 

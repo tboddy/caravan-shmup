@@ -195,14 +195,14 @@ var timeString = function(timeInput){
 	return output;
 };
 
-var getHit = function(enemyArr, i){
+var getHit = function(enemyArr, i, destroysOnlyPlayer){
 	if(livesLeft) livesLeft -= 1;
 	explodeEntity({x: playerX, y: playerY, width: playerWidth, height: playerHeight});
 	playerX = (gameWidth / 2) - (playerWidth / 2), playerY = gameHeight - ((grid * 2.75) + grid);
 	currentPowerup = 1;
 	canGetHit = false;
 	hitClock = fps;
-	enemyArr.splice(i, 1);
+	if(!destroysOnlyPlayer) enemyArr.splice(i, 1);
 };
 
 var saveHighScore = function(){

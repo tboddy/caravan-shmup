@@ -54,7 +54,9 @@ var getAspect = function(){
 };
 
 var checkCollision = function(elA, elB, callback){
-	if(elA.x + elA.width >= elB.x && elA.x <= elB.x + elB.width && elA.y <= elB.y + elB.height && elA.y + elA.height >= elB.y) callback(elA, elB);
+	if(elA.x + elA.width >= elB.x && elA.x <= elB.x + elB.width && elA.y <= elB.y + elB.height && elA.y + elA.height >= elB.y){
+		callback(elA, elB);
+	}
 };
 
 var checkBulletCollision = function(el, callback){
@@ -321,7 +323,7 @@ var levelMap = [
 	['r', 'k', 'l', 'r', 'r', 'r', 'r', 'k', 'l', 'r', 'z', ' ', ' ', ' ', ' ', ' '],
 	['g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'n', ' ', ' ', ' ', ' ', ' '],
 	['r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'n', ' ', ' ', ' ', ' ', ' '],
-	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'M', 'g', 'M', 'B', 'B', 'B', 'B', 'B', 'B'],
+	['B', 'B', 'B (!)', 'B', 'B', 'B', 'B', 'M','g','M','B','B (@)','B','B','B','B'],
 	['B', 'g', 'r', 'g', 'r', 'B', 'B', 'g', 'r', 'g', 'B', 'B', 'B', 'B', 'B', 'B'],
 	['B', 'g', 'r', 'g', 'r', 'B', 'B', 'M', 'r', 'M', 'B', 'B', 'B', 'B', 'B', 'B'],
 	['b', 'b', 'A', 'g', 'r', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'M', 'g', 'M', 'B'],
@@ -419,10 +421,10 @@ var levelMap = [
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
 	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'm', ' ', ' ', ' '],
-	['r', 'r', 'r (3)', 'B', 'g', 'g', 'g', 'B', 'r', 'r', 'r', 'B', 'n', ' ', ' ', ' '],
+	['r', 'r', 'r (3)', 'B', 'g', 'g', 'g', 'B', 'r', 'r', 'r', 'B','n',' ',' ',' '],
 	['r', 'G', 'r', 'B', 'g', 'g', 'g', 'B', 'r', 'G', 'r', 'B', 'z', ' ', ' ', ' '],
 	['r', 'r', 'r', 'B', 'g', 'g', 'g', 'B', 'r', 'r', 'r', 'B', 'W', 'w', 'w', 'w'],
-	['B', 'B', 'B ', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'W', 'w', 'w', 'w'],
+	['B', 'B', 'B ', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'W', 'w', 'w','w'],
 	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'n', ' ', ' ', ' '],
 	['r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'W', 'w', 'w', 'w'],
 	['M', 'g', 'M', 'g', 'M', 'g', 'M', 'B', 'M', 'B', 'M', 'B', 'n', ' ', ' ', ' '],
@@ -480,15 +482,24 @@ var setupLevel = function(){
 				entity = levelGrid.substring(levelGrid.indexOf('(') + 1, levelGrid.indexOf('(') + 2);
 				var xPos = j * grid, yPos = (i * grid) - (levelStartPos - gameHeight);
 				switch(entity){
+
+					// powerup
 					case 'p':
 						var powerupDirection = (Math.random() >= 0.5) ? 'left' : 'right';
 						powerups.push({x: xPos, y: yPos, initial: xPos, direction: powerupDirection, width: grid});
 						break;
+
+					// enemies
 					case '1': enemies.small.one.push({x: xPos, y: yPos, initial: xPos, width: grid, height: grid}); break;
 					case '2': enemies.small.two.push({x: xPos, y: yPos, initial: xPos, width: grid, height: grid}); break;
 					case '3': enemies.medium.one.push({x: xPos, y: yPos, width: grid * 2, height: grid * 2, hits: 2}); break;
 					case '4': enemies.small.three.push({x: xPos, y: yPos, width: grid, height: grid}); break;
 					case '5': enemies.small.four.push({x: xPos, y: yPos, width: grid, height: grid}); break;
+
+					// bosses
+					case '!': bosses.oneA.push({x: xPos, y: yPos, width: grid * 3.5, height: grid * 3.5, sYDirection: 'up', sXDirection: 'left'}); break;
+					case '@': bosses.oneB.push({x: xPos, y: yPos, width: grid * 3.5, height: grid * 3.5, sYDirection: 'up', sXDirection: 'right'}); break;
+
 				};
 			}
 		});
@@ -795,7 +806,7 @@ var explosionsLoop = function(){
 	if(explosions.length) draw()
 
 };
-var enemies = {
+const enemies = {
 	small: {one: [], two: [], three: [], four: []},
 	medium: {one: []}
 };
@@ -820,91 +831,99 @@ var enemiesLoop = function(){
 					var enemyCollisionEl = {x: enemyObj.x, y: enemyObj.y, width: opts.width, height: opts.height};
 					checkBulletCollision(enemyCollisionEl, function(){
 						explodeEntity(enemyCollisionEl);
-						if(enemyObj.hits){
-							enemyObj.hits -= 1;
+						if(opts.hits && !opts.arr['hits']){
+							opts.arr['hits'] = opts.hits;
+						} else if(opts.arr['hits']) {
+							opts.arr.hits -= 1;
+							if(opts.arr.hits == 0){
+								opts.arr.splice(i, 1);
+								score += opts.score;
+							}
 						} else {
 							opts.arr.splice(i, 1);
 							score += opts.score;
 						}
 					});
 					if(canGetHit){
-						checkCollision(enemyCollisionEl, {x: playerX, y: playerY, width: opts.width, height: opts.height}, function(){
-							getHit(opts.arr, i);
+						checkCollision({x: playerX, y: playerY, width: playerWidth, height: playerHeight}, enemyCollisionEl, function(){
+							opts.onlyDestroysPlayer ? getHit(opts.arr, i, true) : getHit(opts.arr, i);
 						});
 					}
 					if(enemyObj.y + opts.height < 0 && enemyObj.direction){
 						if(enemyObj.direction == 'up') opts.arr.splice(i, 1);
 					}
-					if(enemyObj.y >= gameHeight) opts.arr.splice(i, 1);
+					if((enemyObj.y + opts.height >= gameHeight + (opts.height * 2))) opts.arr.splice(i, 1);
 				}
 			});
 		};
 
-		var drawEnemySmallOne = function(){
-			var opts = {
-				arr: enemies.small.one,
-				img: enemySmallOneImg,
-				width: grid,
-				height: grid,
-				animation: enemyAnimations.smallOne,
-				score: 300
-			};
-			drawEnemy(opts);
-		}, drawEnemySmallTwo = function(){
-			var opts = {
-				arr: enemies.small.two,
-				img: enemySmallTwoImg,
-				width: grid,
-				height: grid,
-				animation: enemyAnimations.smallTwo,
-				score: 300,
-				hits: 2
-			};
-			drawEnemy(opts);
-		}, drawEnemySmallThree = function(){
-			var opts = {
-				arr: enemies.small.three,
-				img: enemySmallTwoImg,
-				width: grid,
-				height: grid,
-				animation: enemyAnimations.smallThree,
-				score: 500
-			};
-			drawEnemy(opts);
-		}, drawEnemySmallFour = function(){
-			var opts = {
-				arr: enemies.small.four,
-				img: enemySmallFourImg,
-				width: grid,
-				height: grid,
-				animation: enemyAnimations.smallFour,
-				score: 200
-			};
-			drawEnemy(opts);
-		}, drawEnemyMediumOne = function(){
-			var opts = {
-				arr: enemies.medium.one,
-				img: enemyMediumOneImg,
-				width: grid * 2,
-				height: grid * 2,
-				animation: enemyAnimations.mediumOne,
-				score: 1000,
-				hits: 5
-			};
-			drawEnemy(opts);
-		};
+		if(enemies.small.one.length) drawEnemySmallOne(drawEnemy);
+		if(enemies.small.two.length) drawEnemySmallTwo(drawEnemy);
+		if(enemies.small.three.length) drawEnemySmallThree(drawEnemy);
+		if(enemies.small.four.length) drawEnemySmallFour(drawEnemy);
+		if(enemies.medium.one.length) drawEnemyMediumOne(drawEnemy);
 
-
-		if(enemies.small.one.length) drawEnemySmallOne();
-		if(enemies.small.two.length) drawEnemySmallTwo();
-		if(enemies.small.three.length) drawEnemySmallThree();
-		if(enemies.small.four.length) drawEnemySmallFour();
-		if(enemies.medium.one.length) drawEnemyMediumOne();
+		if(bosses.oneA.length) drawBossOneA(drawEnemy);
+		if(bosses.oneB.length) drawBossOneB(drawEnemy);
 
 	};
 
 	draw();
 
+};
+
+// draw farm
+var drawEnemySmallOne = function(callback){
+	var opts = {
+		arr: enemies.small.one,
+		img: enemySmallOneImg,
+		width: grid,
+		height: grid,
+		animation: enemyAnimations.smallOne,
+		score: 300
+	};
+	callback(opts);
+}, drawEnemySmallTwo = function(callback){
+	var opts = {
+		arr: enemies.small.two,
+		img: enemySmallTwoImg,
+		width: grid,
+		height: grid,
+		animation: enemyAnimations.smallTwo,
+		score: 300
+	};
+	callback(opts);
+}, drawEnemySmallThree = function(callback){
+	var opts = {
+		arr: enemies.small.three,
+		img: enemySmallTwoImg,
+		width: grid,
+		height: grid,
+		animation: enemyAnimations.smallThree,
+		score: 500
+	};
+	callback(opts);
+}, drawEnemySmallFour = function(callback){
+	var opts = {
+		arr: enemies.small.four,
+		img: enemySmallFourImg,
+		width: grid,
+		height: grid,
+		animation: enemyAnimations.smallFour,
+		score: 200
+	};
+	callback(opts);
+}, drawEnemyMediumOne = function(callback){
+	var opts = {
+		arr: enemies.medium.one,
+		img: enemyMediumOneImg,
+		width: grid * 2,
+		height: grid * 2,
+		animation: enemyAnimations.mediumOne,
+		score: 1000,
+		hits: 3
+	};
+	callback(opts);
 };
 
 
@@ -948,6 +967,76 @@ var enemyAnimations = {
 			}
 		}
 		else enemyObj.y += levelSpeed * 2;
+		return enemyObj;
+	}
+};
+const bosses = {
+	oneA: [], oneB: []
+};
+
+const bossOneAImg = new Image(), bossOneBImg = new Image();
+bossOneAImg.src = 'img/bossonea.png';
+bossOneBImg.src = 'img/bossoneb.png';
+
+const drawBossOneA = function(callback){
+	var opts = {
+		arr: bosses.oneA,
+		img: bossOneAImg,
+		width: 56,
+		height: 56,
+		animation: bossAnimations.one,
+		score: 2000,
+		hits: 20,
+		onlyDestroysPlayer: true
+	};
+	callback(opts);
+}, drawBossOneB = function(callback){
+	var opts = {
+		arr: bosses.oneB,
+		img: bossOneBImg,
+		width: 56,
+		height: 56,
+		animation: bossAnimations.one,
+		score: 2000,
+		hits: 10,
+		onlyDestroysPlayer: true
+	};
+	callback(opts);
+};
+
+const bossOneSpeed = (levelSpeed / 3) * 2;
+
+const bossAnimations = {
+	one: function(enemyObj, enemyWidth, enemyHeight, i, enemyArr){
+		if(enemyObj.y + enemyHeight >= -10 && enemyObj.y + enemyHeight <= 1 && !enemyObj.direction){
+			enemyObj.y = gameHeight;
+			enemyObj.direction = 'up';
+		} else if(enemyObj.direction && (enemyObj.direction == 'up')){
+
+			// game bounds
+			// if(enemyObj.x <= 0) enemyObj.sXDirection = 'left';
+			// else if(enemyObj.x + enemyWidth >= gameWidth) enemyObj.sXDirection = 'right';
+			// if(enemyObj.y <= 0) enemyObj.sYDirection = 'down';
+			// else if(enemyObj.y + enemyHeight >= gameHeight) enemyObj.sYDirection = 'up';
+
+			// player tracking
+			if(enemyObj.x + enemyWidth < playerX) enemyObj.sXDirection = 'right';
+			else if(enemyObj.x >= playerX + playerWidth) enemyObj.sXDirection = 'left';
+			else enemyObj.sXDirection = '';
+
+			if(enemyObj.y > playerY + playerHeight) enemyObj.sYDirection = 'up';
+			else if(enemyObj.y + enemyHeight < playerY) enemyObj.sYDirection = 'down';
+			else enemyObj.sYDirection = '';
+			// if(enemyObj.y > playerY + playerHeight) enemyObj.sXDirection = 'up';
+			// else enemyObj.sYDirection = '';
+			// enemyObj.sYDirection = 'up';
+
+			// assign vals
+			if(enemyObj.sXDirection == 'left') enemyObj.x -= bossOneSpeed;
+			else if(enemyObj.sXDirection == 'right') enemyObj.x += bossOneSpeed;
+			if(enemyObj.sYDirection == 'up') enemyObj.y -= bossOneSpeed;
+			else if(enemyObj.sYDirection == 'down') enemyObj.y += bossOneSpeed;
+		}
 		return enemyObj;
 	}
 };
@@ -1408,14 +1497,14 @@ var timeString = function(timeInput){
 	return output;
 };
 
-var getHit = function(enemyArr, i){
+var getHit = function(enemyArr, i, destroysOnlyPlayer){
 	if(livesLeft) livesLeft -= 1;
 	explodeEntity({x: playerX, y: playerY, width: playerWidth, height: playerHeight});
 	playerX = (gameWidth / 2) - (playerWidth / 2), playerY = gameHeight - ((grid * 2.75) + grid);
 	currentPowerup = 1;
 	canGetHit = false;
 	hitClock = fps;
-	enemyArr.splice(i, 1);
+	if(!destroysOnlyPlayer) enemyArr.splice(i, 1);
 };
 
 var saveHighScore = function(){

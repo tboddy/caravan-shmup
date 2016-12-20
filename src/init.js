@@ -54,7 +54,9 @@ var getAspect = function(){
 };
 
 var checkCollision = function(elA, elB, callback){
-	if(elA.x + elA.width >= elB.x && elA.x <= elB.x + elB.width && elA.y <= elB.y + elB.height && elA.y + elA.height >= elB.y) callback(elA, elB);
+	if(elA.x + elA.width >= elB.x && elA.x <= elB.x + elB.width && elA.y <= elB.y + elB.height && elA.y + elA.height >= elB.y){
+		callback(elA, elB);
+	}
 };
 
 var checkBulletCollision = function(el, callback){
