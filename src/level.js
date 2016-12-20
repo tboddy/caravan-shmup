@@ -20,6 +20,7 @@ var setupLevel = function(){
 					case '2': enemies.small.two.push({x: xPos, y: yPos, initial: xPos, width: grid, height: grid}); break;
 					case '3': enemies.medium.one.push({x: xPos, y: yPos, width: grid * 2, height: grid * 2, hits: 2}); break;
 					case '4': enemies.small.three.push({x: xPos, y: yPos, width: grid, height: grid}); break;
+					case '5': enemies.small.four.push({x: xPos, y: yPos, width: grid, height: grid}); break;
 				};
 			}
 		});

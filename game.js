@@ -332,46 +332,46 @@ var levelMap = [
 	['w', 'w', 'e', 'k', 'l', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'M', 'g', 'M', 'B'],
 	[' ', ' ', 'v', 'b', 'A', 'K', 'L', 'B', 'B', 'B', 'B', 'B', 'g', 'R', 'g', 'B'],
 	[' ', ' ', ' ', ' ', 'X', 'k', 'l', 'B', 'B', 'B', 'B', 'B', 'M', 'g', 'M', 'B'],
-	[' ', ' ', ' ', ' ', 'v', 'b', 'b', 'b', 'b', 'A', 'B', 'B', 'B', 'B', 'B', 'B'],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'Z', 'B', 'B', 'B', 'B', 'B', 'B'],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'v', 'b', 'b', 'b', 'b', 'b', 'b'],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'V', 'r'],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'R'],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'Z', 'r'],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'v', 'b'],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	['g', 'r', 'g', 'R', 'g', 'r', 'g', 'm', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'z', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	['g', 'g', 'M', 'r', 'r', 'B', 'B', 'n (p)', ' ', ' ',' ',' ',' ', ' ', ' ',' '],
-	['g', 'g', 'B', 'r', 'r', 'B', 'B', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	['g', 'g', 'B', 'r', 'r', 'B', 'B', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	['g', 'g', 'M', 'r', 'r', 'B', 'B', 'z', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	['r', 'r', 'r', 'r', 'r', 'r', 'r', 'z', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'z', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'n', ' ', ' ', 'V', 'K', 'L', 'r', 'm', ' '],
-	['B', 'r', 'g', 'r', 'B', 'B', 'B', 'n', ' ', ' ', 'X', 'k', 'l', 'r', 'n', ' '],
-	['B', 'r', 'g', 'B', 'r', 'K', 'L', 'W', 'w', 'w', 'e', 'B', 'M', 'B', 'z', ' '],
-	['B', 'r', 'g', 'B', 'B', 'k', 'l', 'n', ' ', ' ', 'X', 'B', 'K', 'L', 'n', ' '],
-	['B', 'r', 'g', 'B', 'B', 'M', 'r', 'z', ' ', ' ', 'Z', 'B', 'k', 'l', 'n', ' '],
-	['b', 'b', 'b', 'A', 'r', 'g', 'r', 'n', ' ', ' ', 'X', 'B', 'r', 'B', 'n', ' '],
-	[' ', ' ', ' ', 'X', 'r', 'g', 'r', 'W', 'w', 'w', 'e', 'r', 'R', 'r', 'z', ' '],
-	[' ', ' ', ' ', 'Z', 'B', 'B', 'B', 'n', ' ', ' ', 'X', 'B', 'r', 'B', 'n', ' '],
-	[' ', ' ', ' ', 'Z', 'B', 'B', 'B', 'n', ' ', ' ', 'X', 'K', 'L', 'r', 'n', ' '],
-	[' ', ' ', ' ', 'v', 'b', 'b', 'b', 'N', ' ', ' ', 'X', 'k', 'l', 'r', 'W', 'w'],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'B', 'M', 'B', 'W', 'w'],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'v', 'b', 'b', 'b', 'N', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', 'v', 'b', 'b', 'b', 'b', 'A', 'B', 'B','B (5)','B','B','B'],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'Z', 'B', 'B','B (5)','B','B','B'],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'v', 'b', 'b','b (5)','b','b','b'],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ','  (5)',' ',' ',' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ','  (5)',' ',' ',' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ','  (5)',' ',' ',' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ','  (5)',' ',' ',' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ','  (5)',' ','V','r'],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ','  (5)',' ','X','R'],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ','  (5)',' ','Z','r'],
+	[' ', ' ', ' ', '  (5)',' ',' ',' ',' ', ' ', ' ', ' ', ' ', ' ', ' ', 'v', 'b'],
+	[' ', ' ', ' ', '  (5)',' ',' ',' ',' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', '  (5)',' ',' ',' ',' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', '  (5)',' ',' ',' ',' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', '  (5)',' ',' ',' ',' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	['g', 'r', 'g', 'R (5)','g','r','g','m', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	['B', 'B', 'B', 'B (5)','B','B','B','z', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	['B', 'B', 'B', 'B (5)','B','B','B','n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	['B', 'B', 'B', 'B (5)','B','B','B','n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	['g', 'g', 'M', 'r (5)','r', 'B', 'B', 'n ', ' ', ' ',' ',' ',' ', ' ', ' ',' '],
+	['g', 'g', 'B', 'r', 'r', 'B', 'B', 'n', ' ', ' ', ' ', ' ','  (5)',' ',' ',' '],
+	['g', 'g', 'B', 'r', 'r', 'B', 'B', 'n', ' ', ' ', ' ', ' ','  (5)',' ',' ',' '],
+	['g','g', 'M', 'r', 'r', 'B', 'B', 'z', ' ', ' ', ' ', ' ', '  (5)',' ',' ',' '],
+	['r','r', 'r', 'r', 'r', 'r', 'r', 'z (p)', ' ',' ',' ',' ','  (5)',' ',' ',' '],
+	['B','B', 'B', 'B', 'B', 'B', 'B', 'z', ' ', ' ', ' ', ' ', '  (5)',' ',' ',' '],
+	['B','B', 'B', 'B', 'B', 'B', 'B', 'n', ' ', ' ', 'V', 'K', 'L (5)','r','m',' '],
+	['B','r', 'g', 'r', 'B', 'B', 'B', 'n', ' ', ' ', 'X', 'k', 'l (5)','r','n',' '],
+	['B','r', 'g', 'B', 'r', 'K', 'L', 'W', 'w', 'w', 'e', 'B', 'M (5)','B','z',' '],
+	['B','r', 'g', 'B', 'B', 'k', 'l', 'n', ' ', ' ', 'X', 'B', 'K (5)','L','n',' '],
+	['B','r', 'g', 'B', 'B', 'M', 'r', 'z', ' ', ' ', 'Z', 'B', 'k (5)','l','n',' '],
+	['b', 'b', 'b', 'A (5)', 'r', 'g', 'r', 'n', ' ', ' ', 'X', 'B',' ','B','n',' '],
+	[' ', ' ', ' ', 'X (5)', 'r', 'g', 'r', 'W', 'w', 'w', 'e', 'r','R','r','z',' '],
+	[' ', ' ', ' ', 'Z (5)', 'B', 'B', 'B', 'n', ' ', ' ', 'X', 'B','r','B','n',' '],
+	[' ', ' ', ' ', 'Z (5)', 'B', 'B', 'B', 'n', ' ', ' ', 'X', 'K','L','r','n',' '],
+	[' ', ' ', ' ', 'v (5)', 'b', 'b', 'b', 'N', ' ', ' ', 'X', 'k','l','r','W','w'],
+	[' ', ' ', ' ', '  (5)', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'B','M','B','W','w'],
+	[' ', ' ', ' ', '  (5)', ' ', ' ', ' ', ' ', ' ', ' ', 'v', 'b','b','b','N',' '],
+	[' ', ' ', ' ', '  (5)', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' ',' '],
+	[' ', ' ', ' ', '  (5)', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' ',' '],
+	[' ', ' ', ' ', '  (5)', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' ',' '],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
@@ -488,6 +488,7 @@ var setupLevel = function(){
 					case '2': enemies.small.two.push({x: xPos, y: yPos, initial: xPos, width: grid, height: grid}); break;
 					case '3': enemies.medium.one.push({x: xPos, y: yPos, width: grid * 2, height: grid * 2, hits: 2}); break;
 					case '4': enemies.small.three.push({x: xPos, y: yPos, width: grid, height: grid}); break;
+					case '5': enemies.small.four.push({x: xPos, y: yPos, width: grid, height: grid}); break;
 				};
 			}
 		});
@@ -795,15 +796,16 @@ var explosionsLoop = function(){
 
 };
 var enemies = {
-	small: {one: [], two: [], three: []},
+	small: {one: [], two: [], three: [], four: []},
 	medium: {one: []}
 };
 
-const enemySmallOneImg = new Image(), enemySmallTwoImg = new Image(),
+const enemySmallOneImg = new Image(), enemySmallTwoImg = new Image(), enemySmallFourImg = new Image();
 	enemyMediumOneImg = new Image();
 enemySmallOneImg.src = 'img/enemysmallone.png';
 enemySmallTwoImg.src = 'img/enemysmalltwo.png';
 enemyMediumOneImg.src = 'img/enemymediumone.png';
+enemySmallFourImg.src = 'img/enemysmallthree.png';
 
 var enemiesLoop = function(){
 
@@ -848,9 +850,7 @@ var enemiesLoop = function(){
 				score: 300
 			};
 			drawEnemy(opts);
-		};
-
-		var drawEnemySmallTwo = function(){
+		}, drawEnemySmallTwo = function(){
 			var opts = {
 				arr: enemies.small.two,
 				img: enemySmallTwoImg,
@@ -861,9 +861,7 @@ var enemiesLoop = function(){
 				hits: 2
 			};
 			drawEnemy(opts);
-		};
-
-		var drawEnemySmallThree = function(){
+		}, drawEnemySmallThree = function(){
 			var opts = {
 				arr: enemies.small.three,
 				img: enemySmallTwoImg,
@@ -873,9 +871,17 @@ var enemiesLoop = function(){
 				score: 500
 			};
 			drawEnemy(opts);
-		};
-
-		var drawEnemyMediumOne = function(){
+		}, drawEnemySmallFour = function(){
+			var opts = {
+				arr: enemies.small.four,
+				img: enemySmallFourImg,
+				width: grid,
+				height: grid,
+				animation: enemyAnimations.smallFour,
+				score: 200
+			};
+			drawEnemy(opts);
+		}, drawEnemyMediumOne = function(){
 			var opts = {
 				arr: enemies.medium.one,
 				img: enemyMediumOneImg,
@@ -892,6 +898,7 @@ var enemiesLoop = function(){
 		if(enemies.small.one.length) drawEnemySmallOne();
 		if(enemies.small.two.length) drawEnemySmallTwo();
 		if(enemies.small.three.length) drawEnemySmallThree();
+		if(enemies.small.four.length) drawEnemySmallFour();
 		if(enemies.medium.one.length) drawEnemyMediumOne();
 
 	};
@@ -906,29 +913,33 @@ var enemiesLoop = function(){
 var enemyAnimations = {
 	smallOne: function(enemyObj){
 		if(enemyObj.y + grid >= 0) enemyObj.y += (levelSpeed / 4) * 3;
-		enemyObj = sineCurve(enemyObj, (grid / 5) * 2, grid * 4);
+		enemyObj = sineCurve(enemyObj, grid / 3, grid * 4);
 		return enemyObj;
 	},
 	smallTwo: function(enemyObj, enemyWidth, enemyHeight){
 		if(enemyObj.y + grid >= 0) enemyObj.y += levelSpeed;
-		enemyObj = sineCurve(enemyObj, grid / 3, grid * 3);
+		enemyObj = sineCurve(enemyObj, grid / 3, grid * 2.5);
 		return enemyObj;
 	},
 	smallThree: function(enemyObj, enemyWidth, enemyHeight, i, enemyArr){
-		if(enemyObj.y + enemyWidth >= 0){
+		if(enemyObj.y + enemyHeight >= 0){
 			let ySpeed = levelSpeed;
 			if(enemyObj.y + grid > grid){
 				if(enemyObj.y + enemyObj.height < playerY){
-					if(enemyObj.x + enemyWidth < playerX) enemyObj.x += grid / 2;
-					else if(enemyObj.x + enemyObj.width > playerX + playerWidth) enemyObj.x -= grid / 2;
-					if(enemyObj.x + enemyWidth >= playerX - grid && enemyObj.x + enemyObj.width < playerX + playerWidth + grid) ySpeed = levelSpeed * 3.5;
-				} else ySpeed = levelSpeed * 3.5;
+					if(enemyObj.x + enemyWidth < playerX) enemyObj.x += grid / 3;
+					else if(enemyObj.x + enemyObj.width > playerX + playerWidth) enemyObj.x -= grid / 3;
+					if(enemyObj.x + enemyWidth >= playerX - grid && enemyObj.x + enemyObj.width < playerX + playerWidth + grid) ySpeed = levelSpeed * 3;
+				} else ySpeed = levelSpeed * 3;
 			}
 			enemyObj.y += ySpeed;
 		}
 		return enemyObj;
-	},
-	mediumOne: function(enemyObj){
+	}, smallFour: function(enemyObj, enemyWidth, enemyHeight, i, enemyArr){
+		if(enemyObj.y + enemyHeight >= 0){
+			enemyObj.y += levelSpeed * 2.5;
+		}
+		return enemyObj;
+	}, mediumOne: function(enemyObj){
 		if((enemyObj.y + enemyObj.height) >= gameHeight / 2) enemyObj.direction = 'up';
 		if(enemyObj.direction == 'up'){
 			enemyObj.y -= levelSpeed / 2;
@@ -1029,7 +1040,7 @@ var destroyBlock = function(block){
 var checkBigBlockCollision = function(bigBlock){
 	checkBulletCollision({x: bigBlock.x, y: bigBlock.y, width: grid, height: grid}, function(){
 		var gridsToDestroy = {};
-		switch(bigBlock.char){
+		switch(bigBlock.char.trim()){
 			case 'k':
 				gridsToDestroy.topLeft = {x: bigBlock.x, y: bigBlock.y - grid};
 				gridsToDestroy.topRight = {x: bigBlock.x + grid, y: bigBlock.y - grid};
@@ -1255,7 +1266,7 @@ var hudLoop = function(){
 			else {
 				timeString = '0:00:00';
 				drawGameOverMessage();
-				stopInput();
+				// stopInput();
 				if(!scoreSaved) saveHighScore();
 				canTime = false;
 				isGameOver = true;
@@ -1273,7 +1284,7 @@ var hudLoop = function(){
 		if(livesLeft == 0){
 			currentFullscreenMessage = 'game over';
 			drawFullscreenMessageNoTime();
-			stopInput();
+			// stopInput();
 			if(!scoreSaved) saveHighScore();
 			canTime = false;
 			isGameOver = true;

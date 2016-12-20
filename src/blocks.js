@@ -41,7 +41,7 @@ var destroyBlock = function(block){
 var checkBigBlockCollision = function(bigBlock){
 	checkBulletCollision({x: bigBlock.x, y: bigBlock.y, width: grid, height: grid}, function(){
 		var gridsToDestroy = {};
-		switch(bigBlock.char){
+		switch(bigBlock.char.trim()){
 			case 'k':
 				gridsToDestroy.topLeft = {x: bigBlock.x, y: bigBlock.y - grid};
 				gridsToDestroy.topRight = {x: bigBlock.x + grid, y: bigBlock.y - grid};

@@ -53,7 +53,7 @@ var hudLoop = function(){
 			else {
 				timeString = '0:00:00';
 				drawGameOverMessage();
-				stopInput();
+				// stopInput();
 				if(!scoreSaved) saveHighScore();
 				canTime = false;
 				isGameOver = true;
@@ -71,7 +71,7 @@ var hudLoop = function(){
 		if(livesLeft == 0){
 			currentFullscreenMessage = 'game over';
 			drawFullscreenMessageNoTime();
-			stopInput();
+			// stopInput();
 			if(!scoreSaved) saveHighScore();
 			canTime = false;
 			isGameOver = true;
