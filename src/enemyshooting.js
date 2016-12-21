@@ -1,9 +1,10 @@
 var enemyShots = {
 	medium: {one: []}
-}
+};
 
-const enemyMediumOneBulletImg = new Image();
-enemyMediumOneBulletImg.src = 'img/enemymediumonebullet.png';
+const missileOneImg = new Image(), blueBulletImg = new Image();
+missileOneImg.src = 'img/missileone.png';
+blueBulletImg.src = 'img/bluebullet.png';
 
 var spawnMediumOneShot = function(enemy){
 	enemyShots.medium.one.push({x: enemy.x + (grid / 3), y: enemy.y + grid, width: grid / 2, height: grid});
@@ -11,20 +12,19 @@ var spawnMediumOneShot = function(enemy){
 };
 
 var enemyShootingLoop = function(){
-
 	var draw = function(){
 		if(enemyShots.medium.one.length) animateMediumOneShot();
+		if(bossShots.oneA.length) bossBulletAnimations.oneA();
+		if(bossShots.oneB.length) bossBulletAnimations.oneB();
 	};
-
 	draw();
-
 };
 
 var animateMediumOneShot = function(){
 	enemyShots.medium.one.forEach(function(shotObj, i){
-		context.drawImage(enemyMediumOneBulletImg, shotObj.x, shotObj.y);
+		context.drawImage(missileOneImg, shotObj.x, shotObj.y);
 		enemyShots.medium.one[i].y += levelSpeed * 4;
-		if(enemyShots.medium.one.y >= gameHeight) enemyShots.medium.one.splice(i, 1);
+		if(enemyShots.medium.one[i].y >= gameHeight) enemyShots.medium.one.splice(i, 1);
 		checkEnemyShotCollision(shotObj, i, enemyShots.medium.one);
 		checkEnemyPopcorn(shotObj, i, enemyShots.medium.one);
 	});

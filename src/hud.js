@@ -1,4 +1,4 @@
-var score = 0, highScore = 0, fullscreenMessageTime = 0, currentFullscreenMessage = 'score attack: 2 min', initialTime = new Date(), canTime = true, livesLeft = 3, canGetHit = true, isGameOver = false,
+var score = 0, highScore = 0, fullscreenMessageTime = 0, currentFullscreenMessage = 'score attack: 2 min', initialTime = new Date(), canTime = true, livesLeft = 4, canGetHit = true, isGameOver = false,
 	hitClock = 0, scoreSaved = false;
 var endTime = new Date(initialTime.getTime() + (2 * 60000));
 
@@ -67,7 +67,8 @@ var hudLoop = function(){
 
 	var drawLives = function(){
 		context.drawImage(liveImg, gameWidth - (grid * 1.5) - (grid / 4), gameHeight - (grid / 2) - (grid / 4));
-		drawString(':' + String(livesLeft), gameWidth - grid - (grid / 4), gameHeight - (grid / 2) - (grid / 4));
+		var stringNum = livesLeft > 0 ? livesLeft - 1 : livesLeft;
+		drawString(':' + String(stringNum), gameWidth - grid - (grid / 4), gameHeight - (grid / 2) - (grid / 4));
 		if(livesLeft == 0){
 			currentFullscreenMessage = 'game over';
 			drawFullscreenMessageNoTime();
@@ -167,8 +168,8 @@ var drawChar = function(input, x, y, isRed){
 		case 'y': charLeft = size * 34; break;
 		case 'z': charLeft = size * 35; break;
 		case ':': charLeft = size * 36; break;
-		case ' ': charLeft = size * 37; break;
-		case '.': charLeft = size * 14; break;
+		case '.': charLeft = size * 37; break;
+		case ' ': charLeft = size * 38; break;
 	};
 	if(isRed) charTop = size;
 	context.drawImage(charImg, charLeft, charTop, size, size, x, y, size, size);
@@ -196,12 +197,12 @@ var timeString = function(timeInput){
 };
 
 var getHit = function(enemyArr, i, destroysOnlyPlayer){
-	if(livesLeft) livesLeft -= 1;
+	if(livesLeft > 0) livesLeft -= 1;
 	explodeEntity({x: playerX, y: playerY, width: playerWidth, height: playerHeight});
 	playerX = (gameWidth / 2) - (playerWidth / 2), playerY = gameHeight - ((grid * 2.75) + grid);
 	currentPowerup = 1;
 	canGetHit = false;
-	hitClock = fps;
+	hitClock = fps * 2;
 	if(!destroysOnlyPlayer) enemyArr.splice(i, 1);
 };
 

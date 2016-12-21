@@ -1,5 +1,5 @@
 var canvas = document.getElementById('canvas'), canvasEl = $('canvas'), fps = 29.97, gameClock = 0, grid = 16, gameHeight = 240, gameWidth = 256, isFullscreen = false, gameLoopInterval, 
-	browserWindow = require('electron').remote, dropXSpeed = grid  / 3, dropXMax = grid * 6, storage = require('electron-json-storage'), savedData = {}, fpsmeter;
+	browserWindow = require('electron').remote, dropXSpeed = grid  / 2, dropXMax = grid * 8, storage = require('electron-json-storage'), savedData = {}, fpsmeter;
 var context = canvas.getContext('2d'), mainWindow = browserWindow.getCurrentWindow();
 
 var init = function(){

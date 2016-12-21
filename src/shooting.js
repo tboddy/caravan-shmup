@@ -1,5 +1,5 @@
 var shots = {one: [], two: [], twoBottom: [], three: [], threeBottom: [], threeLeft: [], threeRight: [], four: [], fourTopLeft: [], fourTopRight: [], fourBottomLeft: [], fourBottomRight: []},
-	shotSpeed = grid * 1.25, shotClock = grid / 4, shotWidth = grid / 2, shotHeight = grid / 2, canShoot = true, currentPowerup = 1;
+	shotSpeed = grid * 1.5, shotClock = grid / 4, shotWidth = grid / 2, shotHeight = grid / 2, canShoot = true, currentPowerup = 1;
 
 var shootingLoop = function(){
 

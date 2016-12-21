@@ -35,26 +35,19 @@ var updateStartGamepad = function(){
 	if(navigator.getGamepads()[0]) if(gamepad.buttons[3].pressed) checkStartGame();
 };
 
-var drawStart = function(){
-	// var titleString = '2 min caravan shmup',
-	// 	subTitleString = 'press start',
-	// 	creditString = '2016 trevor boddy';
-	// drawString(titleString, textCenter(titleString), grid * 5, true);
-	// drawString(subTitleString, textCenter(subTitleString), grid * 6);
-	// drawString(creditString, textCenter(creditString), grid * 10);
-	// var creditsImg = new Image();
-	// creditsImg.src = 'img/studioslogo.png';
-	// context.drawImage(creditsImg, (gameWidth / 2) - (grid * 2), grid * 10);
-	var logo = new Image();
-	logo.src = 'img/logo.png';
+const startLogoImg = new Image(), studiosLogoImg = new Image();
+startLogoImg.src = 'img/logo.png';
+studiosLogoImg.src = 'img/studioslogo.png';
 
-	var verString = 'alpha 1: 25 seconds',
+var drawStart = function(){
+	var verString = 'pre alpha 0.02',
 		startString = 'press b3 or enter',
-		creditString = '2016 trevor boddy';
-	context.drawImage(logo, (gameWidth / 2) - 64, grid * 2);
+		creditString = '2016';
+	context.drawImage(startLogoImg, (gameWidth / 2) - 64, grid * 2);
 	drawString(verString, textCenter(verString), grid * 9);
-	drawString(startString, textCenter(startString), grid * 10);
-	drawString(creditString, textCenter(creditString), grid * 13);
+	drawString(creditString, textCenter(creditString), grid * 10);
+	drawString(startString, textCenter(startString), grid * 11);
+	context.drawImage(studiosLogoImg, (gameWidth / 2) - 32, grid * 12);
 };
 
 var textCenter = function(string){

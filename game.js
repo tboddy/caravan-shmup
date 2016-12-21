@@ -1,5 +1,5 @@
 var canvas = document.getElementById('canvas'), canvasEl = $('canvas'), fps = 29.97, gameClock = 0, grid = 16, gameHeight = 240, gameWidth = 256, isFullscreen = false, gameLoopInterval, 
-	browserWindow = require('electron').remote, dropXSpeed = grid  / 3, dropXMax = grid * 6, storage = require('electron-json-storage'), savedData = {}, fpsmeter;
+	browserWindow = require('electron').remote, dropXSpeed = grid  / 2, dropXMax = grid * 8, storage = require('electron-json-storage'), savedData = {}, fpsmeter;
 var context = canvas.getContext('2d'), mainWindow = browserWindow.getCurrentWindow();
 
 var init = function(){
@@ -153,26 +153,19 @@ var updateStartGamepad = function(){
 	if(navigator.getGamepads()[0]) if(gamepad.buttons[3].pressed) checkStartGame();
 };
 
-var drawStart = function(){
-	// var titleString = '2 min caravan shmup',
-	// 	subTitleString = 'press start',
-	// 	creditString = '2016 trevor boddy';
-	// drawString(titleString, textCenter(titleString), grid * 5, true);
-	// drawString(subTitleString, textCenter(subTitleString), grid * 6);
-	// drawString(creditString, textCenter(creditString), grid * 10);
-	// var creditsImg = new Image();
-	// creditsImg.src = 'img/studioslogo.png';
-	// context.drawImage(creditsImg, (gameWidth / 2) - (grid * 2), grid * 10);
-	var logo = new Image();
-	logo.src = 'img/logo.png';
+const startLogoImg = new Image(), studiosLogoImg = new Image();
+startLogoImg.src = 'img/logo.png';
+studiosLogoImg.src = 'img/studioslogo.png';
 
-	var verString = 'alpha 1: 25 seconds',
+var drawStart = function(){
+	var verString = 'pre alpha 0.02',
 		startString = 'press b3 or enter',
-		creditString = '2016 trevor boddy';
-	context.drawImage(logo, (gameWidth / 2) - 64, grid * 2);
+		creditString = '2016';
+	context.drawImage(startLogoImg, (gameWidth / 2) - 64, grid * 2);
 	drawString(verString, textCenter(verString), grid * 9);
-	drawString(startString, textCenter(startString), grid * 10);
-	drawString(creditString, textCenter(creditString), grid * 13);
+	drawString(creditString, textCenter(creditString), grid * 10);
+	drawString(startString, textCenter(startString), grid * 11);
+	context.drawImage(studiosLogoImg, (gameWidth / 2) - 32, grid * 12);
 };
 
 var textCenter = function(string){
@@ -337,7 +330,7 @@ var levelMap = [
 	[' ', ' ', ' ', ' ', 'v', 'b', 'b', 'b', 'b', 'A', 'B', 'B','B (5)','B','B','B'],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'Z', 'B', 'B','B (5)','B','B','B'],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'v', 'b', 'b','b (5)','b','b','b'],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ','  (5)',' ',' ',' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' (p)',' ',' ',' ', ' ','  (5)',' ',' ',' '],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ','  (5)',' ',' ',' '],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ','  (5)',' ',' ',' '],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ','  (5)',' ',' ',' '],
@@ -359,12 +352,12 @@ var levelMap = [
 	['g','g', 'M', 'r', 'r', 'B', 'B', 'z', ' ', ' ', ' ', ' ', '  (5)',' ',' ',' '],
 	['r','r', 'r', 'r', 'r', 'r', 'r', 'z (p)', ' ',' ',' ',' ','  (5)',' ',' ',' '],
 	['B','B', 'B', 'B', 'B', 'B', 'B', 'z', ' ', ' ', ' ', ' ', '  (5)',' ',' ',' '],
-	['B','B', 'B', 'B', 'B', 'B', 'B', 'n', ' ', ' ', 'V', 'K', 'L (5)','r','m',' '],
-	['B','r', 'g', 'r', 'B', 'B', 'B', 'n', ' ', ' ', 'X', 'k', 'l (5)','r','n',' '],
+	['B','B', 'B', 'B', 'B', 'B', 'B', 'n', ' ', ' ', 'V', 'r', 'r (5)','r','m',' '],
+	['B','r', 'g', 'r', 'B', 'B', 'B', 'n', ' ', ' ', 'X', 'r', 'r (5)','r','n',' '],
 	['B','r', 'g', 'B', 'r', 'K', 'L', 'W', 'w', 'w', 'e', 'B', 'M (5)','B','z',' '],
-	['B','r', 'g', 'B', 'B', 'k', 'l', 'n', ' ', ' ', 'X', 'B', 'K (5)','L','n',' '],
-	['B','r', 'g', 'B', 'B', 'M', 'r', 'z', ' ', ' ', 'Z', 'B', 'k (5)','l','n',' '],
-	['b', 'b', 'b', 'A (5)', 'r', 'g', 'r', 'n', ' ', ' ', 'X', 'B',' ','B','n',' '],
+	['B','r', 'g', 'B', 'B', 'k', 'l', 'n', ' ', ' ', 'X', 'B', 'g (5)','g','n',' '],
+	['B','r', 'g', 'B', 'B', 'M', 'r', 'z', ' ', ' ', 'Z', 'B', 'g (5)','g','n',' '],
+	['b', 'b', 'b', 'A (5)', 'r', 'g', 'r', 'n', ' ', ' ', 'X', 'B','B','B','n',' '],
 	[' ', ' ', ' ', 'X (5)', 'r', 'g', 'r', 'W', 'w', 'w', 'e', 'r','R','r','z',' '],
 	[' ', ' ', ' ', 'Z (5)', 'B', 'B', 'B', 'n', ' ', ' ', 'X', 'B','r','B','n',' '],
 	[' ', ' ', ' ', 'Z (5)', 'B', 'B', 'B', 'n', ' ', ' ', 'X', 'K','L','r','n',' '],
@@ -413,7 +406,7 @@ var levelMap = [
 	['g', 'M', 'g', 'n', ' ', ' (2)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' '],
 	['r', 'g', 'r', 'n', ' ', ' (2)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' '],
 	['b', 'b', 'b', 'N', ' ', ' (2)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' '],
-	[' ', ' ', ' ', ' ', ' ', ' (2)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' '],
+	[' ', ' ', ' ', ' ', ' ', ' (2)', ' ', ' ', ' (p)',' ',' ',' ', ' ',' ',' ',' '],
 	[' ', ' ', ' ', ' ', ' ', ' (2)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' '],
 	[' ', ' ', ' ', ' ', ' ', ' (2)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' '],
 	[' ', ' ', ' ', ' ', ' ', ' (2)', ' ', ' ', ' ', ' ',' ',' ',' ',' (3)',' ',' '],
@@ -921,7 +914,7 @@ var drawEnemySmallOne = function(callback){
 		height: grid * 2,
 		animation: enemyAnimations.mediumOne,
 		score: 1000,
-		hits: 3
+		hits: 5
 	};
 	callback(opts);
 };
@@ -955,14 +948,14 @@ var enemyAnimations = {
 		return enemyObj;
 	}, smallFour: function(enemyObj, enemyWidth, enemyHeight, i, enemyArr){
 		if(enemyObj.y + enemyHeight >= 0){
-			enemyObj.y += levelSpeed * 2.5;
+			enemyObj.y += levelSpeed * 2.75;
 		}
 		return enemyObj;
 	}, mediumOne: function(enemyObj){
 		if((enemyObj.y + enemyObj.height) >= gameHeight / 2) enemyObj.direction = 'up';
 		if(enemyObj.direction == 'up'){
 			enemyObj.y -= levelSpeed / 2;
-			if(gameClock % (grid / 4) == 0){
+			if(gameClock % 6 == 0){
 				spawnMediumOneShot(enemyObj);
 			}
 		}
@@ -984,7 +977,7 @@ const drawBossOneA = function(callback){
 		img: bossOneAImg,
 		width: 56,
 		height: 56,
-		animation: bossAnimations.one,
+		animation: bossAnimations.oneA,
 		score: 2000,
 		hits: 20,
 		onlyDestroysPlayer: true
@@ -996,9 +989,9 @@ const drawBossOneA = function(callback){
 		img: bossOneBImg,
 		width: 56,
 		height: 56,
-		animation: bossAnimations.one,
+		animation: bossAnimations.oneB,
 		score: 2000,
-		hits: 10,
+		hits: 20,
 		onlyDestroysPlayer: true
 	};
 	callback(opts);
@@ -1006,46 +999,45 @@ const drawBossOneA = function(callback){
 
 const bossOneSpeed = (levelSpeed / 3) * 2;
 
-const bossAnimations = {
-	one: function(enemyObj, enemyWidth, enemyHeight, i, enemyArr){
+const bossOneAnimation = function(enemyObj, enemyWidth, enemyHeight){
 		if(enemyObj.y + enemyHeight >= -10 && enemyObj.y + enemyHeight <= 1 && !enemyObj.direction){
 			enemyObj.y = gameHeight;
 			enemyObj.direction = 'up';
 		} else if(enemyObj.direction && (enemyObj.direction == 'up')){
-
-			// game bounds
-			// if(enemyObj.x <= 0) enemyObj.sXDirection = 'left';
-			// else if(enemyObj.x + enemyWidth >= gameWidth) enemyObj.sXDirection = 'right';
-			// if(enemyObj.y <= 0) enemyObj.sYDirection = 'down';
-			// else if(enemyObj.y + enemyHeight >= gameHeight) enemyObj.sYDirection = 'up';
-
-			// player tracking
 			if(enemyObj.x + enemyWidth < playerX) enemyObj.sXDirection = 'right';
 			else if(enemyObj.x >= playerX + playerWidth) enemyObj.sXDirection = 'left';
 			else enemyObj.sXDirection = '';
-
 			if(enemyObj.y > playerY + playerHeight) enemyObj.sYDirection = 'up';
 			else if(enemyObj.y + enemyHeight < playerY) enemyObj.sYDirection = 'down';
 			else enemyObj.sYDirection = '';
-			// if(enemyObj.y > playerY + playerHeight) enemyObj.sXDirection = 'up';
-			// else enemyObj.sYDirection = '';
-			// enemyObj.sYDirection = 'up';
-
-			// assign vals
 			if(enemyObj.sXDirection == 'left') enemyObj.x -= bossOneSpeed;
 			else if(enemyObj.sXDirection == 'right') enemyObj.x += bossOneSpeed;
 			if(enemyObj.sYDirection == 'up') enemyObj.y -= bossOneSpeed;
 			else if(enemyObj.sYDirection == 'down') enemyObj.y += bossOneSpeed;
 		}
 		return enemyObj;
+};
+
+const bossOneInterval = 128;
+
+const bossAnimations = {
+	oneA: function(enemyObj, enemyWidth, enemyHeight){
+		enemyObj = bossOneAnimation(enemyObj, enemyWidth, enemyHeight)
+		if(gameClock % bossOneInterval == 0) bossBulletSpawn.oneA(enemyObj);
+		return enemyObj;
+	}, oneB: function(enemyObj, enemyWidth, enemyHeight){
+		enemyObj = bossOneAnimation(enemyObj, enemyWidth, enemyHeight)
+		if(gameClock % bossOneInterval == (bossOneInterval / 2)) bossBulletSpawn.oneB(enemyObj);
+		return enemyObj;
 	}
 };
 var enemyShots = {
 	medium: {one: []}
-}
+};
 
-const enemyMediumOneBulletImg = new Image();
-enemyMediumOneBulletImg.src = 'img/enemymediumonebullet.png';
+const missileOneImg = new Image(), blueBulletImg = new Image();
+missileOneImg.src = 'img/missileone.png';
+blueBulletImg.src = 'img/bluebullet.png';
 
 var spawnMediumOneShot = function(enemy){
 	enemyShots.medium.one.push({x: enemy.x + (grid / 3), y: enemy.y + grid, width: grid / 2, height: grid});
@@ -1053,20 +1045,19 @@ var spawnMediumOneShot = function(enemy){
 };
 
 var enemyShootingLoop = function(){
-
 	var draw = function(){
 		if(enemyShots.medium.one.length) animateMediumOneShot();
+		if(bossShots.oneA.length) bossBulletAnimations.oneA();
+		if(bossShots.oneB.length) bossBulletAnimations.oneB();
 	};
-
 	draw();
-
 };
 
 var animateMediumOneShot = function(){
 	enemyShots.medium.one.forEach(function(shotObj, i){
-		context.drawImage(enemyMediumOneBulletImg, shotObj.x, shotObj.y);
+		context.drawImage(missileOneImg, shotObj.x, shotObj.y);
 		enemyShots.medium.one[i].y += levelSpeed * 4;
-		if(enemyShots.medium.one.y >= gameHeight) enemyShots.medium.one.splice(i, 1);
+		if(enemyShots.medium.one[i].y >= gameHeight) enemyShots.medium.one.splice(i, 1);
 		checkEnemyShotCollision(shotObj, i, enemyShots.medium.one);
 		checkEnemyPopcorn(shotObj, i, enemyShots.medium.one);
 	});
@@ -1085,6 +1076,145 @@ var checkEnemyPopcorn = function(shotObj, i, arr){
 		arr.splice(i, 1);
 		score += 20;
 	});
+};
+const bossShots = {oneA: [], oneB: []};
+
+const missileTwoNImg = new Image(), missileTwoSImg = new Image(), missileTwoWImg = new Image(), missileTwoEImg = new Image(),
+	missileTwoNWImg = new Image(), missileTwoNEImg = new Image(), missileTwoSWImg = new Image(), missileTwoSEImg = new Image();
+missileTwoNImg.src = 'img/missiletwon.png';
+missileTwoSImg.src = 'img/missiletwo.png';
+missileTwoWImg.src = 'img/missiletwow.png';
+missileTwoEImg.src = 'img/missiletwoe.png';
+missileTwoNWImg.src = 'img/missiletwonw.png';
+missileTwoNEImg.src = 'img/missiletwone.png';
+missileTwoSWImg.src = 'img/missiletwosw.png';
+missileTwoSEImg.src = 'img/missiletwose.png';
+
+const bossBulletSpawn = {
+	oneA: function(enemy){
+		bossShots.oneA.push({x: enemy.x + (enemy.height / 2), y: enemy.y - grid, width: 12, height: grid, direction: 'n'});
+		bossShots.oneA.push({x: enemy.x + (enemy.height / 2), y: enemy.y + enemy.height, width: 12, height: grid, direction: 's'});
+		bossShots.oneA.push({x: enemy.x - grid, y: enemy.y + (enemy.height / 2), width: grid, height: 12, direction: 'w'});
+		bossShots.oneA.push({x: enemy.x + enemy.width, y: enemy.y + (enemy.height / 2), width: grid, height: 12, direction: 'e'});
+		bossShots.oneA.push({x: enemy.x - grid, y: enemy.y - grid, width: 12, height: grid, direction: 'nw'});
+		bossShots.oneA.push({x: enemy.x + enemy.width, y: enemy.y - grid, width: grid, height: grid, direction: 'ne'});
+		bossShots.oneA.push({x: enemy.x - grid, y: enemy.y + enemy.height, width: grid, height: grid, direction: 'sw'});
+		bossShots.oneA.push({x: enemy.x + enemy.width, y: enemy.y + enemy.height, width: grid, height: grid, direction: 'se'});
+	}, oneB: function(enemy){
+		bossShots.oneB.push({x: enemy.x + (enemy.height / 2), y: enemy.y - 6, width: 6, height: 6, direction: 'n'});
+		bossShots.oneB.push({x: enemy.x + (enemy.height / 2), y: enemy.y + enemy.height, width: 6, height: 6, direction: 's'});
+		bossShots.oneB.push({x: enemy.x - 6, y: enemy.y + (enemy.height / 2), width: 6, height: 6, direction: 'w'});
+		bossShots.oneB.push({x: enemy.x + enemy.width, y: enemy.y + (enemy.height / 2), width: 6, height: 6, direction: 'e'});
+		bossShots.oneB.push({x: enemy.x - 6, y: enemy.y - 6, width: 6, height: 6, direction: 'nw'});
+		bossShots.oneB.push({x: enemy.x + enemy.width, y: enemy.y - 6, width: 6, height: 6, direction: 'ne'});
+		bossShots.oneB.push({x: enemy.x - 6, y: enemy.y + enemy.height, width: 6, height: 6, direction: 'sw'});
+		bossShots.oneB.push({x: enemy.x + enemy.width, y: enemy.y + enemy.height, width: 6, height: 6, direction: 'se'});
+	}
+};
+
+const bossBulletOneSpeeds = {
+	up: levelSpeed * 1.9, down: levelSpeed * 1.5, x: levelSpeed * 1.2
+};
+
+const bossBulletAnimations = {
+	oneA: function(){
+		bossShots.oneA.forEach(function(shotObj, i){
+			switch(shotObj.direction){
+				case 'n':
+					bossShots.oneA[i].y -= bossBulletOneSpeeds.up;
+					context.drawImage(missileTwoNImg, shotObj.x, shotObj.y);
+					break;
+				case 's':
+					bossShots.oneA[i].y += bossBulletOneSpeeds.down;
+					context.drawImage(missileTwoSImg, shotObj.x, shotObj.y);
+					break;
+				case 'w':
+					bossShots.oneA[i].x -= bossBulletOneSpeeds.x * 1.25;
+					context.drawImage(missileTwoWImg, shotObj.x, shotObj.y);
+					break;
+				case 'e':
+					bossShots.oneA[i].x += bossBulletOneSpeeds.x * 1.25;
+					context.drawImage(missileTwoEImg, shotObj.x, shotObj.y);
+					break;
+				case 'nw':
+					bossShots.oneA[i].y -= bossBulletOneSpeeds.down;
+					bossShots.oneA[i].x -= bossBulletOneSpeeds.x;
+					context.drawImage(missileTwoNWImg, shotObj.x, shotObj.y);
+					break;
+				case 'ne':
+					bossShots.oneA[i].y -= bossBulletOneSpeeds.down;
+					bossShots.oneA[i].x += bossBulletOneSpeeds.x;
+					context.drawImage(missileTwoNEImg, shotObj.x, shotObj.y);
+					break;
+				case 'sw':
+					bossShots.oneA[i].y += bossBulletOneSpeeds.x;
+					bossShots.oneA[i].x -= bossBulletOneSpeeds.x;
+					context.drawImage(missileTwoSWImg, shotObj.x, shotObj.y);
+					break;
+				case 'se':
+					bossShots.oneA[i].y += bossBulletOneSpeeds.x;
+					bossShots.oneA[i].x += bossBulletOneSpeeds.x;
+					context.drawImage(missileTwoSEImg, shotObj.x, shotObj.y);
+					break;
+			};
+			if(bossShots.oneA[i].y >= gameHeight) bossShots.oneA.splice(i, 1);
+			else if(bossShots.oneA[i].y + shotObj.height <= 0) bossShots.oneA.splice(i, 1);
+			if(bossShots.oneA[i]){
+				if(bossShots.oneA[i].x >= gameWidth) bossShots.oneA.splice(i, 1);
+				else if(bossShots.oneA[i].x + shotObj.width <= 0) bossShots.oneA.splice(i, 1);
+			}
+			if(bossShots.oneA[i]) checkEnemyShotCollision(shotObj, i, bossShots.oneA);
+			if(bossShots.oneA[i]) checkEnemyPopcorn(shotObj, i, bossShots.oneA);
+		});
+	}, oneB: function(){
+		bossShots.oneB.forEach(function(shotObj, i){
+			switch(shotObj.direction){
+				case 'n':
+					bossShots.oneB[i].y -= bossBulletOneSpeeds.up;
+					context.drawImage(blueBulletImg, shotObj.x, shotObj.y);
+					break;
+				case 's':
+					bossShots.oneB[i].y += bossBulletOneSpeeds.down;
+					context.drawImage(blueBulletImg, shotObj.x, shotObj.y);
+					break;
+				case 'w':
+					bossShots.oneB[i].x -= bossBulletOneSpeeds.x * 1.25;
+					context.drawImage(blueBulletImg, shotObj.x, shotObj.y);
+					break;
+				case 'e':
+					bossShots.oneB[i].x += bossBulletOneSpeeds.x * 1.25;
+					context.drawImage(blueBulletImg, shotObj.x, shotObj.y);
+					break;
+				case 'nw':
+					bossShots.oneB[i].y -= bossBulletOneSpeeds.down;
+					bossShots.oneB[i].x -= bossBulletOneSpeeds.x;
+					context.drawImage(blueBulletImg, shotObj.x, shotObj.y);
+					break;
+				case 'ne':
+					bossShots.oneB[i].y -= bossBulletOneSpeeds.down;
+					bossShots.oneB[i].x += bossBulletOneSpeeds.x;
+					context.drawImage(blueBulletImg, shotObj.x, shotObj.y);
+					break;
+				case 'sw':
+					bossShots.oneB[i].y += bossBulletOneSpeeds.x;
+					bossShots.oneB[i].x -= bossBulletOneSpeeds.x;
+					context.drawImage(blueBulletImg, shotObj.x, shotObj.y);
+					break;
+				case 'se':
+					bossShots.oneB[i].y += bossBulletOneSpeeds.x;
+					bossShots.oneB[i].x += bossBulletOneSpeeds.x;
+					context.drawImage(blueBulletImg, shotObj.x, shotObj.y);
+					break;
+			};
+			if(bossShots.oneB[i].y >= gameHeight) bossShots.oneB.splice(i, 1);
+			else if(bossShots.oneB[i].y + shotObj.height <= 0) bossShots.oneB.splice(i, 1);
+			if(bossShots.oneB[i]){
+				if(bossShots.oneB[i].x >= gameWidth) bossShots.oneB.splice(i, 1);
+				else if(bossShots.oneB[i].x + shotObj.width <= 0) bossShots.oneB.splice(i, 1);
+			}
+			if(bossShots.oneB[i]) checkEnemyShotCollision(shotObj, i, bossShots.oneB);
+		});
+	}
 };
 var updateBlocks = function(){
 	levelMap.forEach(function(row, i){
@@ -1165,8 +1295,8 @@ var destroyBigBlock = function(gridsToDestroy){
 			var gridChar = char;
 			if(gridChar.indexOf('(') > -1) gridChar = gridChar.substring(0, gridChar.indexOf('('));
 			var tempRow = gridPositions[i], grid = gridPositions[i].grids[j];
-			if(gridChar == 'k' || gridChar == 'K' || gridChar == 'l' || gridChar == 'L'){
-				var otherRowIndex = (gridChar == 'K' || gridChar == 'L') ? i + 1 : i - 1;
+			if(gridChar.indexOf('k') > -1 || gridChar.indexOf('K') > -1 || gridChar.indexOf('l') > -1 || gridChar.indexOf('L') > -1){
+				var otherRowIndex = (gridChar.indexOf('K') > -1 || gridChar.indexOf('L') > -1) ? i + 1 : i - 1;
 				for(var cord in gridsToDestroy){
 					if(grid.x == gridsToDestroy[cord].x && tempRow.y == gridsToDestroy[cord].y){
 						var newChar = '', newOtherChar = '';
@@ -1300,7 +1430,7 @@ var playerLoop = function(){
 	draw();
 
 };
-var score = 0, highScore = 0, fullscreenMessageTime = 0, currentFullscreenMessage = 'score attack: 2 min', initialTime = new Date(), canTime = true, livesLeft = 3, canGetHit = true, isGameOver = false,
+var score = 0, highScore = 0, fullscreenMessageTime = 0, currentFullscreenMessage = 'score attack: 2 min', initialTime = new Date(), canTime = true, livesLeft = 4, canGetHit = true, isGameOver = false,
 	hitClock = 0, scoreSaved = false;
 var endTime = new Date(initialTime.getTime() + (2 * 60000));
 
@@ -1369,7 +1499,8 @@ var hudLoop = function(){
 
 	var drawLives = function(){
 		context.drawImage(liveImg, gameWidth - (grid * 1.5) - (grid / 4), gameHeight - (grid / 2) - (grid / 4));
-		drawString(':' + String(livesLeft), gameWidth - grid - (grid / 4), gameHeight - (grid / 2) - (grid / 4));
+		var stringNum = livesLeft > 0 ? livesLeft - 1 : livesLeft;
+		drawString(':' + String(stringNum), gameWidth - grid - (grid / 4), gameHeight - (grid / 2) - (grid / 4));
 		if(livesLeft == 0){
 			currentFullscreenMessage = 'game over';
 			drawFullscreenMessageNoTime();
@@ -1469,8 +1600,8 @@ var drawChar = function(input, x, y, isRed){
 		case 'y': charLeft = size * 34; break;
 		case 'z': charLeft = size * 35; break;
 		case ':': charLeft = size * 36; break;
-		case ' ': charLeft = size * 37; break;
-		case '.': charLeft = size * 14; break;
+		case '.': charLeft = size * 37; break;
+		case ' ': charLeft = size * 38; break;
 	};
 	if(isRed) charTop = size;
 	context.drawImage(charImg, charLeft, charTop, size, size, x, y, size, size);
@@ -1498,12 +1629,12 @@ var timeString = function(timeInput){
 };
 
 var getHit = function(enemyArr, i, destroysOnlyPlayer){
-	if(livesLeft) livesLeft -= 1;
+	if(livesLeft > 0) livesLeft -= 1;
 	explodeEntity({x: playerX, y: playerY, width: playerWidth, height: playerHeight});
 	playerX = (gameWidth / 2) - (playerWidth / 2), playerY = gameHeight - ((grid * 2.75) + grid);
 	currentPowerup = 1;
 	canGetHit = false;
-	hitClock = fps;
+	hitClock = fps * 2;
 	if(!destroysOnlyPlayer) enemyArr.splice(i, 1);
 };
 
@@ -1513,7 +1644,7 @@ var saveHighScore = function(){
 	storage.set('savedData', {highScore: highScore});
 };
 var shots = {one: [], two: [], twoBottom: [], three: [], threeBottom: [], threeLeft: [], threeRight: [], four: [], fourTopLeft: [], fourTopRight: [], fourBottomLeft: [], fourBottomRight: []},
-	shotSpeed = grid * 1.25, shotClock = grid / 4, shotWidth = grid / 2, shotHeight = grid / 2, canShoot = true, currentPowerup = 1;
+	shotSpeed = grid * 1.5, shotClock = grid / 4, shotWidth = grid / 2, shotHeight = grid / 2, canShoot = true, currentPowerup = 1;
 
 var shootingLoop = function(){
 

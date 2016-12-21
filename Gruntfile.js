@@ -12,6 +12,7 @@ module.exports = function(grunt) {
 					'src/enemies.js',
 					'src/bosses.js',
 					'src/enemyshooting.js',
+					'src/bossshooting.js',
 					'src/blocks.js',
 					'src/player.js',
 					'src/hud.js',

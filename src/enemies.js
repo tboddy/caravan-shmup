@@ -113,7 +113,7 @@ var drawEnemySmallOne = function(callback){
 		height: grid * 2,
 		animation: enemyAnimations.mediumOne,
 		score: 1000,
-		hits: 3
+		hits: 5
 	};
 	callback(opts);
 };
@@ -147,14 +147,14 @@ var enemyAnimations = {
 		return enemyObj;
 	}, smallFour: function(enemyObj, enemyWidth, enemyHeight, i, enemyArr){
 		if(enemyObj.y + enemyHeight >= 0){
-			enemyObj.y += levelSpeed * 2.5;
+			enemyObj.y += levelSpeed * 2.75;
 		}
 		return enemyObj;
 	}, mediumOne: function(enemyObj){
 		if((enemyObj.y + enemyObj.height) >= gameHeight / 2) enemyObj.direction = 'up';
 		if(enemyObj.direction == 'up'){
 			enemyObj.y -= levelSpeed / 2;
-			if(gameClock % (grid / 4) == 0){
+			if(gameClock % 6 == 0){
 				spawnMediumOneShot(enemyObj);
 			}
 		}
