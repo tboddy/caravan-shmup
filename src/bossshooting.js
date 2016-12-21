@@ -34,7 +34,14 @@ const bossBulletSpawn = {
 };
 
 const bossBulletOneSpeeds = {
-	up: levelSpeed * 1.9, down: levelSpeed * 1.5, x: levelSpeed * 1.2
+	n: levelSpeed * 1.9,
+	nwney: levelSpeed * 1.3,
+	nwnex: levelSpeed * 1,
+	s: levelSpeed * 1.5,
+	swsey: levelSpeed * 1,
+	swsex: levelSpeed * 1,
+	we: levelSpeed * 1.5
+
 };
 
 const bossBulletAnimations = {
@@ -42,39 +49,39 @@ const bossBulletAnimations = {
 		bossShots.oneA.forEach(function(shotObj, i){
 			switch(shotObj.direction){
 				case 'n':
-					bossShots.oneA[i].y -= bossBulletOneSpeeds.up;
+					bossShots.oneA[i].y -= bossBulletOneSpeeds.n;
 					context.drawImage(missileTwoNImg, shotObj.x, shotObj.y);
 					break;
 				case 's':
-					bossShots.oneA[i].y += bossBulletOneSpeeds.down;
+					bossShots.oneA[i].y += bossBulletOneSpeeds.s;
 					context.drawImage(missileTwoSImg, shotObj.x, shotObj.y);
 					break;
 				case 'w':
-					bossShots.oneA[i].x -= bossBulletOneSpeeds.x * 1.25;
+					bossShots.oneA[i].x -= bossBulletOneSpeeds.we;
 					context.drawImage(missileTwoWImg, shotObj.x, shotObj.y);
 					break;
 				case 'e':
-					bossShots.oneA[i].x += bossBulletOneSpeeds.x * 1.25;
+					bossShots.oneA[i].x += bossBulletOneSpeeds.we;
 					context.drawImage(missileTwoEImg, shotObj.x, shotObj.y);
 					break;
 				case 'nw':
-					bossShots.oneA[i].y -= bossBulletOneSpeeds.down;
-					bossShots.oneA[i].x -= bossBulletOneSpeeds.x;
+					bossShots.oneA[i].y -= bossBulletOneSpeeds.nwney;
+					bossShots.oneA[i].x -= bossBulletOneSpeeds.nwnex;
 					context.drawImage(missileTwoNWImg, shotObj.x, shotObj.y);
 					break;
 				case 'ne':
-					bossShots.oneA[i].y -= bossBulletOneSpeeds.down;
-					bossShots.oneA[i].x += bossBulletOneSpeeds.x;
+					bossShots.oneA[i].y -= bossBulletOneSpeeds.nwney;
+					bossShots.oneA[i].x += bossBulletOneSpeeds.nwnex;
 					context.drawImage(missileTwoNEImg, shotObj.x, shotObj.y);
 					break;
 				case 'sw':
-					bossShots.oneA[i].y += bossBulletOneSpeeds.x;
-					bossShots.oneA[i].x -= bossBulletOneSpeeds.x;
+					bossShots.oneA[i].y += bossBulletOneSpeeds.swsey;
+					bossShots.oneA[i].x -= bossBulletOneSpeeds.swsex;
 					context.drawImage(missileTwoSWImg, shotObj.x, shotObj.y);
 					break;
 				case 'se':
-					bossShots.oneA[i].y += bossBulletOneSpeeds.x;
-					bossShots.oneA[i].x += bossBulletOneSpeeds.x;
+					bossShots.oneA[i].y += bossBulletOneSpeeds.swsey;
+					bossShots.oneA[i].x += bossBulletOneSpeeds.swsex;
 					context.drawImage(missileTwoSEImg, shotObj.x, shotObj.y);
 					break;
 			};
@@ -91,39 +98,39 @@ const bossBulletAnimations = {
 		bossShots.oneB.forEach(function(shotObj, i){
 			switch(shotObj.direction){
 				case 'n':
-					bossShots.oneB[i].y -= bossBulletOneSpeeds.up;
+					bossShots.oneB[i].y -= bossBulletOneSpeeds.n;
 					context.drawImage(blueBulletImg, shotObj.x, shotObj.y);
 					break;
 				case 's':
-					bossShots.oneB[i].y += bossBulletOneSpeeds.down;
+					bossShots.oneB[i].y += bossBulletOneSpeeds.s;
 					context.drawImage(blueBulletImg, shotObj.x, shotObj.y);
 					break;
 				case 'w':
-					bossShots.oneB[i].x -= bossBulletOneSpeeds.x * 1.25;
+					bossShots.oneB[i].x -= bossBulletOneSpeeds.we;
 					context.drawImage(blueBulletImg, shotObj.x, shotObj.y);
 					break;
 				case 'e':
-					bossShots.oneB[i].x += bossBulletOneSpeeds.x * 1.25;
+					bossShots.oneB[i].x += bossBulletOneSpeeds.we;
 					context.drawImage(blueBulletImg, shotObj.x, shotObj.y);
 					break;
 				case 'nw':
-					bossShots.oneB[i].y -= bossBulletOneSpeeds.down;
-					bossShots.oneB[i].x -= bossBulletOneSpeeds.x;
+					bossShots.oneB[i].y -= bossBulletOneSpeeds.nwney;
+					bossShots.oneB[i].x -= bossBulletOneSpeeds.nwnex;
 					context.drawImage(blueBulletImg, shotObj.x, shotObj.y);
 					break;
 				case 'ne':
-					bossShots.oneB[i].y -= bossBulletOneSpeeds.down;
-					bossShots.oneB[i].x += bossBulletOneSpeeds.x;
+					bossShots.oneB[i].y -= bossBulletOneSpeeds.nwney;
+					bossShots.oneB[i].x += bossBulletOneSpeeds.nwnex;
 					context.drawImage(blueBulletImg, shotObj.x, shotObj.y);
 					break;
 				case 'sw':
-					bossShots.oneB[i].y += bossBulletOneSpeeds.x;
-					bossShots.oneB[i].x -= bossBulletOneSpeeds.x;
+					bossShots.oneB[i].y += bossBulletOneSpeeds.swsey;
+					bossShots.oneB[i].x -= bossBulletOneSpeeds.swsex;
 					context.drawImage(blueBulletImg, shotObj.x, shotObj.y);
 					break;
 				case 'se':
-					bossShots.oneB[i].y += bossBulletOneSpeeds.x;
-					bossShots.oneB[i].x += bossBulletOneSpeeds.x;
+					bossShots.oneB[i].y += bossBulletOneSpeeds.swsey;
+					bossShots.oneB[i].x += bossBulletOneSpeeds.swsex;
 					context.drawImage(blueBulletImg, shotObj.x, shotObj.y);
 					break;
 			};
