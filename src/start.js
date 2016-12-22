@@ -40,9 +40,9 @@ startLogoImg.src = 'img/logo.png';
 studiosLogoImg.src = 'img/studioslogo.png';
 
 var drawStart = function(){
-	var verString = 'pre alpha 0.02',
+	var verString = 'pre alpha 0.03',
 		startString = 'press b3 or enter',
-		creditString = '2016 t.boddy';
+		creditString = '2016 decontrol';
 	context.drawImage(startLogoImg, (gameWidth / 2) - 64, grid * 2);
 	drawString(verString, textCenter(verString), grid * 9);
 	drawString(creditString, textCenter(creditString), grid * 10);

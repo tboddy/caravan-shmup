@@ -77,18 +77,26 @@ var destroyBigBlock = function(gridsToDestroy){
 			var gridChar = char;
 			if(gridChar.indexOf('(') > -1) gridChar = gridChar.substring(0, gridChar.indexOf('('));
 			var tempRow = gridPositions[i], grid = gridPositions[i].grids[j];
+			gridChar = gridChar.trim();
 			if(gridChar.indexOf('k') > -1 || gridChar.indexOf('K') > -1 || gridChar.indexOf('l') > -1 || gridChar.indexOf('L') > -1){
 				var otherRowIndex = (gridChar.indexOf('K') > -1 || gridChar.indexOf('L') > -1) ? i + 1 : i - 1;
 				for(var cord in gridsToDestroy){
 					if(grid.x == gridsToDestroy[cord].x && tempRow.y == gridsToDestroy[cord].y){
 						var newChar = '', newOtherChar = '';
-						switch(levelMap[i][j]){
+
+						var tempGrid = levelMap[i][j], tempOtherGrid = levelMap[otherRowIndex][j];
+
+						if(tempGrid.indexOf('(') > -1) tempGrid = tempGrid.substring(0, tempGrid.indexOf('('));
+						if(tempOtherGrid.indexOf('(') > -1) tempOtherGrid = tempOtherGrid.substring(0, tempOtherGrid.indexOf('('));
+						tempGrid = tempGrid.trim();
+						tempOtherGrid = tempOtherGrid.trim();
+						switch(tempGrid){
 							case 'k': newChar = 'u'; break;
 							case 'K': newChar = 'U'; break;
 							case 'l': newChar = 'i'; break;
 							case 'L': newChar = 'I'; break;
 						};
-						switch(levelMap[otherRowIndex][j]){
+						switch(tempOtherGrid){
 							case 'k': newOtherChar = 'u'; break;
 							case 'K': newOtherChar = 'U'; break;
 							case 'l': newOtherChar = 'i'; break;

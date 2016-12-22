@@ -13,14 +13,14 @@ missileTwoSEImg.src = 'img/missiletwose.png';
 
 const bossBulletSpawn = {
 	oneA: function(enemy){
-		bossShots.oneA.push({x: enemy.x + (enemy.height / 2), y: enemy.y - grid, width: 12, height: grid, direction: 'n'});
-		bossShots.oneA.push({x: enemy.x + (enemy.height / 2), y: enemy.y + enemy.height, width: 12, height: grid, direction: 's'});
-		bossShots.oneA.push({x: enemy.x - grid, y: enemy.y + (enemy.height / 2), width: grid, height: 12, direction: 'w'});
-		bossShots.oneA.push({x: enemy.x + enemy.width, y: enemy.y + (enemy.height / 2), width: grid, height: 12, direction: 'e'});
-		bossShots.oneA.push({x: enemy.x - grid, y: enemy.y - grid, width: 12, height: grid, direction: 'nw'});
-		bossShots.oneA.push({x: enemy.x + enemy.width, y: enemy.y - grid, width: grid, height: grid, direction: 'ne'});
-		bossShots.oneA.push({x: enemy.x - grid, y: enemy.y + enemy.height, width: grid, height: grid, direction: 'sw'});
-		bossShots.oneA.push({x: enemy.x + enemy.width, y: enemy.y + enemy.height, width: grid, height: grid, direction: 'se'});
+		// bossShots.oneA.push({x: enemy.x + (enemy.height / 2), y: enemy.y - grid, width: 12, height: grid, direction: 'n'});
+		// bossShots.oneA.push({x: enemy.x + (enemy.height / 2), y: enemy.y + enemy.height, width: 12, height: grid, direction: 's'});
+		// bossShots.oneA.push({x: enemy.x - grid, y: enemy.y + (enemy.height / 2), width: grid, height: 12, direction: 'w'});
+		// bossShots.oneA.push({x: enemy.x + enemy.width, y: enemy.y + (enemy.height / 2), width: grid, height: 12, direction: 'e'});
+		bossShots.oneA.push({x: enemy.x, y: enemy.y, width: 12, height: grid, direction: 'nw'});
+		bossShots.oneA.push({x: enemy.x + enemy.width - grid, y: enemy.y, width: grid, height: grid, direction: 'ne'});
+		bossShots.oneA.push({x: enemy.x, y: enemy.y + enemy.height - grid, width: grid, height: grid, direction: 'sw'});
+		bossShots.oneA.push({x: enemy.x + enemy.width - grid, y: enemy.y + enemy.height - grid, width: grid, height: grid, direction: 'se'});
 	}, oneB: function(enemy){
 		bossShots.oneB.push({x: enemy.x + (enemy.height / 2), y: enemy.y - 6, width: 6, height: 6, direction: 'n'});
 		bossShots.oneB.push({x: enemy.x + (enemy.height / 2), y: enemy.y + enemy.height, width: 6, height: 6, direction: 's'});
@@ -35,7 +35,7 @@ const bossBulletSpawn = {
 
 const bossBulletOneSpeeds = {
 	n: levelSpeed * 1.9,
-	nwney: levelSpeed * 1.3,
+	nwney: levelSpeed * 1.1,
 	nwnex: levelSpeed * 1,
 	s: levelSpeed * 1.5,
 	swsey: levelSpeed * 1,

@@ -1,9 +1,6 @@
-var score = 0, highScore = 0, fullscreenMessageTime = 0, currentFullscreenMessage = 'score attack: 2 min', initialTime = new Date(), canTime = true, livesLeft = 4, canGetHit = true, isGameOver = false,
+let score = 0, highScore = 0, fullscreenMessageTime = 0, currentFullscreenMessage = 'score attack: 2 min', initialTime = new Date(), canTime = true, livesLeft = 4, canGetHit = true, isGameOver = false, isFinished = false, isDead = false,
 	hitClock = 0, scoreSaved = false;
-var endTime = new Date(initialTime.getTime() + (2 * 60000));
-
-const liveImg = new Image();
-liveImg.src = 'img/life.png';
+let endTime = new Date(initialTime.getTime() + (2 * 60000));
 
 var setupHighScore = function(){
 	if(savedData.highScore) highScore = savedData.highScore;
@@ -51,58 +48,57 @@ var hudLoop = function(){
 			if(secondsLeft == 120) timeString = '2:00:00';
 			else if(secondsLeft < 120 && secondsLeft > 0) timeString = buildTimeString();
 			else {
-				timeString = '0:00:00';
-				drawGameOverMessage();
-				// stopInput();
-				if(!scoreSaved) saveHighScore();
+				document.removeEventListener('keydown', playerKeysDown);
+				document.removeEventListener('keyup', playerKeysUp);
+				document.addEventListener('playerReloadOnly', playerKeysUp);
 				canTime = false;
 				isGameOver = true;
-				shot = false;
+				isFinished = true;
+				canGetHit = false;
 			}
 			drawString('time ' + timeString, grid / 4, (grid / 4) * 3);
 		} else {
 			drawString('time ' + '0:00:00', grid / 4, (grid / 4) * 3);
+			if(isFinished) drawFullscreenMessageGameOver('time over');
+			else if(isDead) drawFullscreenMessageGameOver('game over');
+			if(!scoreSaved) saveHighScore();
 		}
 	};
 
 	var drawLives = function(){
-		context.drawImage(liveImg, gameWidth - (grid * 1.5) - (grid / 4), gameHeight - (grid / 2) - (grid / 4));
+		// context.drawImage(liveImg, gameWidth - (grid * 1.5) - (grid / 4), gameHeight - (grid / 2) - (grid / 4));
 		var stringNum = livesLeft > 0 ? livesLeft - 1 : livesLeft;
-		drawString(':' + String(stringNum), gameWidth - grid - (grid / 4), gameHeight - (grid / 2) - (grid / 4));
+		drawString('left:' + String(stringNum), gameWidth - (grid * 3) - (grid / 4), gameHeight - (grid / 2) - (grid / 4));
 		if(livesLeft == 0){
-			currentFullscreenMessage = 'game over';
-			drawFullscreenMessageNoTime();
-			// stopInput();
-			if(!scoreSaved) saveHighScore();
+			document.removeEventListener('keydown', playerKeysDown);
+			document.removeEventListener('keyup', playerKeysUp);
+			document.addEventListener('playerReloadOnly', playerKeysUp);
 			canTime = false;
 			isGameOver = true;
-			shot = false;
+			isDead = true;
+			canGetHit = false;
 		}
 		if(hitClock > 0) hitClock--;
 		else if(!canGetHit) canGetHit = true;
 	};
 
-	var drawFullscreenMessage = function(){
+	const drawFullscreenMessage = function(){
 		drawString(currentFullscreenMessage, (gameWidth / 2) - (currentFullscreenMessage.length * (grid / 4)), (gameHeight / 2) - (grid / 4), true);
 		fullscreenMessageTime++;
 	};
 
-	var drawFullscreenMessageNoTime = function(){
-		drawString(currentFullscreenMessage, (gameWidth / 2) - (currentFullscreenMessage.length * (grid / 4)), (gameHeight / 2) - (grid / 4), true);
-	};
-
-	var drawGameOverMessage = function(){
-		// currentFullscreenMessage = 'time over';
-		var baseYPos = (gameHeight / 2) - (grid / 4);
-		var firstString = 'time over', secondString = 'your score ' + score,
+	const drawFullscreenMessageGameOver = function(message){
+		if(gameClock == 4100) mainWindow.reload();
+		const baseYPos = (gameHeight / 2) - (grid / 4);
+		const firstString = message, secondString = 'your score ' + score,
 			thirdString = (score == highScore) ? 'new high score ' + score : '';
 		if(thirdString == ''){
-			drawString(firstString, (gameWidth / 2) - (firstString.length * (grid / 4)), baseYPos - (grid / 2));
-			drawString(secondString, (gameWidth / 2) - (secondString.length * (grid / 4)), baseYPos + (grid / 2));
+			drawString(firstString, (gameWidth / 2) - (firstString.length * (grid / 4)), baseYPos - (grid / 2), true);
+			drawString(secondString, (gameWidth / 2) - (secondString.length * (grid / 4)), baseYPos + (grid / 2), true);
 		} else {
-			drawString(firstString, (gameWidth / 2) - (firstString.length * (grid / 4)), baseYPos - grid);
-			drawString(secondString, (gameWidth / 2) - (secondString.length * (grid / 4)), baseYPos);
-			drawString(thirdString, (gameWidth / 2) - (thirdString.length * (grid / 4)), baseYPos + grid);
+			drawString(firstString, (gameWidth / 2) - (firstString.length * (grid / 4)), baseYPos - grid, true);
+			drawString(secondString, (gameWidth / 2) - (secondString.length * (grid / 4)), baseYPos, true);
+			drawString(thirdString, (gameWidth / 2) - (thirdString.length * (grid / 4)), baseYPos + grid, true);
 		}
 	};
 
@@ -111,10 +107,6 @@ var hudLoop = function(){
 	drawTime();
 	drawLives();
 	if(fullscreenMessageTime < fps * 2.5) drawFullscreenMessage();
-	// if(gameClock == outroTime){
-	// 	currentFullscreenMessage = 'the boss approaches';
-	// 	drawFullscreenMessage()
-	// };
 };
 
 var drawString = function(input, x, y, isRed){

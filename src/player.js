@@ -3,49 +3,44 @@ var playerX = (gameWidth / 2) - (playerWidth / 2), playerY = gameHeight - (playe
 
 const playerImg = new Image();
 
-var setupPlayer = function(){
-
-	var setupKeyboard = function(){
-		$(document).keydown(function(e){
-			switch(e.which){
-				case 38: movingUp = true; break;
-				case 40: movingDown = true; break;
-				case 37: movingLeft = true; break;
-				case 39: movingRight = true; break;
-				case 90: shot = true; break;
-				case 191: mainWindow.reload(); break;
-			};
-		});
-		$(document).keyup(function(e){
-			switch(e.which){
-				case 38: movingUp = false; break;
-				case 40: movingDown = false; break;
-				case 37: movingLeft = false; break;
-				case 39: movingRight = false; break;
-				case 90: shot = false; break;
-			};
-		});
+const playerKeysDown = function(e){
+	switch(e.which){
+		case 38: movingUp = true; break;
+		case 40: movingDown = true; break;
+		case 37: movingLeft = true; break;
+		case 39: movingRight = true; break;
+		case 90: shot = true; break;
+		case 191: mainWindow.reload(); break;
 	};
+}, playerKeysUp = function(e){
+	switch(e.which){
+		case 38: movingUp = false; break;
+		case 40: movingDown = false; break;
+		case 37: movingLeft = false; break;
+		case 39: movingRight = false; break;
+		case 90: shot = false; break;
+	};
+}, playerReloadOnly = function(e){
+	switch(e.which){
+		case 191: mainWindow.reload(); break;
+	};
+};
 
-	var buildPlayer = function(){
+const setupPlayer = function(){
+	const setupKeyboard = function(){
+		document.addEventListener('keydown', playerKeysDown);
+		document.addEventListener('keyup', playerKeysUp);
+	}, buildPlayer = function(){
 		player = new Image();
 	};
-
 	setupKeyboard();
 	buildPlayer();
-
 };
 
 var stopInput = function(){
-	$(document).off('keydown').on('keydown', function(e){
-		switch(e.which){
-			case 38: movingUp = false; break;
-			case 40: movingDown = false; break;
-			case 37: movingLeft = false; break;
-			case 39: movingRight = false; break;
-			case 90: shot = false; break;
-		};
-	});
+	document.removeEventListener('keydown', playerKeysDown);
+	document.removeEventListener('keyup', playerKeysUp);
+	document.addEventListener('playerReloadOnly', playerKeysUp);
 	inputStopped = true;
 };
 

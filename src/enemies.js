@@ -139,15 +139,15 @@ var enemyAnimations = {
 				if(enemyObj.y + enemyObj.height < playerY){
 					if(enemyObj.x + enemyWidth < playerX) enemyObj.x += grid / 3;
 					else if(enemyObj.x + enemyObj.width > playerX + playerWidth) enemyObj.x -= grid / 3;
-					if(enemyObj.x + enemyWidth >= playerX - grid && enemyObj.x + enemyObj.width < playerX + playerWidth + grid) ySpeed = levelSpeed * 3;
-				} else ySpeed = levelSpeed * 3;
+					if(enemyObj.x + enemyWidth >= playerX - grid && enemyObj.x + enemyObj.width < playerX + playerWidth + grid) ySpeed = levelSpeed * 2.5;
+				} else ySpeed = levelSpeed * 2.5;
 			}
 			enemyObj.y += ySpeed;
 		}
 		return enemyObj;
 	}, smallFour: function(enemyObj, enemyWidth, enemyHeight, i, enemyArr){
 		if(enemyObj.y + enemyHeight >= 0){
-			enemyObj.y += levelSpeed * 2.75;
+			enemyObj.y += levelSpeed * 3;
 		}
 		return enemyObj;
 	}, mediumOne: function(enemyObj){
