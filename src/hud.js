@@ -52,13 +52,14 @@ var hudLoop = function(){
 				document.removeEventListener('keyup', playerKeysUp);
 				document.addEventListener('playerReloadOnly', playerKeysUp);
 				canTime = false;
-				isGameOver = true;
 				isFinished = true;
-				canGetHit = false;
 			}
 			drawString('time ' + timeString, grid / 4, (grid / 4) * 3);
 		} else {
 			drawString('time ' + '0:00:00', grid / 4, (grid / 4) * 3);
+			isGameOver = true;
+			shot = false;
+			canGetHit = false;
 			if(isFinished) drawFullscreenMessageGameOver('time over');
 			else if(isDead) drawFullscreenMessageGameOver('game over');
 			if(!scoreSaved) saveHighScore();
@@ -74,9 +75,7 @@ var hudLoop = function(){
 			document.removeEventListener('keyup', playerKeysUp);
 			document.addEventListener('playerReloadOnly', playerKeysUp);
 			canTime = false;
-			isGameOver = true;
 			isDead = true;
-			canGetHit = false;
 		}
 		if(hitClock > 0) hitClock--;
 		else if(!canGetHit) canGetHit = true;
