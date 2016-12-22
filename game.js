@@ -1,4 +1,4 @@
-var canvas = document.getElementById('canvas'), canvasEl = $('canvas'), fps = 29.97, gameClock = 0, grid = 16, gameHeight = 240, gameWidth = 256, isFullscreen = false, gameLoopInterval, 
+var canvas = document.getElementById('canvas'), canvasEl = $('canvas'), fps = 29.97, gameClock = 0, grid = 16, gameHeight = 240, gameWidth = 256, isFullscreen = false, gameLoopInterval, gamepad = false,
 	browserWindow = require('electron').remote, dropXSpeed = grid  / 2, dropXMax = grid * 8, storage = require('electron-json-storage'), savedData = {};
 var context = canvas.getContext('2d'), mainWindow = browserWindow.getCurrentWindow();
 
@@ -120,11 +120,11 @@ var initStart = function(){
 	startControls();
 };
 
-var startControls = function(){
+var setupGamepad = function(){
+	gamepad = navigator.getGamepads()[0];
+};
 
-	var setupGamepad = function(){
-		gamepad = navigator.getGamepads()[0];
-	};
+var startControls = function(){
 
 	var setupKeyboard = function(){
 		$(document).keydown(function(e){
@@ -146,6 +146,7 @@ var startLoop = function(){
 };
 
 var updateStartGamepad = function(){
+	if(!gamepad) setupGamepad()
 	if(navigator.getGamepads()[0]) if(gamepad.buttons[3].pressed) checkStartGame();
 };
 
@@ -1381,6 +1382,8 @@ var stopInput = function(){
 	inputStopped = true;
 };
 
+const analogThresh = 0.15;
+
 var playerLoop = function(){
 
 	var update = function(){
@@ -1392,10 +1395,10 @@ var playerLoop = function(){
 				if(gamepad.buttons[2].pressed) mainWindow.reload();
 			} else if(navigator.getGamepads()[0]){
 				gamepad = navigator.getGamepads()[0];
-				movingUp = gamepad.axes[1] == -1 ? true : false;
-				movingDown = gamepad.axes[1] == 1 ? true : false;
-				movingLeft = gamepad.axes[0] == -1 ? true : false;
-				movingRight = gamepad.axes[0] == 1 ? true : false;
+				movingUp = gamepad.axes[1] < analogThresh * -1 ? true : false;
+				movingDown = gamepad.axes[1] > analogThresh ? true : false;
+				movingLeft = gamepad.axes[0] < analogThresh * -1 ? true : false;
+				movingRight = gamepad.axes[0] > analogThresh ? true : false;
 				shot = gamepad.buttons[0].pressed || gamepad.buttons[1].pressed ? true : false;
 				if(gamepad.buttons[2].pressed) mainWindow.reload();
 			}

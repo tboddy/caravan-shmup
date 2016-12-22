@@ -44,6 +44,8 @@ var stopInput = function(){
 	inputStopped = true;
 };
 
+const analogThresh = 0.15;
+
 var playerLoop = function(){
 
 	var update = function(){
@@ -55,10 +57,10 @@ var playerLoop = function(){
 				if(gamepad.buttons[2].pressed) mainWindow.reload();
 			} else if(navigator.getGamepads()[0]){
 				gamepad = navigator.getGamepads()[0];
-				movingUp = gamepad.axes[1] == -1 ? true : false;
-				movingDown = gamepad.axes[1] == 1 ? true : false;
-				movingLeft = gamepad.axes[0] == -1 ? true : false;
-				movingRight = gamepad.axes[0] == 1 ? true : false;
+				movingUp = gamepad.axes[1] < analogThresh * -1 ? true : false;
+				movingDown = gamepad.axes[1] > analogThresh ? true : false;
+				movingLeft = gamepad.axes[0] < analogThresh * -1 ? true : false;
+				movingRight = gamepad.axes[0] > analogThresh ? true : false;
 				shot = gamepad.buttons[0].pressed || gamepad.buttons[1].pressed ? true : false;
 				if(gamepad.buttons[2].pressed) mainWindow.reload();
 			}

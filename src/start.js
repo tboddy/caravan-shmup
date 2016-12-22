@@ -6,11 +6,11 @@ var initStart = function(){
 	startControls();
 };
 
-var startControls = function(){
+var setupGamepad = function(){
+	gamepad = navigator.getGamepads()[0];
+};
 
-	var setupGamepad = function(){
-		gamepad = navigator.getGamepads()[0];
-	};
+var startControls = function(){
 
 	var setupKeyboard = function(){
 		$(document).keydown(function(e){
@@ -32,6 +32,7 @@ var startLoop = function(){
 };
 
 var updateStartGamepad = function(){
+	if(!gamepad) setupGamepad()
 	if(navigator.getGamepads()[0]) if(gamepad.buttons[3].pressed) checkStartGame();
 };
 
