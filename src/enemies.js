@@ -30,6 +30,12 @@ var enemiesLoop = function(){
 							if(opts.arr.hits == 0){
 								opts.arr.splice(i, 1);
 								score += opts.score;
+								if(opts.bossType){
+									switch(opts.bossType){
+										case 'bossOneA': bossOneAActive = false; break;
+										case 'bossOneB': bossOneBActive = false; break;
+									}
+								}
 							}
 						} else {
 							opts.arr.splice(i, 1);
@@ -49,11 +55,13 @@ var enemiesLoop = function(){
 			});
 		};
 
-		if(enemies.small.one.length) drawEnemySmallOne(drawEnemy);
-		if(enemies.small.two.length) drawEnemySmallTwo(drawEnemy);
-		if(enemies.small.three.length) drawEnemySmallThree(drawEnemy);
-		if(enemies.small.four.length) drawEnemySmallFour(drawEnemy);
-		if(enemies.medium.one.length) drawEnemyMediumOne(drawEnemy);
+		if(!bossOneAActive && !bossOneBActive){
+			if(enemies.small.one.length) drawEnemySmallOne(drawEnemy);
+			if(enemies.small.two.length) drawEnemySmallTwo(drawEnemy);
+			if(enemies.small.three.length) drawEnemySmallThree(drawEnemy);
+			if(enemies.small.four.length) drawEnemySmallFour(drawEnemy);
+			if(enemies.medium.one.length) drawEnemyMediumOne(drawEnemy);
+		}
 
 		if(bosses.oneA.length) drawBossOneA(drawEnemy);
 		if(bosses.oneB.length) drawBossOneB(drawEnemy);

@@ -41,7 +41,7 @@ var setupLevel = function(){
 const greenBlockImg = new Image(), redBlockImg = new Image(), greenPointImg = new Image(), redPointImg = new Image(), destroyedImg = new Image(),
 	platformOneImg = new Image(), platformTwoImg = new Image(), platformBottomImg = new Image(), platformBottomLeftImg = new Image(), platformBottomRightImg = new Image(), platformLeftImg = new Image(), platformTopLeftImg = new Image(),
 	platformRightImg = new Image(), platformTopRightImg = new Image(), platformRightNubImg = new Image(), platformLeftNubImg = new Image(), platformIntersectTopLeftImg = new Image(), platformIntersectTopRightImg = new Image(),
-	pipeImg = new Image(), pipeLeftImg = new Image(), pipeRightImg = new Image(), bigBlockImg = new Image(), destroyedBigBlockImg = new Image(), bigThingImg = new Image();
+	pipeImg = new Image(), pipeLeftImg = new Image(), pipeRightImg = new Image(), bigBlockImg = new Image(), destroyedBigBlockImg = new Image(), bigThingImg = new Image(), destroyedSecretBlockImg = new Image();
 
 const setupGridImages = function(){
 	greenBlockImg.src = 'img/greenblock.png';
@@ -72,6 +72,8 @@ const setupGridImages = function(){
 	destroyedBigBlockImg.src = 'img/destroyedbigblock.png';
 
 	bigThingImg.src = 'img/bigthing.png';
+
+	destroyedSecretBlockImg.src = 'img/destroyedsecretblock.png';
 };
 
 var levelLoop = function(){
@@ -134,11 +136,19 @@ var levelLoop = function(){
 								case 'O': img = bigThingImg; break;
 								case 'p': img = bigThingImg; break;
 								case 'P': img = bigThingImg; break;
+								case '-': img = platformOneImg; break;
+								case '_': img = platformOneImg; break;
+								case '=': img = platformOneImg; break;
+								case '+': img = platformOneImg; break;
+								case 'q': img = destroyedSecretBlockImg; break;
+								case 'Q': img = destroyedSecretBlockImg; break;
+								case 'y': img = destroyedSecretBlockImg; break;
+								case 'Y': img = destroyedSecretBlockImg; break;
 							}
-							if(levelGrid == 'K' || levelGrid == 'O' || levelGrid == 'U') context.drawImage(img, 0, 0, grid, grid, (j * grid), rowY, grid, grid);
-							else if(levelGrid == 'k' || levelGrid == 'o' || levelGrid == 'u') context.drawImage(img, 0, grid, grid, grid, (j * grid), rowY, grid, grid);
-							else if(levelGrid == 'L' || levelGrid == 'P' || levelGrid == 'I') context.drawImage(img, grid, 0, grid, grid, (j * grid), rowY, grid, grid);
-							else if(levelGrid == 'l' || levelGrid == 'p' || levelGrid == 'i') context.drawImage(img, grid, grid, grid, grid, (j * grid), rowY, grid, grid);
+							if(levelGrid == 'K' || levelGrid == 'O' || levelGrid == 'U' || levelGrid == 'q') context.drawImage(img, 0, 0, grid, grid, (j * grid), rowY, grid, grid);
+							else if(levelGrid == 'k' || levelGrid == 'o' || levelGrid == 'u' || levelGrid == 'Q') context.drawImage(img, 0, grid, grid, grid, (j * grid), rowY, grid, grid);
+							else if(levelGrid == 'L' || levelGrid == 'P' || levelGrid == 'I' || levelGrid == 'y') context.drawImage(img, grid, 0, grid, grid, (j * grid), rowY, grid, grid);
+							else if(levelGrid == 'l' || levelGrid == 'p' || levelGrid == 'i' || levelGrid == 'Y') context.drawImage(img, grid, grid, grid, grid, (j * grid), rowY, grid, grid);
 							else if(levelGrid == 'b' || levelGrid == 'N' || levelGrid == 'v' || levelGrid == 'a' || levelGrid == 'A'){
 								var sX = 0;
 								switch(currentPlatformAnimation){
@@ -213,54 +223,3 @@ var levelLoop = function(){
 	draw();
 
 };
-
-// var gridItem = function(character){
-// 	var image = '', entity = '', entityString = '';
-// 	if(character.indexOf('(') > -1) character = character.substring(0, character.indexOf('('));
-// 	character = character.trim();
-
-// 	switch(character){
-
-// 		case 'B': image = 'platform1'; break;
-// 		case 'M': image = 'platform2'; break;
-
-// 		case 'b': image = 'platformbottom'; break;
-// 		case 'N': image = 'platformbottomright'; break;
-// 		case 'v': image = 'platformbottomleft'; break;
-// 		case 'a': image = 'platformintersecttopleft'; break;
-// 		case 'A': image = 'platformintersecttopright'; break;
-
-// 		case 'X': image = 'platformleft'; break;
-// 		case 'V': image = 'platformtopleft'; break;
-// 		case 'n': image = 'platformright'; break;
-// 		case 'm': image = 'platformtopright'; break;
-
-// 		case 'z': image = 'platformrightnub'; break;
-// 		case 'Z': image = 'platformleftnub'; break;
-// 		case 'w': image = 'pipe'; break;
-// 		case 'W': image = 'pipeleft'; break;
-// 		case 'e': image = 'piperight'; break;
-
-// 		case 'g': image = 'greenblock'; break;
-// 		case 'G': image = 'greenpoint'; break;
-// 		case 'r': image = 'redblock'; break;
-// 		case 'R': image = 'redpoint'; break;
-// 		case 't': image = 'destroyed'; break;
-		
-// 		case 'k': image = 'bigblock'; break;
-// 		case 'K': image = 'bigblock'; break;
-// 		case 'l': image = 'bigblock'; break;
-// 		case 'L': image = 'bigblock'; break;
-// 		case 'u': image = 'destroyedbigblock'; break;
-// 		case 'U': image = 'destroyedbigblock'; break;
-// 		case 'i': image = 'destroyedbigblock'; break;
-// 		case 'I': image = 'destroyedbigblock'; break;
-
-// 		case 'o': image = 'bigthing'; break;
-// 		case 'O': image = 'bigthing'; break;
-// 		case 'p': image = 'bigthing'; break;
-// 		case 'P': image = 'bigthing'; break;
-
-// 	};
-// 	return image;
-// };

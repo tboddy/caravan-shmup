@@ -347,7 +347,7 @@ var levelMap = [
 	['g', 'g', 'B', 'r', 'r', 'B', 'B', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
 	['g', 'g', 'B', 'r', 'r', 'B', 'B', 'n', ' ', ' ', ' ', ' ', ' (5)',' ',' ',' '],
 	['g', 'g', 'M', 'r', 'r', 'B', 'B', 'z', ' ', ' ', ' ', ' ', ' (5)',' ',' ',' '],
-	['r', 'r', 'r', 'r', 'r', 'r', 'r', 'z ',' ',' ',' ',' ', ' (5)',' ',' ',' '],
+	['r', 'r', 'r', 'r', 'r', 'r', 'r', 'z ',' ',' ',' ',' ', ' (5)', ' ', ' ', ' '],
 	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'z', ' ', ' ', ' ', ' ', ' (5)',' ',' ',' '],
 	['B', 'B', 'B', 'B ', 'B', 'B', 'B', 'n', ' ', ' ', 'V', 'r','r', 'r', 'm', ' '],
 	['B', 'r', 'g', 'r (5)', 'B', 'B', 'B', 'n', ' ', ' ', 'X', 'r','r','r','n',' '],
@@ -356,8 +356,8 @@ var levelMap = [
 	['B', 'r', 'g', 'B (5)', 'B', 'M', 'r', 'z', ' ', ' ', 'Z', 'B','g','g','n',' '],
 	['b', 'b', 'b', 'A', 'r', 'g', 'r', 'n', ' ', ' ', 'X', 'B','B ', 'B', 'n', ' '],
 	[' ', ' ', ' ', 'X', 'r', 'g', 'r', 'W', 'w', 'w', 'e', 'r','R (5)','r','z',' '],
-	[' ', ' ', ' ', 'Z', 'B', 'B', 'B', 'n', ' ', ' ', 'X', 'B','r (5)','B','n',' '],
-	[' ', ' ', ' ', 'Z', 'B', 'B', 'B', 'n', ' ',' (p)','X','K','L (5)','r','n',' '],
+	[' ', ' ', ' ', 'Z', 'B', '_', '+', 'n', ' ', ' ', 'X', 'B','r (5)','B','n',' '],
+	[' ', ' ', ' ', 'Z', 'B', '-', '=', 'n', ' ',' (p)','X','K','L (5)','r','n',' '],
 	[' ', ' ', ' ', 'v', 'b', 'b', 'b', 'N', ' ', ' ', 'X', 'k','l (5)','r','W','w'],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'B', 'M', 'B', 'W', 'w'],
 	[' ', ' ', ' ', ' (5)', ' ', ' ', ' ', ' ', ' ', ' ', 'v', 'b','b','b','N', ' '],
@@ -376,9 +376,9 @@ var levelMap = [
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'k', 'l', 'M', 'B', 'M', 'B'],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'M', 'B','M','K','L','B (4)'],
 	['r', 'r', 'g', 'r', 'r', 'm', ' ', ' ', ' ', 'X', 'g', 'R', 'M', 'k', 'l', 'B'],
-	['g', 'g', 'g', 'g', 'g', 'n', ' ', ' ',' ','X','M','B','M','B','M (4)','B'],
+	['g', 'g', 'g', 'g', 'g', 'n', ' ', ' ',' ','X','M','B', 'M', 'B', 'M (4)', 'B'],
 	['r', 'G', 'g', 'r', 'r', 'n', ' ', ' ', ' ', 'X', 'M', 'B ','M', 'B', 'M', 'B'],
-	['g', 'r', 'g', 'g', 'g', 'n', ' ',' ',' ','X','M','B ','M','B','M','B (4)'],
+	['g', 'r', 'g', 'g', 'g', 'n', ' ',' ',' ','X','M','B ', 'M', 'B', 'M', 'B (4)'],
 	['g', 'r', 'g', 'r', 'a', 'N', 'V', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r'],
 	['g', 'r (4)', 'g', 'r', 'n', ' ', 'X', 'g', 'r', 'g', 'r', 'g','r','g','G','g'],
 	['g', 'r', 'g', 'r', 'W', 'w', 'e', 'M', 'g', 'r', 'g', 'M', 'g', 'r', 'g', 'M'],
@@ -387,18 +387,18 @@ var levelMap = [
 	['b ', 'b(4)', 'b', 'b', 'N', ' ', ' ', ' ', ' ', ' ', 'X', 'B','M','r','M','B'],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'B', 'B', 'B', 'B', 'B'],
 	[' (4)', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'Z', 'g','g','M','r', 'r'],
-	[' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' (p)', ' ', 'X', 'g','g','B','r','r'],
-	[' ', ' (4)', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'g','g','M','r','r'],
+	[' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' (p)', ' ', 'X', 'g', 'g', 'B', 'r', 'r'],
+	[' ', ' (4)', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'g','g','M','r', 'r'],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X (2)', 'g','G','B','r','r'],
-	[' (4)', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X (2)', 'g','g','M','r','r'],
+	[' (4)', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ','X (2)','g','g','M','r','r'],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X (2)', 'g','g','B','R','r'],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'Z (2)', 'g','g','M','r','r'],
 	['r', 'g', 'r', 'm', ' ', ' ', ' ', ' ', ' ', ' ', 'Z (2)', 'g','g','B','r','r'],
 	['M', 'B', 'M', 'z', ' ', ' ', ' ', ' ', ' ', ' ', 'X (2)', 'g','g','M','r','r'],
 	['r', 'g', 'r', 'n', ' ', ' ', ' ', ' ', ' ', ' ', 'v (2)', 'b','A','B','r','r'],
 	['g', 'r', 'g', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' (2)', ' ', 'Z','M','B','M'],
-	['r', 'G', 'r', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'v','b','b','b'],
-	['g', 'M', 'g', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' '],
+	['r', 'G', 'r', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'v', 'b', 'b', 'b'],
+	['g', 'M', 'g', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
 	['r', 'g', 'r', 'z', ' ', ' (2)', ' ', ' ', ' ', ' ',' ',' ',' ', ' ', ' ', ' '],
 	['g', 'M', 'g', 'n', ' ', ' (2)', ' ', ' ', ' ', ' ',' ',' ',' ', ' ', ' ', ' '],
 	['r', 'g', 'r', 'n', ' ', ' (2)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' '],
@@ -406,14 +406,14 @@ var levelMap = [
 	[' ', ' ', ' ', ' ', ' ', ' (2)', ' ', ' ', ' ',' ',' ',' ', ' ', ' ', ' ', ' '],
 	[' ', ' ', ' ', ' ', ' ', ' (2)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' '],
 	[' ', ' ', ' ', ' ', ' ', ' (2)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' '],
-	[' ', ' ', ' ', ' ', ' ', ' (2)', ' ', ' ', ' ', ' ',' ',' ',' ',' ',' ',' '],
+	[' ', ' ', ' ', ' ', ' ', ' (2)', ' ', ' ', ' ', ' ',' ',' ',' ', ' ', ' ', ' '],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' (3)', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' (3)',' ',' '],
 	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'm', ' ', ' ', ' '],
-	['r', 'r', 'r ', 'B', 'g', 'g', 'g', 'B', 'r', 'r', 'r', 'B','n',' ',' ',' '],
+	['r', 'r', 'r ', 'B', 'g', 'g', 'g', 'B', 'r', 'r', 'r', 'B','n', ' ', ' ', ' '],
 	['r', 'G', 'r', 'B', 'g', 'g', 'g', 'B', 'r', 'G', 'r', 'B', 'z', ' ', ' ', ' '],
-	['r', 'r', 'r (3)', 'B', 'g', 'g', 'g', 'B', 'r', 'r', 'r', 'B', 'W', 'w', 'w', 'w'],
+	['r', 'r', 'r (3)', 'B', 'g', 'g', 'g', 'B', 'r', 'r', 'r', 'B','W','w','w','w'],
 	['B', 'B', 'B ', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'W', 'w', 'w','w'],
 	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'n', ' ', ' ', ' '],
 	['r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'W', 'w', 'w', 'w'],
@@ -501,7 +501,7 @@ var setupLevel = function(){
 const greenBlockImg = new Image(), redBlockImg = new Image(), greenPointImg = new Image(), redPointImg = new Image(), destroyedImg = new Image(),
 	platformOneImg = new Image(), platformTwoImg = new Image(), platformBottomImg = new Image(), platformBottomLeftImg = new Image(), platformBottomRightImg = new Image(), platformLeftImg = new Image(), platformTopLeftImg = new Image(),
 	platformRightImg = new Image(), platformTopRightImg = new Image(), platformRightNubImg = new Image(), platformLeftNubImg = new Image(), platformIntersectTopLeftImg = new Image(), platformIntersectTopRightImg = new Image(),
-	pipeImg = new Image(), pipeLeftImg = new Image(), pipeRightImg = new Image(), bigBlockImg = new Image(), destroyedBigBlockImg = new Image(), bigThingImg = new Image();
+	pipeImg = new Image(), pipeLeftImg = new Image(), pipeRightImg = new Image(), bigBlockImg = new Image(), destroyedBigBlockImg = new Image(), bigThingImg = new Image(), destroyedSecretBlockImg = new Image();
 
 const setupGridImages = function(){
 	greenBlockImg.src = 'img/greenblock.png';
@@ -532,6 +532,8 @@ const setupGridImages = function(){
 	destroyedBigBlockImg.src = 'img/destroyedbigblock.png';
 
 	bigThingImg.src = 'img/bigthing.png';
+
+	destroyedSecretBlockImg.src = 'img/destroyedsecretblock.png';
 };
 
 var levelLoop = function(){
@@ -594,11 +596,19 @@ var levelLoop = function(){
 								case 'O': img = bigThingImg; break;
 								case 'p': img = bigThingImg; break;
 								case 'P': img = bigThingImg; break;
+								case '-': img = platformOneImg; break;
+								case '_': img = platformOneImg; break;
+								case '=': img = platformOneImg; break;
+								case '+': img = platformOneImg; break;
+								case 'q': img = destroyedSecretBlockImg; break;
+								case 'Q': img = destroyedSecretBlockImg; break;
+								case 'y': img = destroyedSecretBlockImg; break;
+								case 'Y': img = destroyedSecretBlockImg; break;
 							}
-							if(levelGrid == 'K' || levelGrid == 'O' || levelGrid == 'U') context.drawImage(img, 0, 0, grid, grid, (j * grid), rowY, grid, grid);
-							else if(levelGrid == 'k' || levelGrid == 'o' || levelGrid == 'u') context.drawImage(img, 0, grid, grid, grid, (j * grid), rowY, grid, grid);
-							else if(levelGrid == 'L' || levelGrid == 'P' || levelGrid == 'I') context.drawImage(img, grid, 0, grid, grid, (j * grid), rowY, grid, grid);
-							else if(levelGrid == 'l' || levelGrid == 'p' || levelGrid == 'i') context.drawImage(img, grid, grid, grid, grid, (j * grid), rowY, grid, grid);
+							if(levelGrid == 'K' || levelGrid == 'O' || levelGrid == 'U' || levelGrid == 'q') context.drawImage(img, 0, 0, grid, grid, (j * grid), rowY, grid, grid);
+							else if(levelGrid == 'k' || levelGrid == 'o' || levelGrid == 'u' || levelGrid == 'Q') context.drawImage(img, 0, grid, grid, grid, (j * grid), rowY, grid, grid);
+							else if(levelGrid == 'L' || levelGrid == 'P' || levelGrid == 'I' || levelGrid == 'y') context.drawImage(img, grid, 0, grid, grid, (j * grid), rowY, grid, grid);
+							else if(levelGrid == 'l' || levelGrid == 'p' || levelGrid == 'i' || levelGrid == 'Y') context.drawImage(img, grid, grid, grid, grid, (j * grid), rowY, grid, grid);
 							else if(levelGrid == 'b' || levelGrid == 'N' || levelGrid == 'v' || levelGrid == 'a' || levelGrid == 'A'){
 								var sX = 0;
 								switch(currentPlatformAnimation){
@@ -673,57 +683,6 @@ var levelLoop = function(){
 	draw();
 
 };
-
-// var gridItem = function(character){
-// 	var image = '', entity = '', entityString = '';
-// 	if(character.indexOf('(') > -1) character = character.substring(0, character.indexOf('('));
-// 	character = character.trim();
-
-// 	switch(character){
-
-// 		case 'B': image = 'platform1'; break;
-// 		case 'M': image = 'platform2'; break;
-
-// 		case 'b': image = 'platformbottom'; break;
-// 		case 'N': image = 'platformbottomright'; break;
-// 		case 'v': image = 'platformbottomleft'; break;
-// 		case 'a': image = 'platformintersecttopleft'; break;
-// 		case 'A': image = 'platformintersecttopright'; break;
-
-// 		case 'X': image = 'platformleft'; break;
-// 		case 'V': image = 'platformtopleft'; break;
-// 		case 'n': image = 'platformright'; break;
-// 		case 'm': image = 'platformtopright'; break;
-
-// 		case 'z': image = 'platformrightnub'; break;
-// 		case 'Z': image = 'platformleftnub'; break;
-// 		case 'w': image = 'pipe'; break;
-// 		case 'W': image = 'pipeleft'; break;
-// 		case 'e': image = 'piperight'; break;
-
-// 		case 'g': image = 'greenblock'; break;
-// 		case 'G': image = 'greenpoint'; break;
-// 		case 'r': image = 'redblock'; break;
-// 		case 'R': image = 'redpoint'; break;
-// 		case 't': image = 'destroyed'; break;
-		
-// 		case 'k': image = 'bigblock'; break;
-// 		case 'K': image = 'bigblock'; break;
-// 		case 'l': image = 'bigblock'; break;
-// 		case 'L': image = 'bigblock'; break;
-// 		case 'u': image = 'destroyedbigblock'; break;
-// 		case 'U': image = 'destroyedbigblock'; break;
-// 		case 'i': image = 'destroyedbigblock'; break;
-// 		case 'I': image = 'destroyedbigblock'; break;
-
-// 		case 'o': image = 'bigthing'; break;
-// 		case 'O': image = 'bigthing'; break;
-// 		case 'p': image = 'bigthing'; break;
-// 		case 'P': image = 'bigthing'; break;
-
-// 	};
-// 	return image;
-// };
 var powerups = [];
 
 const powerupImg = new Image();
@@ -754,7 +713,7 @@ var powerupCollision = function(powerupObj, i){
 };
 
 var powerupBonus = function(){
-	score = score + 1000;
+	score += 1000;
 	fullscreenMessageTime = 0;
 	currentFullscreenMessage = 'bonus: 1000';
 };
@@ -828,6 +787,12 @@ var enemiesLoop = function(){
 							if(opts.arr.hits == 0){
 								opts.arr.splice(i, 1);
 								score += opts.score;
+								if(opts.bossType){
+									switch(opts.bossType){
+										case 'bossOneA': bossOneAActive = false; break;
+										case 'bossOneB': bossOneBActive = false; break;
+									}
+								}
 							}
 						} else {
 							opts.arr.splice(i, 1);
@@ -847,11 +812,13 @@ var enemiesLoop = function(){
 			});
 		};
 
-		if(enemies.small.one.length) drawEnemySmallOne(drawEnemy);
-		if(enemies.small.two.length) drawEnemySmallTwo(drawEnemy);
-		if(enemies.small.three.length) drawEnemySmallThree(drawEnemy);
-		if(enemies.small.four.length) drawEnemySmallFour(drawEnemy);
-		if(enemies.medium.one.length) drawEnemyMediumOne(drawEnemy);
+		if(!bossOneAActive && !bossOneBActive){
+			if(enemies.small.one.length) drawEnemySmallOne(drawEnemy);
+			if(enemies.small.two.length) drawEnemySmallTwo(drawEnemy);
+			if(enemies.small.three.length) drawEnemySmallThree(drawEnemy);
+			if(enemies.small.four.length) drawEnemySmallFour(drawEnemy);
+			if(enemies.medium.one.length) drawEnemyMediumOne(drawEnemy);
+		}
 
 		if(bosses.oneA.length) drawBossOneA(drawEnemy);
 		if(bosses.oneB.length) drawBossOneB(drawEnemy);
@@ -960,6 +927,8 @@ var enemyAnimations = {
 		return enemyObj;
 	}
 };
+let bossOneAActive = false, bossOneBActive = false;
+
 const bosses = {
 	oneA: [], oneB: []
 };
@@ -969,37 +938,45 @@ bossOneAImg.src = 'img/bossonea.png';
 bossOneBImg.src = 'img/bossoneb.png';
 
 const drawBossOneA = function(callback){
-	var opts = {
+	callback({
 		arr: bosses.oneA,
 		img: bossOneAImg,
 		width: 56,
 		height: 56,
 		animation: bossAnimations.oneA,
 		score: 2000,
-		hits: 16,
-		onlyDestroysPlayer: true
-	};
-	callback(opts);
+		hits: 20,
+		onlyDestroysPlayer: true,
+		bossType: 'bossOneA'
+	});
 }, drawBossOneB = function(callback){
-	var opts = {
+	callback({
 		arr: bosses.oneB,
 		img: bossOneBImg,
 		width: 56,
 		height: 56,
 		animation: bossAnimations.oneB,
 		score: 2000,
-		hits: 16,
-		onlyDestroysPlayer: true
-	};
-	callback(opts);
+		hits: 20,
+		onlyDestroysPlayer: true,
+		bossType: 'bossOneB'
+	});
 };
 
 const bossOneSpeed = (levelSpeed / 3) * 2;
 
-const bossOneAnimation = function(enemyObj, enemyWidth, enemyHeight){
+const bossOneAnimation = function(enemyObj, enemyWidth, enemyHeight, isB){
+	if(gameClock >= 1750){
+		enemyObj.y += bossOneSpeed;
+		enemyObj.x = enemyObj.x;
+			if(isB && bossOneBActive) bossOneBActive = false;
+			else if(!isB && bossOneAActive) bossOneAActive = false;
+	} else {
 		if(enemyObj.y + enemyHeight >= -10 && enemyObj.y + enemyHeight <= 1 && !enemyObj.direction){
 			enemyObj.y = gameHeight;
 			enemyObj.direction = 'up';
+			if(isB && !bossOneBActive) bossOneBActive = true;
+			else if(!isB && !bossOneAActive) bossOneAActive = true;
 		} else if(enemyObj.direction && (enemyObj.direction == 'up')){
 			if(enemyObj.x + enemyWidth < playerX) enemyObj.sXDirection = 'right';
 			else if(enemyObj.x >= playerX + playerWidth) enemyObj.sXDirection = 'left';
@@ -1012,19 +989,20 @@ const bossOneAnimation = function(enemyObj, enemyWidth, enemyHeight){
 			if(enemyObj.sYDirection == 'up') enemyObj.y -= bossOneSpeed;
 			else if(enemyObj.sYDirection == 'down') enemyObj.y += bossOneSpeed;
 		}
-		return enemyObj;
+	}
+	return enemyObj;
 };
 
 const bossOneInterval = 128;
 
 const bossAnimations = {
 	oneA: function(enemyObj, enemyWidth, enemyHeight){
-		enemyObj = bossOneAnimation(enemyObj, enemyWidth, enemyHeight)
-		if(gameClock % bossOneInterval == 0) bossBulletSpawn.oneA(enemyObj);
+		enemyObj = bossOneAnimation(enemyObj, enemyWidth, enemyHeight, false)
+		if(gameClock % bossOneInterval == 0 && bossOneAActive) bossBulletSpawn.oneA(enemyObj);
 		return enemyObj;
 	}, oneB: function(enemyObj, enemyWidth, enemyHeight){
-		enemyObj = bossOneAnimation(enemyObj, enemyWidth, enemyHeight)
-		if(gameClock % bossOneInterval == (bossOneInterval / 2)) bossBulletSpawn.oneB(enemyObj);
+		enemyObj = bossOneAnimation(enemyObj, enemyWidth, enemyHeight, true)
+		if(gameClock % bossOneInterval == (bossOneInterval / 2) && bossOneBActive) bossBulletSpawn.oneB(enemyObj);
 		return enemyObj;
 	}
 };
@@ -1223,13 +1201,14 @@ const bossBulletAnimations = {
 var updateBlocks = function(){
 	levelMap.forEach(function(row, i){
 		if(gridPositions[i].y + grid >= 0 && gridPositions[i].y <= gameHeight){
-			row.forEach(function(levelGrid, j){ // in the grid
+			row.forEach(function(levelGrid, j){
 				var gridChar = gridPositions[i].grids[j].char;
 				if(gridChar.indexOf('(') > -1) gridChar = gridChar.substring(0, gridChar.indexOf('('));
 				var gridObj = {x: gridPositions[i].grids[j].x, y: gridPositions[i].y, char: gridChar};
 				gridChar = gridChar.trim();
 				if(gridChar == 'g' || gridChar == 'G' || gridChar == 'r' || gridChar == 'R') checkBlockCollision(gridObj);
 				else if(gridChar == 'k' || gridChar == 'K' || gridChar == 'l' || gridChar == 'L') checkBigBlockCollision(gridObj);
+				else if(gridChar == '-' || gridChar == '_' || gridChar == '=' || gridChar == '+') checkSecretCollision(gridObj);
 			});
 		}
 	});
@@ -1335,6 +1314,88 @@ var destroyBigBlock = function(gridsToDestroy){
 	});
 	explodeEntity({x: gridsToDestroy.topLeft.x, y: gridsToDestroy.topLeft.y, width: grid * 2, height: grid * 2});
 	score += 200;
+};
+
+var checkSecretCollision = function(secretBlock){
+	checkBulletCollision({x: secretBlock.x, y: secretBlock.y, width: grid, height: grid}, function(){
+		var gridsToDestroy = {};
+		switch(secretBlock.char.trim()){
+			case '-':
+				gridsToDestroy.topLeft = {x: secretBlock.x, y: secretBlock.y - grid};
+				gridsToDestroy.topRight = {x: secretBlock.x + grid, y: secretBlock.y - grid};
+				gridsToDestroy.bottomLeft = secretBlock;
+				gridsToDestroy.bottomRight = {x: secretBlock.x + grid, y: secretBlock.y};
+				break;
+			case '_':
+				gridsToDestroy.topLeft = secretBlock;
+				gridsToDestroy.topRight = {x: secretBlock.x + grid, y: secretBlock.y};
+				gridsToDestroy.bottomLeft = {x: secretBlock.x, y: secretBlock.y + grid};
+				gridsToDestroy.bottomRight = {x: secretBlock.x + grid, y: secretBlock.y + grid};
+				break;
+			case '=':
+				gridsToDestroy.topLeft = {x: secretBlock.x - grid, y: secretBlock.y - grid};
+				gridsToDestroy.topRight = {x: secretBlock.x, y: secretBlock.y - grid};
+				gridsToDestroy.bottomLeft = {x: secretBlock.x - grid, y: secretBlock.y};
+				gridsToDestroy.bottomRight = secretBlock;
+				break;
+			case '+':
+				gridsToDestroy.topLeft = {x: secretBlock.x - grid, y: secretBlock.y};
+				gridsToDestroy.topRight = secretBlock;
+				gridsToDestroy.bottomLeft = {x: secretBlock.x - grid, y: secretBlock.y - grid};
+				gridsToDestroy.bottomRight = {x: secretBlock.x, y: secretBlock.y - grid};
+				break;
+		};
+		destroySecretBlock(gridsToDestroy);
+	});
+};
+
+let bonusCount = 1;
+
+var destroySecretBlock = function(gridsToDestroy){
+	levelMap.forEach(function(row, i){
+		row.forEach(function(char, j){
+			var gridChar = char;
+			if(gridChar.indexOf('(') > -1) gridChar = gridChar.substring(0, gridChar.indexOf('('));
+			var tempRow = gridPositions[i], grid = gridPositions[i].grids[j];
+			gridChar = gridChar.trim();
+			if(gridChar.indexOf('-') > -1 || gridChar.indexOf('_') > -1 || gridChar.indexOf('=') > -1 || gridChar.indexOf('+') > -1){
+				var otherRowIndex = (gridChar.indexOf('_') > -1 || gridChar.indexOf('+') > -1) ? i + 1 : i - 1;
+				for(var cord in gridsToDestroy){
+					if(grid.x == gridsToDestroy[cord].x && tempRow.y == gridsToDestroy[cord].y){
+						var newChar = '', newOtherChar = '';
+
+						var tempGrid = levelMap[i][j], tempOtherGrid = levelMap[otherRowIndex][j];
+
+						if(tempGrid.indexOf('(') > -1) tempGrid = tempGrid.substring(0, tempGrid.indexOf('('));
+						if(tempOtherGrid.indexOf('(') > -1) tempOtherGrid = tempOtherGrid.substring(0, tempOtherGrid.indexOf('('));
+						tempGrid = tempGrid.trim();
+						tempOtherGrid = tempOtherGrid.trim();
+						switch(tempGrid){
+							case '-': newChar = 'Q'; break;
+							case '_': newChar = 'q'; break;
+							case '=': newChar = 'Y'; break;
+							case '+': newChar = 'y'; break;
+						};
+						switch(tempOtherGrid){
+							case '-': newOtherChar = 'Q'; break;
+							case '_': newOtherChar = 'q'; break;
+							case '=': newOtherChar = 'Y'; break;
+							case '+': newOtherChar = 'y'; break;
+						};
+						levelMap[i][j] = newChar;
+						gridPositions[i].grids[j].char = newChar;
+						levelMap[otherRowIndex][j] = newOtherChar;
+						gridPositions[otherRowIndex].grids[j].char = newOtherChar;
+					}
+				};
+			}
+		});
+	});
+	explodeEntity({x: gridsToDestroy.topLeft.x, y: gridsToDestroy.topLeft.y, width: grid * 2, height: grid * 2});
+	score += bonusCount * 1000;
+	fullscreenMessageTime = 0;
+	currentFullscreenMessage = 'bonus: ' + (bonusCount * 1000);
+	bonusCount++;
 };
 var movingUp = false, movingDown = false, movingLeft = false, movingRight = false, shot = false, isPaused = false, player, inputStopped = false,  playerSpeed = grid / 2, playerWidth = grid, playerHeight = grid * 1.5, playerIsHidden = false;
 var playerX = (gameWidth / 2) - (playerWidth / 2), playerY = gameHeight - (playerHeight + grid);

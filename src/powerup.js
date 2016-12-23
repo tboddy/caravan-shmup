@@ -28,7 +28,7 @@ var powerupCollision = function(powerupObj, i){
 };
 
 var powerupBonus = function(){
-	score = score + 1000;
+	score += 1000;
 	fullscreenMessageTime = 0;
 	currentFullscreenMessage = 'bonus: 1000';
 };
