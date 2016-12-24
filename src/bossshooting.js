@@ -34,7 +34,7 @@ const bossBulletSpawn = {
 };
 
 const bossBulletOneSpeeds = {
-	n: levelSpeed * 1.9,
+	n: levelSpeed * 1.67,
 	nwney: levelSpeed * 1.1,
 	nwnex: levelSpeed * 1,
 	s: levelSpeed * 1.5,

@@ -21,6 +21,7 @@ var initGame = function(){
 var gameLoop = function(){
 	clearGame();
 	levelLoop();
+	secretLoop();
 	enemiesLoop();
 	explosionsLoop();
 	enemyShootingLoop();
@@ -289,53 +290,53 @@ var levelMap = [
 	['b', 'b', 'b', 'b', 'b', 'A', 'r', 'g', 'r', 'g', 'n', ' ', ' ', ' ', ' ', ' '],
 	[' ', ' ', ' ', ' ', ' ', 'Z', 'g', 'r', 'g', 'r', 'z', ' ', ' ', ' ', ' ', ' '],
 	[' ', ' ', ' ', ' ', ' ', 'X', 'r', 'g', 'r', 'g', 'n', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', 'V', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'm',' ',' (4)',' '],
+	[' ', ' ', ' ', 'V', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'm', ' ', ' ', ' '],
 	[' ', ' ', ' ', 'X', 'B', 'M', 'r', 'g', 'r', 'g', 'M', 'B', 'n', ' ', ' ', ' '],
-	[' ', ' ', ' ', 'Z', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'z',' ',' ',' (4)'],
+	[' ', ' ', ' ', 'Z', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'z', ' ', ' ', ' '],
 	[' ', ' ', ' ', 'Z', 'B', 'M', 'r', 'g', 'r', 'g', 'M', 'B', 'z', ' ', ' ', ' '],
-	[' ', ' ', ' ', 'v', 'b', 'b', 'A', 'B', 'B', 'a', 'b', 'b', 'N',' ',' (4)',' '],
+	[' ', ' ', ' ', 'v', 'b', 'b', 'A', 'B', 'B', 'a', 'b', 'b', 'N', ' ', ' ', ' '],
 	[' ', ' ', ' ', ' ', ' ', ' ', 'X', 'g', 'r', 'n', ' ', ' ', ' ', ' ', ' ', ' '],
-	['g', 'r', 'g', 'm', ' ', ' ', 'Z', 'K', 'L', 'z', ' ', ' ','V','g','r','g (4)'],
-	['g', 'r', 'g', 'W', 'w', 'w', 'e', 'k', 'l', 'W', 'w', 'w ', 'e', 'g', 'r','g'],
-	['g', 'r', 'g', 'n', ' ', ' ', 'v', 'b', 'b', 'N', ' ',' ','X','g','r (4)', 'g'],
+	['g', 'r', 'g', 'm', ' ', ' ', 'Z', 'K', 'L', 'z', ' ', ' ', 'V', 'g', 'r', 'g'],
+	['g', 'r', 'g', 'W', 'w', 'w', 'e', 'k', 'l', 'W', 'w', 'w', 'e', 'g', 'r', 'g'],
+	['g', 'r', 'g', 'n', ' ', ' ', 'v', 'b', 'b', 'N', ' ', ' ', 'X', 'g', 'r', 'g'],
 	['g', 'r', 'g', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'g', 'r', 'g'],
-	['g', 'r', 'g', 'z', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ','Z','g','r', 'g (4)'],
+	['g', 'r', 'g', 'z', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'Z', 'g', 'r', 'g'],
 	['g', 'r', 'g', 'n', ' ', ' ', ' ', ' ', ' (p)',' ',' ',' ', 'X', 'g', 'r', 'g'],
-	['B', 'B (4)','B','B','B','B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B'],
+	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B'],
 	['B', 'r', 'G', 'r', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'r', 'g', 'r', 'B'],
-	['B (4)', 'g','g','g','g','g', 'g', 'B', 'B', 'g', 'g', 'g', 'g', 'g', 'g', 'B'],
+	['B', 'g', 'g', 'g', 'g', 'g', 'g', 'B', 'B', 'g', 'g', 'g', 'g', 'g', 'g', 'B'],
 	['B', 'r', 'g', 'r', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'r', 'G', 'r', 'B'],
-	['B', 'B (4)','B','B','B','B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B'],
+	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B'],
 	['B', 'M', 'B', 'M', 'B', 'M', 'B', 'M', 'B', 'M', 'a', 'b', 'b', 'b', 'b', 'b'],
-	['g (4)', 'g','g','g','g','g', 'g', 'g', 'g', 'g', 'n', ' ', ' ', ' ', ' ', ' '],
+	['g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'n', ' ', ' ', ' ', ' ', ' '],
 	['r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'n', ' ', ' ', ' ', ' ', ' '],
-	['g', 'K (4)', 'L', 'g', 'g', 'g', 'g', 'K', 'L', 'g', 'n', ' ',' ',' ',' ',' '],
+	['g', 'K', 'L', 'g', 'g', 'g', 'g', 'K', 'L', 'g', 'n', ' ', ' ', ' ', ' ', ' '],
 	['r', 'k', 'l', 'r', 'r', 'r', 'r', 'k', 'l', 'r', 'z', ' ', ' ', ' ', ' ', ' '],
-	['g (4)', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'n', ' ',' ',' ',' ',' '],
+	['g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'n', ' ', ' ', ' ', ' ', ' '],
 	['r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'n', ' ', ' ', ' ', ' ', ' '],
-	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'M', 'g', 'M', 'B', 'B', 'B', 'B', 'B', 'B'],
+	['B', 'B (4)', 'B', 'B', 'B', 'B', 'B', 'M', 'g', 'M', 'B', 'B','B','B','B','B'],
 	['B', 'g', 'r', 'g', 'r', 'B', 'B', 'g', 'r', 'g', 'B', 'B', 'B', 'B', 'B', 'B'],
-	['B', 'g', 'r', 'g', 'r', 'B', 'B', 'M', 'r', 'M', 'B', 'B', 'B', 'B', 'B', 'B'],
+	['B (4)', 'g', 'r', 'g', 'r', 'B', 'B', 'M', 'r', 'M', 'B', 'B','B','B','B','B'],
 	['b', 'b', 'A', 'g', 'r', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'M', 'g', 'M', 'B'],
-	[' ', ' ', 'X', 'g', 'r', 'B', 'B', 'B', 'B', 'B ','B', 'B', 'g', 'R', 'g', 'B'],
+	[' ', ' (4)', 'X', 'g', 'r', 'B', 'B', 'B', 'B', 'B ','B', 'B', 'g','R','g','B'],
 	[' ', ' ', 'X', 'B', 'B', 'B', 'B', 'M', 'g', 'M', 'B', 'B', 'M', 'g', 'M', 'B'],
-	[' ', ' ', 'Z', 'B', 'B', 'B', 'B', 'g', 'R', 'g', 'B', 'B', 'B', 'B', 'B', 'B'],
+	[' (4)', ' ', 'Z', 'B', 'B', 'B', 'B', 'g', 'R', 'g', 'B', 'B', 'B','B','B','B'],
 	[' ', ' ', 'Z', 'K', 'L', 'B', 'B', 'M', 'g', 'M', 'B', 'B', 'B', 'B', 'B', 'B'],
-	['w', 'w', 'e', 'k', 'l', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'M', 'g', 'M', 'B'],
+	['w', 'w (4)', 'e', 'k', 'l', 'B', 'B', 'B', 'B', 'B', 'B', 'B','M','g','M','B'],
 	[' ', ' ', 'v', 'b', 'A', 'K', 'L', 'B', 'B', 'B', 'B', 'B', 'g', 'R', 'g', 'B'],
-	[' ', ' ', ' ', ' ', 'X', 'k', 'l', 'B', 'B', 'B', 'B', 'B', 'M', 'g', 'M', 'B'],
+	[' (4)', ' ', ' ', ' ', 'X', 'k', 'l', 'B', 'B', 'B', 'B', 'B', 'M','g','M','B'],
 	[' ', ' ', ' ', ' ', 'v', 'b', 'b', 'b', 'b', 'A', 'B', 'B', 'B', 'B', 'B', 'B'],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'Z', 'B', 'B', 'B', 'B', 'B', 'B'],
+	[' ',' ',' ',' ',' ', ' ', ' ', ' ', ' ', 'Z', 'B', 'B', 'B', 'B', 'B (4)', 'B'],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'v', 'b', 'b', 'b', 'b', 'b', 'b'],
+	[' ',' ',' ',' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' (4)'],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ',' ',' ',' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' (4)', ' '],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'V', 'r'],
+	[' ',' ',' ',' ',' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'V', 'r (4)'],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'R'],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' (p)',' ',' ',' ', ' ', ' ', ' ', 'Z', 'r'],
+	[' ',' ',' ',' ',' ', ' ', ' ', ' (p)',' ',' ',' ', ' ', ' ', ' ', 'Z (4)', 'r'],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'v', 'b'],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ',' ',' ',' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' (4)'],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
 	[' ', ' ', ' (!)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' (@)',' ',' ',' ',' '],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
@@ -347,7 +348,7 @@ var levelMap = [
 	['g', 'g', 'B', 'r', 'r', 'B', 'B', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
 	['g', 'g', 'B', 'r', 'r', 'B', 'B', 'n', ' ', ' ', ' ', ' ', ' (5)',' ',' ',' '],
 	['g', 'g', 'M', 'r', 'r', 'B', 'B', 'z', ' ', ' ', ' ', ' ', ' (5)',' ',' ',' '],
-	['r', 'r', 'r', 'r', 'r', 'r', 'r', 'z ',' ',' ',' ',' ', ' (5)', ' ', ' ', ' '],
+	['r', 'r', 'r', 'r', 'r', 'r', 'r', 'z ', ' ', ' ', ' ',' ', ' (5)',' ',' ',' '],
 	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'z', ' ', ' ', ' ', ' ', ' (5)',' ',' ',' '],
 	['B', 'B', 'B', 'B ', 'B', 'B', 'B', 'n', ' ', ' ', 'V', 'r','r', 'r', 'm', ' '],
 	['B', 'r', 'g', 'r (5)', 'B', 'B', 'B', 'n', ' ', ' ', 'X', 'r','r','r','n',' '],
@@ -356,8 +357,8 @@ var levelMap = [
 	['B', 'r', 'g', 'B (5)', 'B', 'M', 'r', 'z', ' ', ' ', 'Z', 'B','g','g','n',' '],
 	['b', 'b', 'b', 'A', 'r', 'g', 'r', 'n', ' ', ' ', 'X', 'B','B ', 'B', 'n', ' '],
 	[' ', ' ', ' ', 'X', 'r', 'g', 'r', 'W', 'w', 'w', 'e', 'r','R (5)','r','z',' '],
-	[' ', ' ', ' ', 'Z', 'B', '_', '+', 'n', ' ', ' ', 'X', 'B','r (5)','B','n',' '],
-	[' ', ' ', ' ', 'Z', 'B', '-', '=', 'n', ' ',' (p)','X','K','L (5)','r','n',' '],
+	[' ', ' ', ' ', 'Z', 'B', 'B(-)','B','n',' ', ' ', 'X', 'B','r (5)','B','n',' '],
+	[' ', ' ', ' ', 'Z', 'B', 'B', 'B', 'n', ' ',' (p)','X','K','L (5)','r','n',' '],
 	[' ', ' ', ' ', 'v', 'b', 'b', 'b', 'N', ' ', ' ', 'X', 'k','l (5)','r','W','w'],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'B', 'M', 'B', 'W', 'w'],
 	[' ', ' ', ' ', ' (5)', ' ', ' ', ' ', ' ', ' ', ' ', 'v', 'b','b','b','N', ' '],
@@ -379,84 +380,84 @@ var levelMap = [
 	['g', 'g', 'g', 'g', 'g', 'n', ' ', ' ',' ','X','M','B', 'M', 'B', 'M (4)', 'B'],
 	['r', 'G', 'g', 'r', 'r', 'n', ' ', ' ', ' ', 'X', 'M', 'B ','M', 'B', 'M', 'B'],
 	['g', 'r', 'g', 'g', 'g', 'n', ' ',' ',' ','X','M','B ', 'M', 'B', 'M', 'B (4)'],
-	['g', 'r', 'g', 'r', 'a', 'N', 'V', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r'],
-	['g', 'r (4)', 'g', 'r', 'n', ' ', 'X', 'g', 'r', 'g', 'r', 'g','r','g','G','g'],
-	['g', 'r', 'g', 'r', 'W', 'w', 'e', 'M', 'g', 'r', 'g', 'M', 'g', 'r', 'g', 'M'],
-	['g (4)', 'r', 'G', 'r', 'W', 'w', 'e', 'B', 'B', 'B', 'B', 'B','M','r','M','B'],
-	['g', 'r', 'g', 'R', 'n', ' ', 'v', 'b', 'b', 'b', 'A', 'B', 'g', 'M', 'g', 'B'],
-	['b ', 'b(4)', 'b', 'b', 'N', ' ', ' ', ' ', ' ', ' ', 'X', 'B','M','r','M','B'],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'B', 'B', 'B', 'B', 'B'],
-	[' (4)', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'Z', 'g','g','M','r', 'r'],
-	[' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' (p)', ' ', 'X', 'g', 'g', 'B', 'r', 'r'],
-	[' ', ' (4)', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'g','g','M','r', 'r'],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X (2)', 'g','G','B','r','r'],
-	[' (4)', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ','X (2)','g','g','M','r','r'],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X (2)', 'g','g','B','R','r'],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'Z (2)', 'g','g','M','r','r'],
-	['r', 'g', 'r', 'm', ' ', ' ', ' ', ' ', ' ', ' ', 'Z (2)', 'g','g','B','r','r'],
-	['M', 'B', 'M', 'z', ' ', ' ', ' ', ' ', ' ', ' ', 'X (2)', 'g','g','M','r','r'],
-	['r', 'g', 'r', 'n', ' ', ' ', ' ', ' ', ' ', ' ', 'v (2)', 'b','A','B','r','r'],
-	['g', 'r', 'g', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' (2)', ' ', 'Z','M','B','M'],
-	['r', 'G', 'r', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'v', 'b', 'b', 'b'],
-	['g', 'M', 'g', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	['r', 'g', 'r', 'z', ' ', ' (2)', ' ', ' ', ' ', ' ',' ',' ',' ', ' ', ' ', ' '],
-	['g', 'M', 'g', 'n', ' ', ' (2)', ' ', ' ', ' ', ' ',' ',' ',' ', ' ', ' ', ' '],
-	['r', 'g', 'r', 'n', ' ', ' (2)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' '],
-	['b', 'b', 'b', 'N', ' ', ' (2)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' '],
-	[' ', ' ', ' ', ' ', ' ', ' (2)', ' ', ' ', ' ',' ',' ',' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' (2)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' '],
-	[' ', ' ', ' ', ' ', ' ', ' (2)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' '],
-	[' ', ' ', ' ', ' ', ' ', ' (2)', ' ', ' ', ' ', ' ',' ',' ',' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' (3)',' ',' '],
-	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'm', ' ', ' ', ' '],
-	['r', 'r', 'r ', 'B', 'g', 'g', 'g', 'B', 'r', 'r', 'r', 'B','n', ' ', ' ', ' '],
-	['r', 'G', 'r', 'B', 'g', 'g', 'g', 'B', 'r', 'G', 'r', 'B', 'z', ' ', ' ', ' '],
-	['r', 'r', 'r (3)', 'B', 'g', 'g', 'g', 'B', 'r', 'r', 'r', 'B','W','w','w','w'],
-	['B', 'B', 'B ', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'W', 'w', 'w','w'],
-	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'n', ' ', ' ', ' '],
-	['r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'W', 'w', 'w', 'w'],
-	['M', 'g', 'M', 'g', 'M', 'g', 'M', 'B', 'M', 'B', 'M', 'B', 'n', ' ', ' ', ' '],
-	['r', 'g', 'r', 'g', 'r', 'g', 'a', 'b', 'b', 'b', 'b', 'b', 'N', ' ', ' ', ' '],
-	['r', 'g', 'M', 'G', 'r', 'G', 'n', ' ', ' ', ' ', ' ', '  (1)',' ',' ',' ',' '],
-	['r', 'g', 'r', 'g', 'r', 'g', 'n', ' ', ' (p)',' ',' ','  (1)',' ',' ',' ',' '],
-	['M', 'g', 'r', 'g', 'M', 'g', 'n', ' ', ' ', ' ', ' ', '  (1)',' ','V','K','L'],
-	['r', 'g', 'r', 'g', 'r', 'g', 'n', ' ', ' ', ' ', ' ', '  (1)',' ','X','k','l'],
-	['R', 'g', 'M', 'g', 'r', 'g', 'n', ' ', ' ', ' ', ' ', '  (1)',' ','Z','K','L'],
-	['r', 'g', 'r', 'g', 'r', 'g', 'W','w','w','w','w', 'w (1)', 'w', 'e', 'k', 'l'],
-	['M', 'g', 'M', 'g', 'M', 'g', 'n', ' ', ' ', ' ', ' ', '  (1)',' ','X','K','L'],
-	['r', 'g', 'r', 'g', 'r', 'g', 'n', ' ', ' ', ' ', ' ', '  (1)',' ','X','k','l'],
-	['M', 'g', 'M', 'g', 'M', 'g', 'n', ' ', ' ', ' ', ' ', '  (1)',' ','v','b','b'],
-	['r', 'g', 'r', 'g', 'r', 'g', 'n', ' ', ' ', ' ', ' ', '  (1)',' ',' ',' ',' '],
-	['M', 'g', 'M', 'g', 'M (1)', 'g', 'n', ' ', ' ', ' ', ' ', ' ',' ',' ',' ',' '],
-	['b', 'b', 'b', 'A', 'r (1)', 'g', 'z', ' ', ' ', ' ', ' ', ' ',' ',' ',' ',' '],
-	[' ', ' ', ' ', 'Z', 'r (1)', 'g', 'z', ' ', ' ', ' ', ' ', ' ',' ',' ',' ',' '],
-	[' ', ' ', ' ', 'X', 'r (1)', 'g', 'n', ' ', ' ', ' ', ' ', ' ',' ',' ',' ',' '],
-	[' ', ' ', ' ', 'v', 'b (1)', 'b', 'N', ' ', ' ', ' ', ' ', ' ',' ',' ',' ',' '],
-	[' ', ' ', ' ', ' ', '  (1)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' ',' '],
-	[' ', ' ', ' ', ' ', '  (1)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' ',' '],
-	[' ', ' ', ' ', ' ', '  (1)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' ',' '],
-	[' ', ' ', ' ', ' ', '  (1)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' ',' '],
-	[' ', ' ', ' ', ' ', '  (1)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' ',' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' (p)', ' ', ' ', ' ', ' ',' ',' ',' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+	// ['g', 'r', 'g', 'r', 'a', 'N', 'V', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r'],
+	// ['g', 'r (4)', 'g', 'r', 'n', ' ', 'X', 'g', 'r', 'g', 'r', 'g','r','g','G','g'],
+	// ['g', 'r', 'g', 'r', 'W', 'w', 'e', 'M', 'g', 'r', 'g', 'M', 'g', 'r', 'g', 'M'],
+	// ['g (4)', 'r', 'G', 'r', 'W', 'w', 'e', 'B', 'B', 'B', 'B', 'B','M','r','M','B'],
+	// ['g', 'r', 'g', 'R', 'n', ' ', 'v', 'b', 'b', 'b', 'A', 'B', 'g', 'M', 'g', 'B'],
+	// ['b ', 'b(4)', 'b', 'b', 'N', ' ', ' ', ' ', ' ', ' ', 'X', 'B','M','r','M','B'],
+	// [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'B', 'B', 'B', 'B', 'B'],
+	// [' (4)', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'Z', 'g','g','M','r', 'r'],
+	// [' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' (p)', ' ', 'X', 'g', 'g', 'B', 'r', 'r'],
+	// [' ', ' (4)', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'g','g','M','r', 'r'],
+	// [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X (2)', 'g','G','B','r','r'],
+	// [' (4)', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ','X (2)','g','g','M','r','r'],
+	// [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X (2)', 'g','g','B','R','r'],
+	// [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'Z (2)', 'g','g','M','r','r'],
+	// ['r', 'g', 'r', 'm', ' ', ' ', ' ', ' ', ' ', ' ', 'Z (2)', 'g','g','B','r','r'],
+	// ['M', 'B', 'M', 'z', ' ', ' ', ' ', ' ', ' ', ' ', 'X (2)', 'g','g','M','r','r'],
+	// ['r', 'g', 'r', 'n', ' ', ' ', ' ', ' ', ' ', ' ', 'v (2)', 'b','A','B','r','r'],
+	// ['g', 'r', 'g', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' (2)', ' ', 'Z','M','B','M'],
+	// ['r', 'G', 'r', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'v', 'b', 'b', 'b'],
+	// ['g', 'M', 'g', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	// ['r', 'g', 'r', 'z', ' ', ' (2)', ' ', ' ', ' ', ' ',' ',' ',' ', ' ', ' ', ' '],
+	// ['g', 'M', 'g', 'n', ' ', ' (2)', ' ', ' ', ' ', ' ',' ',' ',' ', ' ', ' ', ' '],
+	// ['r', 'g', 'r', 'n', ' ', ' (2)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' '],
+	// ['b', 'b', 'b', 'N', ' ', ' (2)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' '],
+	// [' ', ' ', ' ', ' ', ' ', ' (2)', ' ', ' ', ' ',' ',' ',' ', ' ', ' ', ' ', ' '],
+	// [' ', ' ', ' ', ' ', ' ', ' (2)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' '],
+	// [' ', ' ', ' ', ' ', ' ', ' (2)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' '],
+	// [' ', ' ', ' ', ' ', ' ', ' (2)', ' ', ' ', ' ', ' ',' ',' ',' ', ' ', ' ', ' '],
+	// [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	// [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	// [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' (3)',' ',' '],
+	// ['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'm', ' ', ' ', ' '],
+	// ['r', 'r', 'r ', 'B', 'g', 'g', 'g', 'B', 'r', 'r', 'r', 'B','n', ' ', ' ', ' '],
+	// ['r', 'G', 'r', 'B', 'g', 'g', 'g', 'B', 'r', 'G', 'r', 'B', 'z', ' ', ' ', ' '],
+	// ['r', 'r', 'r (3)', 'B', 'g', 'g', 'g', 'B', 'r', 'r', 'r', 'B','W','w','w','w'],
+	// ['B', 'B', 'B ', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'W', 'w', 'w','w'],
+	// ['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'n', ' ', ' ', ' '],
+	// ['r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'W', 'w', 'w', 'w'],
+	// ['M', 'g', 'M', 'g', 'M', 'g', 'M', 'B', 'M', 'B', 'M', 'B', 'n', ' ', ' ', ' '],
+	// ['r', 'g', 'r', 'g', 'r', 'g', 'a', 'b', 'b', 'b', 'b', 'b', 'N', ' ', ' ', ' '],
+	// ['r', 'g', 'M', 'G', 'r', 'G', 'n', ' ', ' ', ' ', ' ', '  (1)',' ',' ',' ',' '],
+	// ['r', 'g', 'r', 'g', 'r', 'g', 'n', ' ', ' (p)',' ',' ','  (1)',' ',' ',' ',' '],
+	// ['M', 'g', 'r', 'g', 'M', 'g', 'n', ' ', ' ', ' ', ' ', '  (1)',' ','V','K','L'],
+	// ['r', 'g', 'r', 'g', 'r', 'g', 'n', ' ', ' ', ' ', ' ', '  (1)',' ','X','k','l'],
+	// ['R', 'g', 'M', 'g', 'r', 'g', 'n', ' ', ' ', ' ', ' ', '  (1)',' ','Z','K','L'],
+	// ['r', 'g', 'r', 'g', 'r', 'g', 'W','w','w','w','w', 'w (1)', 'w', 'e', 'k', 'l'],
+	// ['M', 'g', 'M', 'g', 'M', 'g', 'n', ' ', ' ', ' ', ' ', '  (1)',' ','X','K','L'],
+	// ['r', 'g', 'r', 'g', 'r', 'g', 'n', ' ', ' ', ' ', ' ', '  (1)',' ','X','k','l'],
+	// ['M', 'g', 'M', 'g', 'M', 'g', 'n', ' ', ' ', ' ', ' ', '  (1)',' ','v','b','b'],
+	// ['r', 'g', 'r', 'g', 'r', 'g', 'n', ' ', ' ', ' ', ' ', '  (1)',' ',' ',' ',' '],
+	// ['M', 'g', 'M', 'g', 'M (1)', 'g', 'n', ' ', ' ', ' ', ' ', ' ',' ',' ',' ',' '],
+	// ['b', 'b', 'b', 'A', 'r (1)', 'g', 'z', ' ', ' ', ' ', ' ', ' ',' ',' ',' ',' '],
+	// [' ', ' ', ' ', 'Z', 'r (1)', 'g', 'z', ' ', ' ', ' ', ' ', ' ',' ',' ',' ',' '],
+	// [' ', ' ', ' ', 'X', 'r (1)', 'g', 'n', ' ', ' ', ' ', ' ', ' ',' ',' ',' ',' '],
+	// [' ', ' ', ' ', 'v', 'b (1)', 'b', 'N', ' ', ' ', ' ', ' ', ' ',' ',' ',' ',' '],
+	// [' ', ' ', ' ', ' ', '  (1)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' ',' '],
+	// [' ', ' ', ' ', ' ', '  (1)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' ',' '],
+	// [' ', ' ', ' ', ' ', '  (1)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' ',' '],
+	// [' ', ' ', ' ', ' ', '  (1)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' ',' '],
+	// [' ', ' ', ' ', ' ', '  (1)', ' ', ' ', ' ', ' ', ' ', ' ', ' ',' ',' ',' ',' '],
+	// [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	// [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	// [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	// [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	// [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' (p)', ' ', ' ', ' ', ' ',' ',' ',' ', ' '],
+	// [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	// [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	// [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	// [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	// [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	// [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	// [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	// [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	// [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	// [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	// [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	// [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	// [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
 ];
 var levelRowPositions = [], gridPositions = []; levelStartPos = 0, levelSpeed = 1.5, groundSpeed = 1 / 128, cloudSpeed = 1 / 24, introTime = 90, outroTime = 2700, currentPlatformAnimation = 0;
 
@@ -489,6 +490,9 @@ var setupLevel = function(){
 					// bosses
 					case '!': bosses.oneA.push({x: xPos, y: yPos, width: grid * 3.5, height: grid * 3.5, sYDirection: 'up', sXDirection: 'left'}); break;
 					case '@': bosses.oneB.push({x: xPos, y: yPos, width: grid * 3.5, height: grid * 3.5, sYDirection: 'up', sXDirection: 'right'}); break;
+
+					// secret
+					case '-': secrets.push({x: xPos, y: yPos, width: grid * 2, height: grid * 2, hits: 15});
 
 				};
 			}
@@ -596,10 +600,6 @@ var levelLoop = function(){
 								case 'O': img = bigThingImg; break;
 								case 'p': img = bigThingImg; break;
 								case 'P': img = bigThingImg; break;
-								case '-': img = platformOneImg; break;
-								case '_': img = platformOneImg; break;
-								case '=': img = platformOneImg; break;
-								case '+': img = platformOneImg; break;
 								case 'q': img = destroyedSecretBlockImg; break;
 								case 'Q': img = destroyedSecretBlockImg; break;
 								case 'y': img = destroyedSecretBlockImg; break;
@@ -696,8 +696,8 @@ var powerupLoop = function(){
 				powerupObj = sineCurve(powerupObj, dropXSpeed, dropXMax);
 				context.drawImage(powerupImg, powerupObj.x, powerupObj.y);
 				var powerupCollisionEl = {x: powerupObj.x, y: powerupObj.y, width: grid, height: grid};
-				if(powerupObj.y >= gameHeight + grid) powerups.splice(i, 1);
 				powerupCollision(powerupCollisionEl, i);
+				if(powerupObj.y >= gameHeight + grid) powerups.splice(i, 1);
 			}
 		});
 	};
@@ -927,6 +927,37 @@ var enemyAnimations = {
 		return enemyObj;
 	}
 };
+let secrets = [], bonusCount = 1;
+
+const secretImg = new Image(), secretDestroyedImage = new Image();
+secretImg.src = 'img/secret.png';
+secretDestroyedImage.src = 'img/destroyedsecretblock.png';
+
+const secretLoop = function(){
+	const draw = function(){
+		secrets.forEach(function(secretObj, i){
+			secretObj.y += levelSpeed;
+			if(secretObj.y + secretObj.height >= 0){
+				secretObj.hits <= 0 ? context.drawImage(secretDestroyedImage, secretObj.x, secretObj.y) : context.drawImage(secretImg, secretObj.x, secretObj.y);
+				const secretCollisionEl = {x: secretObj.x, y: secretObj.y, width: secretObj.width, height: secretObj.height};
+				if(secretObj.hits >= 0){
+					checkBulletCollision(secretCollisionEl, function(){
+						explodeEntity(secretCollisionEl);
+						secretObj.hits -= 1;
+						if(secretObj.hits == 0){
+							score += bonusCount * 1000;
+							fullscreenMessageTime = 0;
+							currentFullscreenMessage = 'bonus: ' + bonusCount * 1000;
+							bonusCount++;
+						}
+					});
+				}
+				if(secretObj.y >= gameHeight + grid) secrets.splice(i, 1);
+			}
+		});
+	};
+	if(secrets.length) draw();
+};
 let bossOneAActive = false, bossOneBActive = false;
 
 const bosses = {
@@ -1088,7 +1119,7 @@ const bossBulletSpawn = {
 };
 
 const bossBulletOneSpeeds = {
-	n: levelSpeed * 1.9,
+	n: levelSpeed * 1.67,
 	nwney: levelSpeed * 1.1,
 	nwnex: levelSpeed * 1,
 	s: levelSpeed * 1.5,
@@ -1198,6 +1229,8 @@ const bossBulletAnimations = {
 		});
 	}
 };
+
+
 var updateBlocks = function(){
 	levelMap.forEach(function(row, i){
 		if(gridPositions[i].y + grid >= 0 && gridPositions[i].y <= gameHeight){
@@ -1208,7 +1241,6 @@ var updateBlocks = function(){
 				gridChar = gridChar.trim();
 				if(gridChar == 'g' || gridChar == 'G' || gridChar == 'r' || gridChar == 'R') checkBlockCollision(gridObj);
 				else if(gridChar == 'k' || gridChar == 'K' || gridChar == 'l' || gridChar == 'L') checkBigBlockCollision(gridObj);
-				else if(gridChar == '-' || gridChar == '_' || gridChar == '=' || gridChar == '+') checkSecretCollision(gridObj);
 			});
 		}
 	});
@@ -1314,88 +1346,6 @@ var destroyBigBlock = function(gridsToDestroy){
 	});
 	explodeEntity({x: gridsToDestroy.topLeft.x, y: gridsToDestroy.topLeft.y, width: grid * 2, height: grid * 2});
 	score += 200;
-};
-
-var checkSecretCollision = function(secretBlock){
-	checkBulletCollision({x: secretBlock.x, y: secretBlock.y, width: grid, height: grid}, function(){
-		var gridsToDestroy = {};
-		switch(secretBlock.char.trim()){
-			case '-':
-				gridsToDestroy.topLeft = {x: secretBlock.x, y: secretBlock.y - grid};
-				gridsToDestroy.topRight = {x: secretBlock.x + grid, y: secretBlock.y - grid};
-				gridsToDestroy.bottomLeft = secretBlock;
-				gridsToDestroy.bottomRight = {x: secretBlock.x + grid, y: secretBlock.y};
-				break;
-			case '_':
-				gridsToDestroy.topLeft = secretBlock;
-				gridsToDestroy.topRight = {x: secretBlock.x + grid, y: secretBlock.y};
-				gridsToDestroy.bottomLeft = {x: secretBlock.x, y: secretBlock.y + grid};
-				gridsToDestroy.bottomRight = {x: secretBlock.x + grid, y: secretBlock.y + grid};
-				break;
-			case '=':
-				gridsToDestroy.topLeft = {x: secretBlock.x - grid, y: secretBlock.y - grid};
-				gridsToDestroy.topRight = {x: secretBlock.x, y: secretBlock.y - grid};
-				gridsToDestroy.bottomLeft = {x: secretBlock.x - grid, y: secretBlock.y};
-				gridsToDestroy.bottomRight = secretBlock;
-				break;
-			case '+':
-				gridsToDestroy.topLeft = {x: secretBlock.x - grid, y: secretBlock.y};
-				gridsToDestroy.topRight = secretBlock;
-				gridsToDestroy.bottomLeft = {x: secretBlock.x - grid, y: secretBlock.y - grid};
-				gridsToDestroy.bottomRight = {x: secretBlock.x, y: secretBlock.y - grid};
-				break;
-		};
-		destroySecretBlock(gridsToDestroy);
-	});
-};
-
-let bonusCount = 1;
-
-var destroySecretBlock = function(gridsToDestroy){
-	levelMap.forEach(function(row, i){
-		row.forEach(function(char, j){
-			var gridChar = char;
-			if(gridChar.indexOf('(') > -1) gridChar = gridChar.substring(0, gridChar.indexOf('('));
-			var tempRow = gridPositions[i], grid = gridPositions[i].grids[j];
-			gridChar = gridChar.trim();
-			if(gridChar.indexOf('-') > -1 || gridChar.indexOf('_') > -1 || gridChar.indexOf('=') > -1 || gridChar.indexOf('+') > -1){
-				var otherRowIndex = (gridChar.indexOf('_') > -1 || gridChar.indexOf('+') > -1) ? i + 1 : i - 1;
-				for(var cord in gridsToDestroy){
-					if(grid.x == gridsToDestroy[cord].x && tempRow.y == gridsToDestroy[cord].y){
-						var newChar = '', newOtherChar = '';
-
-						var tempGrid = levelMap[i][j], tempOtherGrid = levelMap[otherRowIndex][j];
-
-						if(tempGrid.indexOf('(') > -1) tempGrid = tempGrid.substring(0, tempGrid.indexOf('('));
-						if(tempOtherGrid.indexOf('(') > -1) tempOtherGrid = tempOtherGrid.substring(0, tempOtherGrid.indexOf('('));
-						tempGrid = tempGrid.trim();
-						tempOtherGrid = tempOtherGrid.trim();
-						switch(tempGrid){
-							case '-': newChar = 'Q'; break;
-							case '_': newChar = 'q'; break;
-							case '=': newChar = 'Y'; break;
-							case '+': newChar = 'y'; break;
-						};
-						switch(tempOtherGrid){
-							case '-': newOtherChar = 'Q'; break;
-							case '_': newOtherChar = 'q'; break;
-							case '=': newOtherChar = 'Y'; break;
-							case '+': newOtherChar = 'y'; break;
-						};
-						levelMap[i][j] = newChar;
-						gridPositions[i].grids[j].char = newChar;
-						levelMap[otherRowIndex][j] = newOtherChar;
-						gridPositions[otherRowIndex].grids[j].char = newOtherChar;
-					}
-				};
-			}
-		});
-	});
-	explodeEntity({x: gridsToDestroy.topLeft.x, y: gridsToDestroy.topLeft.y, width: grid * 2, height: grid * 2});
-	score += bonusCount * 1000;
-	fullscreenMessageTime = 0;
-	currentFullscreenMessage = 'bonus: ' + (bonusCount * 1000);
-	bonusCount++;
 };
 var movingUp = false, movingDown = false, movingLeft = false, movingRight = false, shot = false, isPaused = false, player, inputStopped = false,  playerSpeed = grid / 2, playerWidth = grid, playerHeight = grid * 1.5, playerIsHidden = false;
 var playerX = (gameWidth / 2) - (playerWidth / 2), playerY = gameHeight - (playerHeight + grid);

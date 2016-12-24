@@ -21,6 +21,7 @@ var initGame = function(){
 var gameLoop = function(){
 	clearGame();
 	levelLoop();
+	secretLoop();
 	enemiesLoop();
 	explosionsLoop();
 	enemyShootingLoop();

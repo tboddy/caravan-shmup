@@ -10,6 +10,7 @@ module.exports = function(grunt) {
 					'src/powerup.js',
 					'src/explosions.js',
 					'src/enemies.js',
+					'src/secrets.js',
 					'src/bosses.js',
 					'src/enemyshooting.js',
 					'src/bossshooting.js',

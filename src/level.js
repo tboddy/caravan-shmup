@@ -30,6 +30,9 @@ var setupLevel = function(){
 					case '!': bosses.oneA.push({x: xPos, y: yPos, width: grid * 3.5, height: grid * 3.5, sYDirection: 'up', sXDirection: 'left'}); break;
 					case '@': bosses.oneB.push({x: xPos, y: yPos, width: grid * 3.5, height: grid * 3.5, sYDirection: 'up', sXDirection: 'right'}); break;
 
+					// secret
+					case '-': secrets.push({x: xPos, y: yPos, width: grid * 2, height: grid * 2, hits: 15});
+
 				};
 			}
 		});
@@ -136,10 +139,6 @@ var levelLoop = function(){
 								case 'O': img = bigThingImg; break;
 								case 'p': img = bigThingImg; break;
 								case 'P': img = bigThingImg; break;
-								case '-': img = platformOneImg; break;
-								case '_': img = platformOneImg; break;
-								case '=': img = platformOneImg; break;
-								case '+': img = platformOneImg; break;
 								case 'q': img = destroyedSecretBlockImg; break;
 								case 'Q': img = destroyedSecretBlockImg; break;
 								case 'y': img = destroyedSecretBlockImg; break;

@@ -11,8 +11,8 @@ var powerupLoop = function(){
 				powerupObj = sineCurve(powerupObj, dropXSpeed, dropXMax);
 				context.drawImage(powerupImg, powerupObj.x, powerupObj.y);
 				var powerupCollisionEl = {x: powerupObj.x, y: powerupObj.y, width: grid, height: grid};
-				if(powerupObj.y >= gameHeight + grid) powerups.splice(i, 1);
 				powerupCollision(powerupCollisionEl, i);
+				if(powerupObj.y >= gameHeight + grid) powerups.splice(i, 1);
 			}
 		});
 	};
