@@ -31,7 +31,7 @@ var setupLevel = function(){
 					case '@': bosses.oneB.push({x: xPos, y: yPos, width: grid * 3.5, height: grid * 3.5, sYDirection: 'up', sXDirection: 'right'}); break;
 
 					// secret
-					case '-': secrets.push({x: xPos, y: yPos, width: grid * 2, height: grid * 2, hits: 15});
+					case '-': secrets.push({x: xPos, y: yPos, width: grid * 2, height: grid * 2, hits: 12});
 
 				};
 			}
