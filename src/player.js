@@ -57,12 +57,20 @@ var playerLoop = function(){
 				if(gamepad.buttons[2].pressed) mainWindow.reload();
 			} else if(navigator.getGamepads()[0]){
 				gamepad = navigator.getGamepads()[0];
-				movingUp = gamepad.axes[1] < analogThresh * -1 ? true : false;
-				movingDown = gamepad.axes[1] > analogThresh ? true : false;
-				movingLeft = gamepad.axes[0] < analogThresh * -1 ? true : false;
-				movingRight = gamepad.axes[0] > analogThresh ? true : false;
-				shot = gamepad.buttons[0].pressed || gamepad.buttons[1].pressed ? true : false;
-				if(gamepad.buttons[2].pressed) mainWindow.reload();
+				if(gamepad.axes[9]){
+					var hatSwitch = gamepad.axes[9].toFixed(1);
+					movingUp = hatSwitch == '-1.0' || hatSwitch == '1.0' || hatSwitch == '-0.7' ? true : false;
+					movingDown = hatSwitch == '0.1' || hatSwitch == '-0.1' || hatSwitch == '0.4' ? true : false;
+					movingLeft = hatSwitch == '0.7' || hatSwitch == '1.0' || hatSwitch == '0.4' ? true : false;
+					movingRight = hatSwitch == '-0.4' || hatSwitch == '-0.1' || hatSwitch == '-0.7' ? true : false; 
+				} else {
+					movingUp = gamepad.axes[1] < analogThresh * -1 ? true : false;
+					movingDown = gamepad.axes[1] > analogThresh ? true : false;
+					movingLeft = gamepad.axes[0] < analogThresh * -1 ? true : false;
+					movingRight = gamepad.axes[0] > analogThresh ? true : false;
+				}
+				shot = gamepad.buttons[0].pressed || gamepad.buttons[1].pressed || gamepad.buttons[3].pressed || gamepad.buttons[2].pressed ? true : false;
+				if(gamepad.buttons[8].pressed) mainWindow.reload();
 			}
 		};
 

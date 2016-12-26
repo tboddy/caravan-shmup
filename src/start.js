@@ -33,7 +33,7 @@ var startLoop = function(){
 
 var updateStartGamepad = function(){
 	if(!gamepad) setupGamepad()
-	if(navigator.getGamepads()[0]) if(gamepad.buttons[3].pressed) checkStartGame();
+	if(navigator.getGamepads()[0]) if(gamepad.buttons[9].pressed) checkStartGame();
 };
 
 const startLogoImg = new Image(), studiosLogoImg = new Image();
@@ -42,7 +42,7 @@ studiosLogoImg.src = 'img/studioslogo.png';
 
 var drawStart = function(){
 	var verString = 'pre alpha 0.04',
-		startString = 'press b3 enter',
+		startString = 'press start or enter',
 		creditString = '2016 decontrol';
 	context.drawImage(startLogoImg, (gameWidth / 2) - 64, grid * 2.5);
 	drawString(verString, textCenter(verString), grid * 9.5);
