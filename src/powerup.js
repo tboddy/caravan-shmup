@@ -8,7 +8,7 @@ var powerupLoop = function(){
 		powerups.forEach(function(powerupObj, i){
 			powerupObj.y += levelSpeed;
 			if(powerupObj.y + grid >= 0){
-				powerupObj = sineCurve(powerupObj, dropXSpeed, dropXMax);
+				powerupObj = sineCurve(powerupObj, (grid / 5) * 2, dropXMax);
 				context.drawImage(powerupImg, powerupObj.x, powerupObj.y);
 				var powerupCollisionEl = {x: powerupObj.x, y: powerupObj.y, width: grid, height: grid};
 				powerupCollision(powerupCollisionEl, i);

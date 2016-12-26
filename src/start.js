@@ -42,12 +42,12 @@ studiosLogoImg.src = 'img/studioslogo.png';
 
 var drawStart = function(){
 	var verString = 'pre alpha 0.04',
-		startString = 'press b3 or enter',
+		startString = 'press b3 enter',
 		creditString = '2016 decontrol';
-	context.drawImage(startLogoImg, (gameWidth / 2) - 64, grid * 2);
-	drawString(verString, textCenter(verString), grid * 9);
+	context.drawImage(startLogoImg, (gameWidth / 2) - 64, grid * 2.5);
+	drawString(verString, textCenter(verString), grid * 9.5);
 	drawString(creditString, textCenter(creditString), grid * 10);
-	drawString(startString, textCenter(startString), grid * 12);
+	drawString(startString, textCenter(startString), grid * 11.5);
 	// context.drawImage(studiosLogoImg, (gameWidth / 2) - 32, grid * 12);
 };
 

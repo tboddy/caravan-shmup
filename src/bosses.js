@@ -16,7 +16,7 @@ const drawBossOneA = function(callback){
 		height: 56,
 		animation: bossAnimations.oneA,
 		score: 2000,
-		hits: 20,
+		hits: 22,
 		onlyDestroysPlayer: true,
 		bossType: 'bossOneA'
 	});
@@ -28,7 +28,7 @@ const drawBossOneA = function(callback){
 		height: 56,
 		animation: bossAnimations.oneB,
 		score: 2000,
-		hits: 20,
+		hits: 22,
 		onlyDestroysPlayer: true,
 		bossType: 'bossOneB'
 	});

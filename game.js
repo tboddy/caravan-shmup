@@ -157,12 +157,12 @@ studiosLogoImg.src = 'img/studioslogo.png';
 
 var drawStart = function(){
 	var verString = 'pre alpha 0.04',
-		startString = 'press b3 or enter',
+		startString = 'press b3 enter',
 		creditString = '2016 decontrol';
-	context.drawImage(startLogoImg, (gameWidth / 2) - 64, grid * 2);
-	drawString(verString, textCenter(verString), grid * 9);
+	context.drawImage(startLogoImg, (gameWidth / 2) - 64, grid * 2.5);
+	drawString(verString, textCenter(verString), grid * 9.5);
 	drawString(creditString, textCenter(creditString), grid * 10);
-	drawString(startString, textCenter(startString), grid * 12);
+	drawString(startString, textCenter(startString), grid * 11.5);
 	// context.drawImage(studiosLogoImg, (gameWidth / 2) - 32, grid * 12);
 };
 
@@ -693,7 +693,7 @@ var powerupLoop = function(){
 		powerups.forEach(function(powerupObj, i){
 			powerupObj.y += levelSpeed;
 			if(powerupObj.y + grid >= 0){
-				powerupObj = sineCurve(powerupObj, dropXSpeed, dropXMax);
+				powerupObj = sineCurve(powerupObj, (grid / 5) * 2, dropXMax);
 				context.drawImage(powerupImg, powerupObj.x, powerupObj.y);
 				var powerupCollisionEl = {x: powerupObj.x, y: powerupObj.y, width: grid, height: grid};
 				powerupCollision(powerupCollisionEl, i);
@@ -760,12 +760,13 @@ const enemies = {
 	medium: {one: []}
 };
 
-const enemySmallOneImg = new Image(), enemySmallTwoImg = new Image(), enemySmallFourImg = new Image();
+const enemySmallOneImg = new Image(), enemySmallTwoImg = new Image(), enemySmallFourImg = new Image(), enemySmallFiveImg = new Image(),
 	enemyMediumOneImg = new Image();
 enemySmallOneImg.src = 'img/enemysmallone.png';
 enemySmallTwoImg.src = 'img/enemysmalltwo.png';
 enemyMediumOneImg.src = 'img/enemymediumone.png';
 enemySmallFourImg.src = 'img/enemysmallthree.png';
+enemySmallFiveImg.src = 'img/enemysmallfive.png';
 
 var enemiesLoop = function(){
 
@@ -889,12 +890,12 @@ var drawEnemySmallOne = function(callback){
 var enemyAnimations = {
 	smallOne: function(enemyObj){
 		if(enemyObj.y + grid >= 0) enemyObj.y += (levelSpeed / 4) * 3;
-		enemyObj = sineCurve(enemyObj, grid / 3, grid * 4);
+		enemyObj = sineCurve(enemyObj, (grid / 5) * 2, grid * 4);
 		return enemyObj;
 	},
 	smallTwo: function(enemyObj, enemyWidth, enemyHeight){
 		if(enemyObj.y + grid >= 0) enemyObj.y += levelSpeed;
-		enemyObj = sineCurve(enemyObj, grid / 3, grid * 2.5);
+		enemyObj = sineCurve(enemyObj, (grid / 5) * 2, grid * 2.5);
 		return enemyObj;
 	},
 	smallThree: function(enemyObj, enemyWidth, enemyHeight, i, enemyArr){
@@ -976,7 +977,7 @@ const drawBossOneA = function(callback){
 		height: 56,
 		animation: bossAnimations.oneA,
 		score: 2000,
-		hits: 20,
+		hits: 22,
 		onlyDestroysPlayer: true,
 		bossType: 'bossOneA'
 	});
@@ -988,7 +989,7 @@ const drawBossOneA = function(callback){
 		height: 56,
 		animation: bossAnimations.oneB,
 		score: 2000,
-		hits: 20,
+		hits: 22,
 		onlyDestroysPlayer: true,
 		bossType: 'bossOneB'
 	});
@@ -1512,6 +1513,8 @@ var hudLoop = function(){
 			isGameOver = true;
 			shot = false;
 			canGetHit = false;
+			playerX = (gameWidth / 2) - (grid / 2);
+			playerY = gameHeight * -1;
 			if(isFinished) drawFullscreenMessageGameOver('time over');
 			else if(isDead) drawFullscreenMessageGameOver('game over');
 			if(!scoreSaved) saveHighScore();

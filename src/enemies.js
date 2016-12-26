@@ -3,12 +3,13 @@ const enemies = {
 	medium: {one: []}
 };
 
-const enemySmallOneImg = new Image(), enemySmallTwoImg = new Image(), enemySmallFourImg = new Image();
+const enemySmallOneImg = new Image(), enemySmallTwoImg = new Image(), enemySmallFourImg = new Image(), enemySmallFiveImg = new Image(),
 	enemyMediumOneImg = new Image();
 enemySmallOneImg.src = 'img/enemysmallone.png';
 enemySmallTwoImg.src = 'img/enemysmalltwo.png';
 enemyMediumOneImg.src = 'img/enemymediumone.png';
 enemySmallFourImg.src = 'img/enemysmallthree.png';
+enemySmallFiveImg.src = 'img/enemysmallfive.png';
 
 var enemiesLoop = function(){
 
@@ -132,12 +133,12 @@ var drawEnemySmallOne = function(callback){
 var enemyAnimations = {
 	smallOne: function(enemyObj){
 		if(enemyObj.y + grid >= 0) enemyObj.y += (levelSpeed / 4) * 3;
-		enemyObj = sineCurve(enemyObj, grid / 3, grid * 4);
+		enemyObj = sineCurve(enemyObj, (grid / 5) * 2, grid * 4);
 		return enemyObj;
 	},
 	smallTwo: function(enemyObj, enemyWidth, enemyHeight){
 		if(enemyObj.y + grid >= 0) enemyObj.y += levelSpeed;
-		enemyObj = sineCurve(enemyObj, grid / 3, grid * 2.5);
+		enemyObj = sineCurve(enemyObj, (grid / 5) * 2, grid * 2.5);
 		return enemyObj;
 	},
 	smallThree: function(enemyObj, enemyWidth, enemyHeight, i, enemyArr){
