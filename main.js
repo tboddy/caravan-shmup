@@ -1,4 +1,4 @@
-var electron = require('electron'), path = require('path'), url = require('url'), storage = require('electron-json-storage'), mainWindow, scale = 3, barHeight = 0;
+var electron = require('electron'), path = require('path'), url = require('url'), storage = require('electron-json-storage'), mainWindow, scale = 1, barHeight = 0;
 var app = electron.app, browserWindow = electron.BrowserWindow;
 
 var winWidth = 256, winHeight = 240 + barHeight;

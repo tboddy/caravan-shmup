@@ -3,22 +3,23 @@ module.exports = function(grunt) {
 		concat: {
 			development: {
 				src: [
-					'src/init.js',
+					'src/global.js',
 					'src/start.js',
-					'src/map.js',
-					'src/level.js',
-					'src/powerup.js',
-					'src/explosions.js',
-					'src/enemies.js',
-					'src/secrets.js',
-					'src/bosses.js',
-					'src/enemyshooting.js',
-					'src/bossshooting.js',
-					'src/blocks.js',
-					'src/player.js',
-					'src/hud.js',
-					'src/shooting.js',
-					'src/pointer.js'
+					'src/game.js'
+					// 'src/map.js',
+					// 'src/level.js',
+					// 'src/powerup.js',
+					// 'src/explosions.js',
+					// 'src/enemies.js',
+					// 'src/secrets.js',
+					// 'src/bosses.js',
+					// 'src/enemyshooting.js',
+					// 'src/bossshooting.js',
+					// 'src/blocks.js',
+					// 'src/player.js',
+					// 'src/hud.js',
+					// 'src/shooting.js',
+					// 'src/pointer.js'
 				],
 				dest: 'game.js'
 			}
