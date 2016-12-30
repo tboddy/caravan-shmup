@@ -14,6 +14,7 @@ var initGame = function(){
 	setupLevel();
 	setupPlayer();
 	setupHighScore();
+	setupBackgroundMusic();
 	gameLoopInterval = setInterval(gameLoop, 1000 / fps);
 	gameLoop();
 };
@@ -31,6 +32,13 @@ var gameLoop = function(){
 	playerLoop();
 	hudLoop();
 	gameClock++;
+};
+
+const setupBackgroundMusic = function(){
+	const musicEl = '<audio autoplay style="display:none;position:absolute;top:-100px;left:-100px;">\
+		<source src="sound/bg.ogg" type="audio/ogg"></source>\
+		</audio>';
+	$('body').append(musicEl);
 };
 
 var resizeGame = function(){
