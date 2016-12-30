@@ -517,7 +517,7 @@ const greenBlockImg = new Image(), redBlockImg = new Image(), greenPointImg = ne
 
 const setupGridImages = function(){
 	greenBlockImg.src = 'img/greenblock.png';
-	redBlockImg.src = 'img/redBlock.png';
+	redBlockImg.src = 'img/redblock.png';
 	greenPointImg.src = 'img/greenpoint.png';
 	redPointImg.src = 'img/greenpoint.png';
 	destroyedImg.src = 'img/destroyed.png';

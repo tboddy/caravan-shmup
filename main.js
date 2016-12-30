@@ -1,4 +1,4 @@
-var electron = require('electron'), path = require('path'), url = require('url'), storage = require('electron-json-storage'), mainWindow, scale = 3, barHeight = 8;
+var electron = require('electron'), path = require('path'), url = require('url'), storage = require('electron-json-storage'), mainWindow, scale = 3, barHeight = 0;
 var app = electron.app, browserWindow = electron.BrowserWindow;
 
 var winWidth = 256, winHeight = 240 + barHeight;
@@ -16,7 +16,7 @@ var createWindow = function(){
     protocol: 'file:',
     slashes: true
   }));
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
   mainWindow.on('closed', function(){
     mainWindow = null
   });
