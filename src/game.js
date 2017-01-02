@@ -9,9 +9,9 @@ const initGame = function(){
 gameLoop = function(){
 	return function(){
 		clearGame();
+		enemyShootingLoop();
 		enemiesLoop();
 		shootingLoop();
-		enemyShootingLoop();
 		playerLoop();
 		explosionsLoop();
 		hudLoop();

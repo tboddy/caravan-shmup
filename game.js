@@ -294,9 +294,9 @@ const initGame = function(){
 gameLoop = function(){
 	return function(){
 		clearGame();
+		enemyShootingLoop();
 		enemiesLoop();
 		shootingLoop();
-		enemyShootingLoop();
 		playerLoop();
 		explosionsLoop();
 		hudLoop();
@@ -432,11 +432,6 @@ gameLoop = function(){
 // 	};
 // 	isFullscreen ? closeFullscreen() : openFullscreen();
 // };
-let enemies = {
-	small: {one: [], two: [], three: [], four: []},
-	medium: {one: []}
-};
-
 const enemySmallOneImg = new Image(), enemySmallTwoImg = new Image(), enemySmallFourImg = new Image(), enemySmallFiveImg = new Image(), enemyMediumOneImg = new Image();
 enemySmallOneImg.src = 'img/enemysmallone.png';
 enemySmallTwoImg.src = 'img/enemysmalltwo.png';
@@ -444,10 +439,15 @@ enemyMediumOneImg.src = 'img/enemymediumone.png';
 enemySmallFourImg.src = 'img/enemysmallthree.png';
 enemySmallFiveImg.src = 'img/enemysmallfive.png';
 
+const bossOneAImg = new Image(), bossOneBImg = new Image();
+bossOneAImg.src = 'img/bossonea.png';
+bossOneBImg.src = 'img/bossoneb.png';
+
+const bossOneInterval = fps * 2.5;
 
 const enemySmallOneAnimation = function(enemy){
-	enemy.y += 1.25;
-	const increase = 90 / 180 * Math.PI / (grid * 1.15);
+	enemy.y += 0.8;
+	const increase = 90 / 180 * Math.PI / (grid * 1.5);
 	enemy.x = enemy.initial - Math.sin(enemy.count) * (grid * 5);
 	enemy.count += increase;
 	return enemy;
@@ -462,15 +462,29 @@ enemySmallTwoAnimation = function(enemy){
 },
 
 enemySmallThreeAnimation = function(enemy){
-	if(enemy.x <= playerX - 2 && enemy.y <= playerY + playerHeight && enemy.y <= gameHeight / 3){
-		enemy.y += 1;
-		enemy.x += 3;
-	} else if(enemy.x >= playerX + 2 && enemy.y <= playerY + playerHeight && enemy.y <= gameHeight / 3){
-		enemy.y += 1;
-		enemy.x -= 3;
-	} else {
-		enemy.y += 2.5;
-	}
+	if(!enemy.x) enemy.x = enemy.initial;
+	if(enemy.x <= playerX - 2 && enemy.y <= playerY + playerHeight && enemy.y <= grid * 2){
+		enemy.y += 2;
+		enemy.x += 4.5;
+	} else if(enemy.x >= playerX + 2 && enemy.y <= playerY + playerHeight && enemy.y <= grid * 2){
+		enemy.y += 2;
+		enemy.x -= 4.5;
+	} else if(enemy.y <= gameHeight - (grid * 9)) enemy.y += 2.5;
+	else if(enemy.y > gameHeight - (grid * 9) && enemy.y <= gameHeight - (grid * 8)) enemy.y += 3;
+	else if(enemy.y > gameHeight - (grid * 8) && enemy.y <= gameHeight - (grid * 7)) enemy.y += 3.5;
+	else if(enemy.y > gameHeight - (grid * 7) && enemy.y <= gameHeight - (grid * 6)) enemy.y += 4;
+	else if(enemy.y > gameHeight - (grid * 6) && enemy.y <= gameHeight - (grid * 5)) enemy.y += 4.5;
+	else if(enemy.y > gameHeight - (grid * 5) && enemy.y <= gameHeight - (grid * 4)) enemy.y += 5;
+	else if(enemy.y > gameHeight - (grid * 4) && enemy.y <= gameHeight - (grid * 3)) enemy.y += 5.5;
+	else if(enemy.y > gameHeight - (grid * 3) && enemy.y <= gameHeight - (grid * 2)) enemy.y += 6;
+	else if(enemy.y > gameHeight - (grid * 2) && enemy.y <= gameHeight - grid) enemy.y += 6.5;
+	else enemy.y += 7;
+	return enemy;
+},
+
+enemySmallFourAnimation = function(enemy){
+	if(!enemy.x) enemy.x = enemy.initial;
+	enemy.y += 2.25;
 	return enemy;
 },
 
@@ -481,6 +495,27 @@ enemyMediumOneAnimation = function(enemy){
 		if(gameClock % 8 == 0) spawnMediumOneShot(enemy);
 	}
 	else enemy.y += 2.5;
+	return enemy;
+},
+
+bossOneAnimation = function(enemy){
+	if(enemy.x + enemy.width <= playerX + playerWidth) enemy.x += 0.5;
+	else if(enemy.x >= playerX) enemy.x -= 0.5;
+	if(enemy.y + enemy.height <= playerY + playerHeight) enemy.y += 0.5;
+	else if(enemy.y >= playerY) enemy.y -= 0.5;
+	return enemy;
+},
+
+bossOneAAnimation = function(enemy){
+	enemy = bossOneAnimation(enemy);
+	if(gameClock % bossOneInterval == 0) spawnBossOneAShot(enemy);
+	return enemy;
+},
+
+bossOneBAnimation = function(enemy){
+	enemy = bossOneAnimation(enemy);
+	// if(enemy.x <= e)
+	if(gameClock % bossOneInterval == (bossOneInterval / 2)) spawnBossOneBShot(enemy);
 	return enemy;
 };
 
@@ -493,8 +528,6 @@ const waveSmallOne = function(initialPos){
 		initial: initialPos,
 		score: 300,
 		enemies: [
-			{count: -0.8, y: grid * -10},
-			{count: -0.6, y: grid * -9},
 			{count: -0.4, y: grid * -8},
 			{count: -0.2, y: grid * -7},
 			{count: 0, y: grid * -6},
@@ -528,42 +561,98 @@ waveSmallTwo = function(initialPos){
 	};
 },
 
-waveSmallThree = function(){
+waveSmallThree = function(initialPos){
 	return {
 		animation: enemySmallThreeAnimation,
 		img: enemySmallTwoImg,
 		width: grid,
 		height: grid,
+		initial: initialPos,
 		score: 500,
 		enemies: [
-			{x: -grid, y: grid * -3},
-			{x: -grid, y: grid * -1}
+			{y: grid * -6.25},
+			{y: grid * -4.5},
+			{y: grid * -2.75},
+			{y: grid * -1}
 		]
 	};
-};
+},
+
+waveSmallFour = function(initialPos){
+	return {
+		animation: enemySmallFourAnimation,
+		img: enemySmallFourImg,
+		width: grid,
+		height: grid,
+		initial: initialPos,
+		score: 200,
+		enemies: [
+			{y: grid * -7},
+			{y: grid * -5},
+			{y: grid * -3},
+			{y: grid * -1},
+		]
+	}
+},
 
 waveMediumOne = function(){
 	return {
 		animation: enemyMediumOneAnimation,
 		img: enemyMediumOneImg,
 		score: 1000,
-		hits: 5,
 		height: grid * 2,
 		width: grid * 2,
 		enemies: [
-			{x: grid * 2, y: grid * -1},
-			{x: gameWidth - (grid * 4), y: grid * -8}
+			{x: grid * 2, y: grid * -1, hits: 10},
+			{x: gameWidth - (grid * 4), y: grid * -8, hits: 10}
 		]
-	}
+	};
+},
+
+waveBossOneA = function(){
+	return {
+		animation: bossOneAAnimation,
+		img: bossOneAImg,
+		height: grid * 3.5,
+		width: grid * 3.5,
+		score: 2000,
+		onlyDestroysPlayer: true,
+		enemies: [
+			{x: grid * 3, y: -(grid * 3.5), hits: 25}
+		]
+	};
+},
+
+waveBossOneB = function(){
+	return {
+		animation: bossOneBAnimation,
+		img: bossOneBImg,
+		height: grid * 3.5,
+		width: grid * 3.5,
+		score: 2000,
+		onlyDestroysPlayer: true,
+		enemies: [
+			{x: gameWidth - (grid * 4), y: -(grid * 3.5), hits: 30}
+		]
+	};
 };
 
 const waves = {
-	// 0: waveSmallOne(grid * 6),
-	// 150: waveSmallOne(grid * 9),
+	0: waveSmallOne(grid * 6),
+	220: waveSmallOne(grid * 9),
 	// 325: waveMediumOne(),
 	// 500: waveSmallTwo(grid * 7),
-	// 625: waveSmallTwo(grid * 8)
-	0: waveSmallThree()
+	// 625: waveSmallTwo(grid * 8),
+	// 800: waveSmallThree(-grid),
+	// 900: waveSmallThree(gameWidth + grid),
+	// 1000: waveSmallThree(-grid),
+	// 1100: waveSmallThree(gameWidth + grid),
+	// 1200: waveSmallFour(grid * 3),
+	// 1275: waveSmallFour(gameWidth - (grid * 4)),
+	// 1350: waveSmallFour(grid * 3),
+	// 1425: waveSmallFour(gameWidth - (grid * 4)),
+	// 0: waveBossOneA(),
+	// 1: waveBossOneB()
 },
 
 enemiesLoop = function(){
@@ -583,15 +672,21 @@ waveLoop = function(waveTime){
 		context.drawImage(enemy.img, enemy.x, enemy.y);
 		if(enemy.y > gameHeight && i == 0) delete waves[waveTime];
 		else if(enemy.y <= -(grid * 8) && (i + 1) == waves[waveTime].enemies.length) delete waves[waveTime];
-		const enemyCollisionEl = {x: enemy.x, y: enemy.y, width: enemy.width, height: enemy.height};
-		checkBulletCollision(enemyCollisionEl, function(bulletObj){
-			explodeEntity(bulletObj);
+		const enemyCollisionEl = {x: enemy.x, y: enemy.y, width: enemy.width, height: enemy.height},
+		killEnemy = function(){
 			score += waves[waveTime].score;
 			waves[waveTime].enemies.splice(i, 1);
+		};
+		checkBulletCollision(enemyCollisionEl, function(bulletObj){
+			explodeEntity(bulletObj);
+			if(enemy.hits) {
+				enemy.hits -= 1;
+				if(enemy.hits == 0) killEnemy();
+			} else killEnemy();
 		});
 		if(canGetHit){
 			checkCollision({x: playerX, y: playerY, width: playerWidth, height: playerHeight}, enemyCollisionEl, function(){
-				enemy.onlyDestroysPlayer ? getHit(waves[waveTime].enemies, i, true) : getHit(waves[waveTime].enemies, i);
+				waves[waveTime].onlyDestroysPlayer ? getHit(waves[waveTime].enemies, i, true) : getHit(waves[waveTime].enemies, i);
 			});
 		}
 	};
@@ -680,26 +775,6 @@ waveLoop = function(waveTime){
 // 		score: 300
 // 	};
 // 	callback(opts);
-// }, drawEnemySmallTwo = function(callback){
-// 	var opts = {
-// 		arr: enemies.small.two,
-// 		img: enemySmallTwoImg,
-// 		width: grid,
-// 		height: grid,
-// 		animation: enemyAnimations.smallTwo,
-// 		score: 300
-// 	};
-// 	callback(opts);
-// }, drawEnemySmallThree = function(callback){
-// 	var opts = {
-// 		arr: enemies.small.three,
-// 		img: enemySmallTwoImg,
-// 		width: grid,
-// 		height: grid,
-// 		animation: enemyAnimations.smallThree,
-// 		score: 500
-// 	};
-// 	callback(opts);
 // }, drawEnemySmallFour = function(callback){
 // 	var opts = {
 // 		arr: enemies.small.four,
@@ -710,60 +785,16 @@ waveLoop = function(waveTime){
 // 		score: 200
 // 	};
 // 	callback(opts);
-// }, drawEnemyMediumOne = function(callback){
-// 	var opts = {
-// 		arr: enemies.medium.one,
-// 		img: enemyMediumOneImg,
-// 		width: grid * 2,
-// 		height: grid * 2,
-// 		animation: enemyAnimations.mediumOne,
-// 		score: 1000,
-// 		hits: 5
-// 	};
-// 	callback(opts);
-// };
+// },;
 
 
 // // animations
 
 // var enemyAnimations = {
-// 	smallOne: function(enemyObj){
-// 		if(enemyObj.y + grid >= 0) enemyObj.y += (levelSpeed / 4) * 3;
-// 		enemyObj = sineCurve(enemyObj, (grid / 5) * 2, grid * 4);
-// 		return enemyObj;
-// 	},
-// 	smallTwo: function(enemyObj, enemyWidth, enemyHeight){
-// 		if(enemyObj.y + grid >= 0) enemyObj.y += levelSpeed;
-// 		enemyObj = sineCurve(enemyObj, (grid / 5) * 2, grid * 2.5);
-// 		return enemyObj;
-// 	},
-// 	smallThree: function(enemyObj, enemyWidth, enemyHeight, i, enemyArr){
-// 		if(enemyObj.y + enemyHeight >= 0){
-// 			let ySpeed = levelSpeed;
-// 			if(enemyObj.y + grid > grid){
-// 				if(enemyObj.y + enemyObj.height < playerY){
-// 					if(enemyObj.x + enemyWidth < playerX) enemyObj.x += grid / 3;
-// 					else if(enemyObj.x + enemyObj.width > playerX + playerWidth) enemyObj.x -= grid / 3;
-// 					if(enemyObj.x + enemyWidth >= playerX - grid && enemyObj.x + enemyObj.width < playerX + playerWidth + grid) ySpeed = levelSpeed * 2.5;
-// 				} else ySpeed = levelSpeed * 2.5;
-// 			}
-// 			enemyObj.y += ySpeed;
-// 		}
-// 		return enemyObj;
-// 	}, smallFour: function(enemyObj, enemyWidth, enemyHeight, i, enemyArr){
+// smallFour: function(enemyObj, enemyWidth, enemyHeight, i, enemyArr){
 // 		if(enemyObj.y + enemyHeight >= 0){
 // 			enemyObj.y += levelSpeed * 3;
 // 		}
-// 		return enemyObj;
-// 	}, mediumOne: function(enemyObj){
-// 		if((enemyObj.y + enemyObj.height) >= gameHeight / 2) enemyObj.direction = 'up';
-// 		if(enemyObj.direction == 'up'){
-// 			enemyObj.y -= levelSpeed / 2;
-// 			if(gameClock % 6 == 0){
-// 				spawnMediumOneShot(enemyObj);
-// 			}
-// 		}
-// 		else enemyObj.y += levelSpeed * 2;
 // 		return enemyObj;
 // 	}
 // };
@@ -951,22 +982,54 @@ playerLoop = function(){
 // };
 let enemyShots = {
 	medium: {one: []}
+},
+bossShots = {
+	oneA: [], oneB: []
 };
 
 const missileOneImg = new Image(), blueBulletImg = new Image();
 missileOneImg.src = 'img/missileone.png';
 blueBulletImg.src = 'img/bluebullet.png';
 
+const missileTwoNImg = new Image(), missileTwoSImg = new Image(), missileTwoWImg = new Image(), missileTwoEImg = new Image(), missileTwoNWImg = new Image(), missileTwoNEImg = new Image(), missileTwoSWImg = new Image(),
+	missileTwoSEImg = new Image();
+missileTwoNImg.src = 'img/missiletwon.png';
+missileTwoSImg.src = 'img/missiletwo.png';
+missileTwoWImg.src = 'img/missiletwow.png';
+missileTwoEImg.src = 'img/missiletwoe.png';
+missileTwoNWImg.src = 'img/missiletwonw.png';
+missileTwoNEImg.src = 'img/missiletwone.png';
+missileTwoSWImg.src = 'img/missiletwosw.png';
+missileTwoSEImg.src = 'img/missiletwose.png';
+
 const spawnMediumOneShot = function(enemy){
 	enemyShots.medium.one.push({x: enemy.x + (grid / 3), y: enemy.y + grid, width: grid / 2, height: grid});
 	enemyShots.medium.one.push({x: (enemy.x + (grid * 2)) - ((grid / 3) + (grid / 2)), y: enemy.y + grid, width: grid / 2, height: grid});
 },
 
+spawnBossOneAShot = function(enemy){
+	bossShots.oneA.push({x: enemy.x, y: enemy.y, width: 12, height: grid, direction: 'nw'});
+	bossShots.oneA.push({x: enemy.x + enemy.width - grid, y: enemy.y, width: grid, height: grid, direction: 'ne'});
+	bossShots.oneA.push({x: enemy.x, y: enemy.y + enemy.height - grid, width: grid, height: grid, direction: 'sw'});
+	bossShots.oneA.push({x: enemy.x + enemy.width - grid, y: enemy.y + enemy.height - grid, width: grid, height: grid, direction: 'se'});
+},
+
+spawnBossOneBShot = function(enemy){
+	bossShots.oneB.push({x: enemy.x + (enemy.height / 2), y: enemy.y - 6, width: 6, height: 6, direction: 'n'});
+	bossShots.oneB.push({x: enemy.x + (enemy.height / 2), y: enemy.y + enemy.height, width: 6, height: 6, direction: 's'});
+	bossShots.oneB.push({x: enemy.x - 6, y: enemy.y + (enemy.height / 2), width: 6, height: 6, direction: 'w'});
+	bossShots.oneB.push({x: enemy.x + enemy.width, y: enemy.y + (enemy.height / 2), width: 6, height: 6, direction: 'e'});
+	bossShots.oneB.push({x: enemy.x - 6, y: enemy.y - 6, width: 6, height: 6, direction: 'nw'});
+	bossShots.oneB.push({x: enemy.x + enemy.width, y: enemy.y - 6, width: 6, height: 6, direction: 'ne'});
+	bossShots.oneB.push({x: enemy.x - 6, y: enemy.y + enemy.height, width: 6, height: 6, direction: 'sw'});
+	bossShots.oneB.push({x: enemy.x + enemy.width, y: enemy.y + enemy.height, width: 6, height: 6, direction: 'se'});
+},
+
 enemyShootingLoop = function(){
 	var draw = function(){
 		if(enemyShots.medium.one.length) animateMediumOneShot();
-		// if(bossShots.oneA.length) bossBulletAnimations.oneA();
-		// if(bossShots.oneB.length) bossBulletAnimations.oneB();
+		if(bossShots.oneA.length) animateBossOneAShot();
+		if(bossShots.oneB.length) animateBossOneBShot();
 	};
 	draw();
 }, 
@@ -978,6 +1041,94 @@ animateMediumOneShot = function(){
 		if(enemyShots.medium.one[i].y >= gameHeight) enemyShots.medium.one.splice(i, 1);
 		if(canGetHit) checkEnemyShotCollision(shotObj, i, enemyShots.medium.one);
 		checkEnemyPopcorn(shotObj, i, enemyShots.medium.one);
+	});
+},
+
+animateBossOneAShot = function(){
+	const shotSpeed = 1.5 * 0.75;
+	bossShots.oneA.forEach(function(shotObj, i){
+		switch(shotObj.direction){
+			case 'nw':
+				bossShots.oneA[i].y -= shotSpeed;
+				bossShots.oneA[i].x -= shotSpeed;
+				context.drawImage(missileTwoNWImg, shotObj.x, shotObj.y);
+				break;
+			case 'ne':
+				bossShots.oneA[i].y -= shotSpeed;
+				bossShots.oneA[i].x += shotSpeed;
+				context.drawImage(missileTwoNEImg, shotObj.x, shotObj.y);
+				break;
+			case 'sw':
+				bossShots.oneA[i].y += shotSpeed;
+				bossShots.oneA[i].x -= shotSpeed;
+				context.drawImage(missileTwoSWImg, shotObj.x, shotObj.y);
+				break;
+			case 'se':
+				bossShots.oneA[i].y += shotSpeed;
+				bossShots.oneA[i].x += shotSpeed;
+				context.drawImage(missileTwoSEImg, shotObj.x, shotObj.y);
+				break;
+		};
+		if(bossShots.oneA[i].y >= gameHeight) bossShots.oneA.splice(i, 1);
+		else if(bossShots.oneA[i].y + shotObj.height <= 0) bossShots.oneA.splice(i, 1);
+		if(bossShots.oneA[i]){
+			if(bossShots.oneA[i].x >= gameWidth) bossShots.oneA.splice(i, 1);
+			else if(bossShots.oneA[i].x + shotObj.width <= 0) bossShots.oneA.splice(i, 1);
+		}
+		if(bossShots.oneA[i]) checkEnemyShotCollision(shotObj, i, bossShots.oneA);
+		if(bossShots.oneA[i]) checkEnemyPopcorn(shotObj, i, bossShots.oneA);
+	});
+},
+
+animateBossOneBShot = function(){
+	const shotSpeed = 1.5;
+	const shotSpeedDiag = shotSpeed * 0.75;
+	bossShots.oneB.forEach(function(shotObj, i){
+		switch(shotObj.direction){
+			case 'n':
+				bossShots.oneB[i].y -= shotSpeed;
+				context.drawImage(blueBulletImg, shotObj.x, shotObj.y);
+				break;
+			case 's':
+				bossShots.oneB[i].y += shotSpeed;
+				context.drawImage(blueBulletImg, shotObj.x, shotObj.y);
+				break;
+			case 'w':
+				bossShots.oneB[i].x -= shotSpeed;
+				context.drawImage(blueBulletImg, shotObj.x, shotObj.y);
+				break;
+			case 'e':
+				bossShots.oneB[i].x += shotSpeed;
+				context.drawImage(blueBulletImg, shotObj.x, shotObj.y);
+				break;
+			case 'nw':
+				bossShots.oneB[i].y -= shotSpeedDiag;
+				bossShots.oneB[i].x -= shotSpeedDiag;
+				context.drawImage(blueBulletImg, shotObj.x, shotObj.y);
+				break;
+			case 'ne':
+				bossShots.oneB[i].y -= shotSpeedDiag;
+				bossShots.oneB[i].x += shotSpeedDiag;
+				context.drawImage(blueBulletImg, shotObj.x, shotObj.y);
+				break;
+			case 'sw':
+				bossShots.oneB[i].y += shotSpeedDiag;
+				bossShots.oneB[i].x -= shotSpeedDiag;
+				context.drawImage(blueBulletImg, shotObj.x, shotObj.y);
+				break;
+			case 'se':
+				bossShots.oneB[i].y += shotSpeedDiag;
+				bossShots.oneB[i].x += shotSpeedDiag;
+				context.drawImage(blueBulletImg, shotObj.x, shotObj.y);
+				break;
+		};
+		if(bossShots.oneB[i].y >= gameHeight) bossShots.oneB.splice(i, 1);
+		else if(bossShots.oneB[i].y + shotObj.height <= 0) bossShots.oneB.splice(i, 1);
+		if(bossShots.oneB[i]){
+			if(bossShots.oneB[i].x >= gameWidth) bossShots.oneB.splice(i, 1);
+			else if(bossShots.oneB[i].x + shotObj.width <= 0) bossShots.oneB.splice(i, 1);
+		}
+		if(bossShots.oneB[i]) checkEnemyShotCollision(shotObj, i, bossShots.oneB);
 	});
 };
 
@@ -995,8 +1146,9 @@ var checkEnemyPopcorn = function(shotObj, i, arr){
 		score += 20;
 	});
 };
-let shots = {one: [], two: [], twoBottom: [], three: [], threeBottom: [], threeLeft: [], threeRight: [], four: [], fourTopLeft: [], fourTopRight: [], fourBottomLeft: [], fourBottomRight: []}, canShoot = true, currentPowerup = 4;
-const shotSpeed = 12, shotClock = 6, shotWidth = grid / 2, shotHeight = grid / 2, bulletOneImg = new Image(), bulletTwoImg = new Image(), bulletThreeImg = new Image(), bulletThreeLeftImg = new Image(), bulletThreeRightImg = new Image();
+let shots = {one: [], two: [], twoBottom: [], three: [], threeBottom: [], threeLeft: [], threeRight: [], four: [], fourTopLeft: [], fourTopRight: [], fourBottomLeft: [], fourBottomRight: []}, canShoot = true, currentPowerup = 1;
+const shotSpeed = 10, shotClock = 6, shotWidth = grid / 2, shotHeight = grid / 2,
+	bulletOneImg = new Image(), bulletTwoImg = new Image(), bulletThreeImg = new Image(), bulletThreeLeftImg = new Image(), bulletThreeRightImg = new Image();
 bulletOneImg.src = 'img/playerbullet.png';
 bulletTwoImg.src = 'img/playerbullettwo.png';
 bulletThreeImg.src = 'img/playerbulletthree.png';
@@ -1292,7 +1444,7 @@ hudLoop = function(){
 			shot = false;
 			canGetHit = false;
 			playerX = (gameWidth / 2) - (grid / 2);
-			playerY = gameHeight * -1;
+			playerY = gameHeight * 2;
 			if(isFinished) drawFullscreenMessageGameOver('time over');
 			else if(isDead) drawFullscreenMessageGameOver('game over');
 			if(!scoreSaved) saveHighScore();

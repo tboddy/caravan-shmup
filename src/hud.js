@@ -61,7 +61,7 @@ hudLoop = function(){
 			shot = false;
 			canGetHit = false;
 			playerX = (gameWidth / 2) - (grid / 2);
-			playerY = gameHeight * -1;
+			playerY = gameHeight * 2;
 			if(isFinished) drawFullscreenMessageGameOver('time over');
 			else if(isDead) drawFullscreenMessageGameOver('game over');
 			if(!scoreSaved) saveHighScore();
