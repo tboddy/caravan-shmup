@@ -1,74 +1,133 @@
 const start = function(){
 	let menu = [
 		{label: 'start game', action: 'startGame', active: true, index: 0},
-		{label: 'options', action: 'showOptions', active: false, index: 1, children: [
-			{label: 'fullscreen', options: ['yes', 'no']}
-		]},
-	], currentMenuItem = {}, loopInterval;
+		{label: 'options', action: 'showOptions', active: false, index: 1},
+	], optionsMenu = [
+		{label: 'toggle fullscreen', action: 'toggleFullscreen', active: true, index: 0},
+		{label: 'back', action: 'cancelOptions', active: false, index: 1},
+	], currentMenuItem = {}, optionsShowing = false;
+
 	const startLogoImg = new Image(), creditString = '2016 decontrol';
 	startLogoImg.src = 'img/logo.png';
+
 	const init = function(){
 		$(window).resize(resizeGame);
-		startControls();
-		loop();
+		controls();
+		loop = startLoop();
 		canvasEl.show();
-		loopInterval = setInterval(loop, 1000 / fps);
-	}, loop = function(){
-		const draw = function(){
-			context.drawImage(startLogoImg, (gameWidth / 2) - 64, grid * 2.5);
-			menu.forEach(function(item, i){
-				const isRed = item.active ? true : false;
-				drawString(item.label, textCenter(item.label), grid * (9.5 + (i * .5)), isRed);
-			});
-			drawString(creditString, textCenter(creditString), grid * 11.5);
-		};
-		clearGame();
-		draw();
-	}, textCenter = function(string){
-		return (gameWidth / 2) - (string.length * (grid / 4));
-	}; startControls = function(){
-		const setupKeyboard = function(){
-			document.addEventListener('keydown', keysDown);
-		}, keysDown = function(e){
-			// console.log(e.which);
-			switch(e.which){
-				case 38: moveUpMenu(); break;
-				case 40: moveDownMenu(); break;
-				case 13: selectMenuItem(); break;
+		window.requestAnimationFrame(loop);
+	},
+
+	startLoop = function(){
+		return function(){
+			const draw = function(){
+				context.drawImage(startLogoImg, (gameWidth / 2) - 64, grid * 2.5);
+				if(optionsShowing){
+					optionsMenu.forEach(function(item, i){
+						const isActive = item.active ? true : false;
+						drawString(item.label, textCenter(item.label), grid * (9.5 + (i * .5)), isActive);
+					});
+				} else {
+					menu.forEach(function(item, i){
+						const isActive = item.active ? true : false;
+						drawString(item.label, textCenter(item.label), grid * (9.5 + (i * .5)), isActive);
+					});
+					drawString(creditString, textCenter(creditString), grid * 11.5);
+				}
 			};
-		}
+			clearGame();
+			draw();
+			window.requestAnimationFrame(loop);
+		};
+	},
+
+	textCenter = function(string){
+		return (gameWidth / 2) - (string.length * (grid / 4));
+	},
+
+	controls = function(){
 		setupKeyboard();
-	}, moveUpMenu = function(){
-		getCurrentMenuItem()
-		if(menu[currentMenuItem.index - 1]){
-			menu[currentMenuItem.index].active = false;
-			menu[currentMenuItem.index - 1].active = true;
+	},
+
+	moveUpMenu = function(){
+		getCurrentMenuItem();
+		const menuArr = optionsShowing ? optionsMenu : menu;
+		if(menuArr[currentMenuItem.index - 1]){
+			menuArr[currentMenuItem.index].active = false;
+			menuArr[currentMenuItem.index - 1].active = true;
 		}
-	}, moveDownMenu = function(){
-		getCurrentMenuItem()
-		if(menu[currentMenuItem.index + 1]){
-			menu[currentMenuItem.index].active = false;
-			menu[currentMenuItem.index + 1].active = true;
+	},
+
+	moveDownMenu = function(){
+		getCurrentMenuItem();
+		const menuArr = optionsShowing ? optionsMenu : menu;
+		if(menuArr[currentMenuItem.index + 1]){
+			menuArr[currentMenuItem.index].active = false;
+			menuArr[currentMenuItem.index + 1].active = true;
 		}
-	}, selectMenuItem = function(){
+	},
+
+	selectMenuItem = function(){
 		getCurrentMenuItem();
 		eval(currentMenuItem.action + '()');
-	}, getCurrentMenuItem = function(){
-		menu.forEach(function(item, i){
+	},
+
+	getCurrentMenuItem = function(){
+		const menuArr = optionsShowing ? optionsMenu : menu;
+		menuArr.forEach(function(item, i){
 			if(item.active) currentMenuItem = item;
 		});
-	}, startGame = function(){
+	},
+
+	startGame = function(){
 		if(!startedGame){
+			stopKeyboard();
 			startedGame = true;
-			clearInterval(loopInterval);
 			clearGame();
-			game();
+			initGame();
 		}
-	}, showOptions = function(){
-		console.log('show options lol');
+	},
+
+	setupKeyboard = function(){
+		document.addEventListener('keydown', keysDown);
+	}, 
+
+	stopKeyboard = function(){
+		document.removeEventListener('keydown', keysDown);
+	},
+
+	keysDown = function(e){
+		switch(e.which){
+			case 38: moveUpMenu(); break;
+			case 40: moveDownMenu(); break;
+			case 13: selectMenuItem(); break;
+		};
+	},
+
+	showOptions = function(){
+		optionsShowing = true;
+	},
+
+	toggleFullscreen = function(){
+		const openFullscreen = function(){
+			mainWindow.setFullScreen(true);
+			isFullscreen = true;
+		}, closeFullscreen = function(){
+			mainWindow.setFullScreen(false);
+			isFullscreen = false;
+		};
+		isFullscreen ? closeFullscreen() : openFullscreen();
+	},
+
+	cancelOptions = function(){
+		optionsShowing = false;
 	};
 
-	init();
+	storage.get('savedData', function(err, data){
+		savedData = data;
+		init();
+	});
+	
 };
 
 

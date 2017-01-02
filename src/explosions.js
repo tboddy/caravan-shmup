@@ -1,19 +1,18 @@
-var explosions = [];
+let explosions = [];
 
-var explodeEntity = function(entityObj){
+const explodeEntity = function(entityObj){
 	entityObj.time = gameClock;
 	explosions.push(entityObj);
 };
 
 
-var explosionAnimateTime = 1, explosionSize = grid * 2;
+const explosionAnimateTime = 1, explosionSize = grid * 2;
 
 const explosionImg = new Image();
 explosionImg.src = 'img/explosions.png';
 
-var explosionsLoop = function(){
-
-	var draw = function(){
+const explosionsLoop = function(){
+	const draw = function(){
 		explosions.forEach(function(explosion, i){
 			if(gameClock >= explosion.time + (explosionAnimateTime * 5)){
 				explosions.splice(i, 1);
@@ -32,7 +31,5 @@ var explosionsLoop = function(){
 			}
 		});
 	};
-
-	if(explosions.length) draw()
-
+	if(explosions.length) draw();
 };

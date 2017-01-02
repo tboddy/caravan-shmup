@@ -5,19 +5,22 @@ module.exports = function(grunt) {
 				src: [
 					'src/global.js',
 					'src/start.js',
-					'src/game.js'
+					'src/game.js',
+					'src/enemies.js',
+					'src/player.js',
+					'src/enemyshooting.js',
+					'src/playershooting.js',
+					'src/explosions.js',
+					'src/hud.js'
 					// 'src/map.js',
 					// 'src/level.js',
 					// 'src/powerup.js',
 					// 'src/explosions.js',
-					// 'src/enemies.js',
 					// 'src/secrets.js',
 					// 'src/bosses.js',
 					// 'src/enemyshooting.js',
 					// 'src/bossshooting.js',
 					// 'src/blocks.js',
-					// 'src/player.js',
-					// 'src/hud.js',
 					// 'src/shooting.js',
 					// 'src/pointer.js'
 				],
