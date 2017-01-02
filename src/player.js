@@ -34,7 +34,26 @@ playerKeysUp = function(e){
 
 playerLoop = function(){
 	const update = function(){
-		var move = function(){
+		const updateGamepad = function(){
+			if(navigator.getGamepads()[0]){
+				gamepad = navigator.getGamepads()[0];
+				if(gamepad.axes[9]){
+					const hatSwitch = gamepad.axes[9].toFixed(1);
+					movingUp = hatSwitch == '-1.0' || hatSwitch == '1.0' || hatSwitch == '-0.7' ? true : false;
+					movingDown = hatSwitch == '0.1' || hatSwitch == '-0.1' || hatSwitch == '0.4' ? true : false;
+					movingLeft = hatSwitch == '0.7' || hatSwitch == '1.0' || hatSwitch == '0.4' ? true : false;
+					movingRight = hatSwitch == '-0.4' || hatSwitch == '-0.1' || hatSwitch == '-0.7' ? true : false; 
+				} else {
+					movingUp = gamepad.axes[1] < analogThresh * -1 ? true : false;
+					movingDown = gamepad.axes[1] > analogThresh ? true : false;
+					movingLeft = gamepad.axes[0] < analogThresh * -1 ? true : false;
+					movingRight = gamepad.axes[0] > analogThresh ? true : false;
+				}
+				shot = gamepad.buttons[0].pressed || gamepad.buttons[1].pressed || gamepad.buttons[3].pressed || gamepad.buttons[2].pressed ? true : false;
+				if(gamepad.buttons[8].pressed) mainWindow.reload();
+			}
+		},
+		updateKeyboard = function(){
 			if(movingRight) playerX += playerSpeed;
 			else if(movingLeft) playerX -= playerSpeed;
 			if(movingUp) playerY -= playerSpeed;
@@ -44,7 +63,8 @@ playerLoop = function(){
 			if(playerY <= 0) playerY = 0;
 			else if(playerY + playerHeight >= gameHeight) playerY = gameHeight - playerHeight;
 		};
-		move();
+		updateGamepad();
+		updateKeyboard();
 	},
 	draw = function(){
 		if(!isGameOver){
@@ -54,7 +74,7 @@ playerLoop = function(){
 			} else if(player.src != 'img/player.png') {
 				player.src = 'img/player.png';
 			}
-			var offset = 0;
+			let offset = 0;
 			if(movingLeft) offset = grid;
 			else if(movingRight) offset = grid * 2;
 			context.drawImage(player, offset, 0, grid, grid * 1.5, playerX, playerY, grid, grid * 1.5);

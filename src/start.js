@@ -35,6 +35,7 @@ const start = function(){
 					drawString(creditString, textCenter(creditString), grid * 11.5);
 				}
 			};
+			if(!gamepad) setupGamepad()
 			clearGame();
 			draw();
 			window.requestAnimationFrame(loop);
@@ -47,6 +48,7 @@ const start = function(){
 
 	controls = function(){
 		setupKeyboard();
+		navigator.getGamepads()[0] ? setupGamepad() : window.addEventListener('gamepadconnected', setupGamepad);
 	},
 
 	moveUpMenu = function(){
@@ -86,6 +88,10 @@ const start = function(){
 			clearGame();
 			initGame();
 		}
+	},
+
+	setupGamepad = function(){
+		gamepad = navigator.getGamepads()[0];
 	},
 
 	setupKeyboard = function(){
