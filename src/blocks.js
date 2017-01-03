@@ -1,33 +1,30 @@
-
-
-var updateBlocks = function(){
+const updateBlocks = function(){
 	levelMap.forEach(function(row, i){
 		if(gridPositions[i].y + grid >= 0 && gridPositions[i].y <= gameHeight){
 			row.forEach(function(levelGrid, j){
-				var gridChar = gridPositions[i].grids[j].char;
+				let gridChar = gridPositions[i].grids[j].char;
 				if(gridChar.indexOf('(') > -1) gridChar = gridChar.substring(0, gridChar.indexOf('('));
-				var gridObj = {x: gridPositions[i].grids[j].x, y: gridPositions[i].y, char: gridChar};
+				const gridObj = {x: gridPositions[i].grids[j].x, y: gridPositions[i].y, char: gridChar};
 				gridChar = gridChar.trim();
 				if(gridChar == 'g' || gridChar == 'G' || gridChar == 'r' || gridChar == 'R') checkBlockCollision(gridObj);
 				else if(gridChar == 'k' || gridChar == 'K' || gridChar == 'l' || gridChar == 'L') checkBigBlockCollision(gridObj);
 			});
 		}
 	});
-};
+},
 
-var checkBlockCollision = function(block){
+checkBlockCollision = function(block){
 	checkBulletCollision({x: block.x, y: block.y, width: grid, height: grid}, function(){
 		destroyBlock(block);
 	});
-};
+},
 
-var destroyBlock = function(block){
+destroyBlock = function(block){
 	levelMap.forEach(function(row, i){
 		row.forEach(function(char, j){
-			var gridChar = char;
+			let gridChar = char;
 			if(gridChar.indexOf('(') > -1) gridChar = gridChar.substring(0, gridChar.indexOf('('));
-			var tempRow = gridPositions[i], gridItem = gridPositions[i].grids[j];
-			if(gridItem.x == block.x && tempRow.y == block.y && block.char == gridChar){
+			if(gridPositions[i].grids[j].x == block.x && gridPositions[i].y == block.y && block.char == gridChar){
 				if(block.char == 'G' || block.char == 'R') spawnPointer(block);
 				block.width = grid;
 				block.height = grid;
@@ -38,11 +35,11 @@ var destroyBlock = function(block){
 			}
 		});
 	});
-};
+},
 
-var checkBigBlockCollision = function(bigBlock){
+checkBigBlockCollision = function(bigBlock){
 	checkBulletCollision({x: bigBlock.x, y: bigBlock.y, width: grid, height: grid}, function(){
-		var gridsToDestroy = {};
+		let gridsToDestroy = {};
 		switch(bigBlock.char.trim()){
 			case 'k':
 				gridsToDestroy.topLeft = {x: bigBlock.x, y: bigBlock.y - grid};
@@ -71,23 +68,19 @@ var checkBigBlockCollision = function(bigBlock){
 		};
 		destroyBigBlock(gridsToDestroy);
 	});
-};
+},
 
-var destroyBigBlock = function(gridsToDestroy){
+destroyBigBlock = function(gridsToDestroy){
 	levelMap.forEach(function(row, i){
 		row.forEach(function(char, j){
-			var gridChar = char;
+			let gridChar = char;
 			if(gridChar.indexOf('(') > -1) gridChar = gridChar.substring(0, gridChar.indexOf('('));
-			var tempRow = gridPositions[i], grid = gridPositions[i].grids[j];
 			gridChar = gridChar.trim();
 			if(gridChar.indexOf('k') > -1 || gridChar.indexOf('K') > -1 || gridChar.indexOf('l') > -1 || gridChar.indexOf('L') > -1){
-				var otherRowIndex = (gridChar.indexOf('K') > -1 || gridChar.indexOf('L') > -1) ? i + 1 : i - 1;
-				for(var cord in gridsToDestroy){
-					if(grid.x == gridsToDestroy[cord].x && tempRow.y == gridsToDestroy[cord].y){
-						var newChar = '', newOtherChar = '';
-
-						var tempGrid = levelMap[i][j], tempOtherGrid = levelMap[otherRowIndex][j];
-
+				const otherRowIndex = (gridChar.indexOf('K') > -1 || gridChar.indexOf('L') > -1) ? i + 1 : i - 1;
+				for(let cord in gridsToDestroy){
+					if(gridPositions[i].grids[j].x == gridsToDestroy[cord].x && gridPositions[i].y == gridsToDestroy[cord].y){
+						let newChar = '', newOtherChar = '', tempGrid = levelMap[i][j], tempOtherGrid = levelMap[otherRowIndex][j];
 						if(tempGrid.indexOf('(') > -1) tempGrid = tempGrid.substring(0, tempGrid.indexOf('('));
 						if(tempOtherGrid.indexOf('(') > -1) tempOtherGrid = tempOtherGrid.substring(0, tempOtherGrid.indexOf('('));
 						tempGrid = tempGrid.trim();

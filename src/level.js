@@ -1,40 +1,41 @@
-var levelRowPositions = [], gridPositions = []; levelStartPos = 0, levelSpeed = 1.5, groundSpeed = 1 / 128, cloudSpeed = 1 / 24, introTime = 90, outroTime = 2700, currentPlatformAnimation = 0;
 
-var setupLevel = function(){
-	var rowGridCount = levelMap[0].length,
-		levelStartPos = levelMap.length * grid;
+let gridPositions = [], currentPlatformAnimation = 0, groundSpeed = 0.1, cloudSpeed = 0.2;
+const levelSpeed = 0.8, introTime = 90, outroTime = 10000;
+
+const setupLevel = function(){
+	const levelStartPos = levelMap.length * grid;
 	levelMap.forEach(function(levelRow, i){
-		var rowY = (i * grid) - (levelStartPos - gameHeight);
-		var gridPosition = {y: rowY, groundY: rowY, cloudY: rowY, grids: []};
+		const rowY = (i * grid) - (levelStartPos - gameHeight);
+		let gridPosition = {y: rowY, groundY: rowY, cloudY: rowY, grids: []};
 		levelRow.forEach(function(levelGrid, j){
 			gridPosition.grids.push({x: j * grid, char: levelRow[j]});
-			if(levelGrid.indexOf('(') > -1){
-				entity = levelGrid.substring(levelGrid.indexOf('(') + 1, levelGrid.indexOf('(') + 2);
-				var xPos = j * grid, yPos = (i * grid) - (levelStartPos - gameHeight);
-				switch(entity){
+			// if(levelGrid.indexOf('(') > -1){
+			// 	entity = levelGrid.substring(levelGrid.indexOf('(') + 1, levelGrid.indexOf('(') + 2);
+			// 	var xPos = j * grid, yPos = (i * grid) - (levelStartPos - gameHeight);
+			// 	switch(entity){
 
-					// powerup
-					case 'p':
-						var powerupDirection = (Math.random() >= 0.5) ? 'left' : 'right';
-						powerups.push({x: xPos, y: yPos, initial: xPos, direction: powerupDirection, width: grid});
-						break;
+			// 		// powerup
+			// 		case 'p':
+			// 			var powerupDirection = (Math.random() >= 0.5) ? 'left' : 'right';
+			// 			powerups.push({x: xPos, y: yPos, initial: xPos, direction: powerupDirection, width: grid});
+			// 			break;
 
-					// enemies
-					case '1': enemies.small.one.push({x: xPos, y: yPos, initial: xPos, width: grid, height: grid}); break;
-					case '2': enemies.small.two.push({x: xPos, y: yPos, initial: xPos, width: grid, height: grid}); break;
-					case '3': enemies.medium.one.push({x: xPos, y: yPos, width: grid * 2, height: grid * 2, hits: 2}); break;
-					case '4': enemies.small.three.push({x: xPos, y: yPos, width: grid, height: grid}); break;
-					case '5': enemies.small.four.push({x: xPos, y: yPos, width: grid, height: grid}); break;
+			// 		// enemies
+			// 		case '1': enemies.small.one.push({x: xPos, y: yPos, initial: xPos, width: grid, height: grid}); break;
+			// 		case '2': enemies.small.two.push({x: xPos, y: yPos, initial: xPos, width: grid, height: grid}); break;
+			// 		case '3': enemies.medium.one.push({x: xPos, y: yPos, width: grid * 2, height: grid * 2, hits: 2}); break;
+			// 		case '4': enemies.small.three.push({x: xPos, y: yPos, width: grid, height: grid}); break;
+			// 		case '5': enemies.small.four.push({x: xPos, y: yPos, width: grid, height: grid}); break;
 
-					// bosses
-					case '!': bosses.oneA.push({x: xPos, y: yPos, width: grid * 3.5, height: grid * 3.5, sYDirection: 'up', sXDirection: 'left'}); break;
-					case '@': bosses.oneB.push({x: xPos, y: yPos, width: grid * 3.5, height: grid * 3.5, sYDirection: 'up', sXDirection: 'right'}); break;
+			// 		// bosses
+			// 		case '!': bosses.oneA.push({x: xPos, y: yPos, width: grid * 3.5, height: grid * 3.5, sYDirection: 'up', sXDirection: 'left'}); break;
+			// 		case '@': bosses.oneB.push({x: xPos, y: yPos, width: grid * 3.5, height: grid * 3.5, sYDirection: 'up', sXDirection: 'right'}); break;
 
-					// secret
-					case '-': secrets.push({x: xPos, y: yPos, width: grid * 2, height: grid * 2, hits: 12});
+			// 		// secret
+			// 		case '-': secrets.push({x: xPos, y: yPos, width: grid * 2, height: grid * 2, hits: 12});
 
-				};
-			}
+			// 	};
+			// }
 		});
 		gridPositions.push(gridPosition);
 	});
@@ -77,9 +78,9 @@ const setupGridImages = function(){
 	bigThingImg.src = 'img/bigthing.png';
 
 	destroyedSecretBlockImg.src = 'img/destroyedsecretblock.png';
-};
+},
 
-var levelLoop = function(){
+levelLoop = function(){
 
 	var update = function(){
 		if(gameClock % 16 == 0){

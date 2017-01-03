@@ -81,6 +81,284 @@ checkCollision = function(elA, elB, callback){
 		callback(elA, elB);
 	}
 };
+var levelMap = [
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', 'V', 'B', 'B', 'B', 'B', 'm', 'V', 'B', 'B', 'B', 'B', 'm', ' ', ' '],
+	[' ', ' ', 'X', 'B', 'O', 'P', 'B', 'W', 'e', 'B', 'O', 'P', 'B', 'n', ' ', ' '],
+	['w', 'w', 'W', 'B', 'o', 'p', 'B', 'n', 'X', 'B', 'o', 'p', 'B', 'e', 'w', 'w'],
+	[' ', ' ', 'X', 'B', 'B', 'B', 'B', 'W', 'e', 'B', 'B', 'B', 'B', 'n', ' ', ' '],
+	[' ', ' ', 'v', 'b', 'b', 'b', 'b', 'N', 'v', 'b', 'b', 'b', 'b', 'N', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', 'V', 'g', 'g', 'm', 'V', 'g', 'g', 'm', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', 'X', 'r', 'R', 'n', 'X', 'R', 'r', 'n', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', 'X', 'g', 'g', 'n', 'X', 'g', 'g', 'n', ' ', ' ', ' ', ' '],
+	['V', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'm'],
+	['e', 'R', 'B', 'r', 'B', 'r', 'B', 'r', 'r', 'B', 'r', 'B', 'r', 'B', 'R', 'W'],
+	['X', 'B', 'B', 'B', 'B', 'B', 'B', 'r', 'r', 'B', 'B', 'B', 'B', 'B', 'B', 'n'],
+	['v', 'b', 'b', 'b', 'b', 'b', 'A', 'B', 'B', 'a', 'b', 'b', 'b', 'b', 'b', 'N'],
+	[' ', ' ', ' ', ' ', ' ', ' ', 'X', 'g', 'g', 'n', ' ', ' ', ' ', ' ', ' ', ' '],
+	['g', 'g', 'g', 'm', 'V', 'g', 'g', 'g', 'g', 'g ','g', 'm', 'V', 'g', 'g', 'g'],
+	['r', 'R', 'r', 'W', 'e', 'g', 'g', 'g', 'g', 'g', 'g', 'W', 'e', 'r', 'R', 'g'],
+	['g', 'r', 'g', 'n', 'X', 'g', 'g', 'g', 'g', 'g', 'g', 'n', 'X', 'g', 'r', 'g'],
+	['b', 'b', 'b', 'N', 'X', 'r', 'r', 'g', 'g', 'r', 'r', 'n', 'v', 'b', 'b', 'b'],
+	[' ', ' ', ' ', ' ', 'Z', 'M', 'M', 'g', 'g', 'M', 'M', 'z', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', 'X', 'r', 'r', 'g', 'g', 'r', 'r', 'n', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', 'Z', 'M', 'M', 'G', 'G', 'M', 'M', 'z', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', 'X', 'r', 'r', 'g', 'g', 'r', 'r', 'n', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', 'Z', 'M', 'M', 'g', 'g', 'M', 'M', 'z', ' ', ' ', ' ', ' '],
+	[' ', ' ', 'V', 'K', 'L', 'r', 'r', 'g', 'g', 'r', 'r', 'K', 'L', 'm', ' ', ' '],
+	['M', 'M', 'M', 'k', 'l', 'B', 'B', 'B', 'B', 'B', 'B', 'k', 'l', 'M', 'M', 'M'],
+	['g', 'g', 'g', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'g', 'g', 'g'],
+	['r', 'g', 'r', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'r', 'g', 'r'],
+	['r', 'g', 'r', 'B', 'B', 'B', 'B', 'r', 'r', 'B', 'B', 'B', 'B', 'r', 'g', 'r'],
+	['r', 'g', 'r', 'B', 'B', 'B', 'B', 'K', 'L', 'B', 'B', 'B', 'B', 'r', 'g', 'r'],
+	['r', 'g', 'r', 'B', 'B', 'B', 'B', 'k', 'l', 'B', 'B', 'B', 'B', 'r', 'g', 'r'],
+	['r', 'g', 'r', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'r', 'g', 'r'],
+	['r', 'g', 'r', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'r', 'g', 'r'],
+	['r', 'g', 'r', 'B', 'B', 'B', 'B', 'r', 'r', 'B', 'B', 'B', 'B', 'r', 'g', 'r'],
+	['g', 'g', 'g', 'B', 'B', 'B', 'B', 'R', 'R', 'B', 'B', 'B', 'B', 'g', 'g', 'g'],
+	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'r', 'r', 'B', 'B', 'B', 'B', 'B', 'B', 'B'],
+	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B'],
+	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B'],
+	['r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g'],
+	['g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r'],
+	['r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g'],
+	['g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r'],
+	['r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g'],
+	['g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r'],
+	['r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g'],
+	['g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r'],
+	['r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g'],
+	['g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r'],
+	['r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g'],
+	['b', 'A', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'a', 'b', 'b'],
+	[' ', 'X', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'n', ' ', ' '],
+	[' ', 'Z', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'z', ' ', ' '],
+	[' ', 'X', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'n', ' ', ' '],
+	[' ', 'v', 'b', 'b', 'A', 'r', 'g', 'r', 'g', 'r', 'a', 'b', 'b', 'N', ' ', ' '],
+	[' ', ' ', ' ', ' ', 'X', 'g', 'r', 'g', 'r', 'g', 'z', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', 'Z', 'r', 'g', 'r', 'g', 'r', 'n', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', 'X', 'g', 'r', 'g', 'r', 'g', 'z', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', 'v', 'b', 'b', 'b', 'b', 'b', 'N', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	['g', 'r', 'g', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'm', ' ', ' '],
+	['r', 'G', 'r', 'B', 'B', 'B', 'B', 'B', 'B', 'g', 'r', 'g', 'B', 'n', ' ', ' '],
+	['g', 'r', 'g', 'B', 'B', 'g', 'g', 'B', 'B', 'r', 'G', 'r', 'B', 'n', ' ', ' '],
+	['B', 'B', 'B', 'B', 'r', 'r', 'r', 'r', 'B', 'g', 'r', 'g', 'B', 'z', ' ', ' '],
+	['B', 'B', 'B', 'B', 'B', 'g', 'g', 'B', 'B', 'B', 'B', 'B', 'B', 'n', ' ', ' '],
+	['B', 'B', 'B', 'K', 'L', 'K', 'L', 'K', 'L', 'B', 'B', 'B', 'B', 'W', 'w', 'w'],
+	['B', 'B', 'B', 'k', 'l', 'k', 'l', 'k', 'l', 'B', 'B', 'B', 'B', 'n', ' ', ' '],
+	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'n', ' ', ' '],
+	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'a', 'b', 'b', 'N', ' ', ' '],
+	['b', 'b', 'b', 'b', 'b', 'A', 'r', 'g', 'r', 'g', 'n', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', 'Z', 'g', 'r', 'g', 'r', 'z', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', 'X', 'r', 'g', 'r', 'g', 'n', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', 'V', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'm', ' ', ' ', ' '],
+	[' ', ' ', ' ', 'X', 'B', 'M', 'r', 'g', 'r', 'g', 'M', 'B', 'n', ' ', ' ', ' '],
+	[' ', ' ', ' ', 'Z', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'z', ' ', ' ', ' '],
+	[' ', ' ', ' ', 'Z', 'B', 'M', 'r', 'g', 'r', 'g', 'M', 'B', 'z', ' ', ' ', ' '],
+	[' ', ' ', ' ', 'v', 'b', 'b', 'A', 'B', 'B', 'a', 'b', 'b', 'N', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', 'X', 'g', 'r', 'n', ' ', ' ', ' ', ' ', ' ', ' '],
+	['g', 'r', 'g', 'm', ' ', ' ', 'Z', 'K', 'L', 'z', ' ', ' ', 'V', 'g', 'r', 'g'],
+	['g', 'r', 'g', 'W', 'w', 'w', 'e', 'k', 'l', 'W', 'w', 'w', 'e', 'g', 'r', 'g'],
+	['g', 'r', 'g', 'n', ' ', ' ', 'v', 'b', 'b', 'N', ' ', ' ', 'X', 'g', 'r', 'g'],
+	['g', 'r', 'g', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'g', 'r', 'g'],
+	['g', 'r', 'g', 'z', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'Z', 'g', 'r', 'g'],
+	['g', 'r', 'g', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'g', 'r', 'g'],
+	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B'],
+	['B', 'r', 'G', 'r', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'r', 'g', 'r', 'B'],
+	['B', 'g', 'g', 'g', 'g', 'g', 'g', 'B', 'B', 'g', 'g', 'g', 'g', 'g', 'g', 'B'],
+	['B', 'r', 'g', 'r', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'r', 'G', 'r', 'B'],
+	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B'],
+	['B', 'M', 'B', 'M', 'B', 'M', 'B', 'M', 'B', 'M', 'a', 'b', 'b', 'b', 'b', 'b'],
+	['g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'n', ' ', ' ', ' ', ' ', ' '],
+	['r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'n', ' ', ' ', ' ', ' ', ' '],
+	['g', 'K', 'L', 'g', 'g', 'g', 'g', 'K', 'L', 'g', 'n', ' ', ' ', ' ', ' ', ' '],
+	['r', 'k', 'l', 'r', 'r', 'r', 'r', 'k', 'l', 'r', 'z', ' ', ' ', ' ', ' ', ' '],
+	['g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'n', ' ', ' ', ' ', ' ', ' '],
+	['r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'n', ' ', ' ', ' ', ' ', ' '],
+	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'M', 'g', 'M', 'B', 'B', 'B', 'B', 'B', 'B'],
+	['B', 'g', 'r', 'g', 'r', 'B', 'B', 'g', 'r', 'g', 'B', 'B', 'B', 'B', 'B', 'B'],
+	['B', 'g', 'r', 'g', 'r', 'B', 'B', 'M', 'r', 'M', 'B', 'B', 'B', 'B', 'B', 'B'],
+	['b', 'b', 'A', 'g', 'r', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'M', 'g', 'M', 'B'],
+	[' ', ' ', 'X', 'g', 'r', 'B', 'B', 'B', 'B', 'B ','B', 'B', 'g', 'R', 'g', 'B'],
+	[' ', ' ', 'X', 'B', 'B', 'B', 'B', 'M', 'g', 'M', 'B', 'B', 'M', 'g', 'M', 'B'],
+	[' ', ' ', 'Z', 'B', 'B', 'B', 'B', 'g', 'R', 'g', 'B', 'B', 'B', 'B', 'B', 'B'],
+	[' ', ' ', 'Z', 'K', 'L', 'B', 'B', 'M', 'g', 'M', 'B', 'B', 'B', 'B', 'B', 'B'],
+	['w', 'w', 'e', 'k', 'l', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'M', 'g', 'M', 'B'],
+	[' ', ' ', 'v', 'b', 'A', 'K', 'L', 'B', 'B', 'B', 'B', 'B', 'g', 'R', 'g', 'B'],
+	[' ', ' ', ' ', ' ', 'X', 'k', 'l', 'B', 'B', 'B', 'B', 'B', 'M', 'g', 'M', 'B'],
+	[' ', ' ', ' ', ' ', 'v', 'b', 'b', 'b', 'b', 'A', 'B', 'B', 'B', 'B', 'B', 'B'],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'Z', 'B', 'B', 'B', 'B', 'B', 'B'],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'v', 'b', 'b', 'b', 'b', 'b', 'b'],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'V', 'r'],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'R'],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'Z', 'r'],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'v', 'b'],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	['g', 'r', 'g', 'R ','g', 'r', 'g', 'm', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	['B', 'B', 'B', 'B ','B', 'B', 'B', 'z', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	['B', 'B', 'B', 'B ','B', 'B', 'B', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	['B', 'B', 'B', 'B ','B', 'B', 'B', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	['g', 'g', 'M', 'r ','r', 'B', 'B', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	['g', 'g', 'B', 'r', 'r', 'B', 'B', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	['g', 'g', 'B', 'r', 'r', 'B', 'B', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	['g', 'g', 'M', 'r', 'r', 'B', 'B', 'z', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	['r', 'r', 'r', 'r', 'r', 'r', 'r', 'z', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'z', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'n', ' ', ' ', 'V', 'r', 'r', 'r', 'm', ' '],
+	['B', 'r', 'g', 'r', 'B', 'B', 'B', 'n', ' ', ' ', 'X', 'r', 'r', 'r', 'n', ' '],
+	['B', 'r', 'g', 'B', 'r', 'K', 'L', 'W', 'w', 'w', 'e', 'B', 'M', 'B', 'z', ' '],
+	['B', 'r', 'g', 'B', 'B', 'k', 'l', 'n', ' ', ' ', 'X', 'B', 'g', 'g', 'n', ' '],
+	['B', 'r', 'g', 'B', 'B', 'M', 'r', 'z', ' ', ' ', 'Z', 'B', 'g', 'g', 'n', ' '],
+	['b', 'b', 'b', 'A', 'r', 'g', 'r', 'n', ' ', ' ', 'X', 'B','B ', 'B', 'n', ' '],
+	[' ', ' ', ' ', 'X', 'r', 'g', 'r', 'W', 'w', 'w', 'e', 'r', 'R', 'r', 'z', ' '],
+	[' ', ' ', ' ', 'Z', 'B', 'B', 'B', 'n', ' ', ' ', 'X', 'B', 'r', 'B', 'n', ' '],
+	[' ', ' ', ' ', 'Z', 'B', 'B', 'B', 'n', ' ', ' ', 'X', 'K', 'L', 'r', 'n', ' '],
+	[' ', ' ', ' ', 'v', 'b', 'b', 'b', 'N', ' ', ' ', 'X', 'k', 'l', 'r', 'W', 'w'],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'B', 'M', 'B', 'W', 'w'],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'v', 'b', 'b', 'b', 'N', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ,' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'V', 'B', 'B', 'M', 'B' ,'g', 'B'],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'M', 'B', 'M', 'B', 'M', 'B'],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'K', 'L', 'M', 'g', 'r', 'B'],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'k', 'l', 'M', 'B', 'M', 'B'],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'M', 'B', 'M', 'K', 'L', 'B'],
+	['r', 'r', 'g', 'r', 'r', 'm', ' ', ' ', ' ', 'X', 'g', 'R', 'M', 'k', 'l', 'B'],
+	['g', 'g', 'g', 'g', 'g', 'n', ' ', ' ', ' ', 'X', 'M', 'B', 'M', 'B', 'M', 'B'],
+	['r', 'G', 'g', 'r', 'r', 'n', ' ', ' ', ' ', 'X', 'M', 'B', 'M', 'B', 'M', 'B'],
+	['g', 'r', 'g', 'g', 'g', 'n', ' ', ' ', ' ', 'X', 'M', 'B', 'M', 'B', 'M', 'B'],
+	['g', 'r', 'g', 'r', 'a', 'N', 'V', 'r', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'r'],
+	['g', 'r', 'g', 'r', 'n', ' ', 'X', 'g', 'r', 'g', 'r', 'g', 'r', 'g', 'G', 'g'],
+	['g', 'r', 'g', 'r', 'W', 'w', 'e', 'M', 'g', 'r', 'g', 'M', 'g', 'r', 'g', 'M'],
+	['g', 'r', 'G', 'r', 'W', 'w', 'e', 'B', 'B', 'B', 'B', 'B', 'M', 'r', 'M', 'B'],
+	['g', 'r', 'g', 'R', 'n', ' ', 'v', 'b', 'b', 'b', 'A', 'B', 'g', 'M', 'g', 'B'],
+	['b', 'b', 'b', 'b', 'N', ' ', ' ', ' ', ' ', ' ', 'X', 'B', 'M', 'r', 'M', 'B'],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'B', 'B', 'B', 'B', 'B'],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'Z', 'g', 'g', 'M', 'r', 'r'],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'g', 'g', 'B', 'r', 'r'],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'g', 'g', 'M', 'r', 'r'],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'g', 'G', 'B', 'r', 'r'],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'g', 'g', 'M', 'r', 'r'],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'g', 'g', 'B', 'R', 'r'],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'Z', 'g', 'g', 'M', 'r', 'r'],
+	['r', 'g', 'r', 'm', ' ', ' ', ' ', ' ', ' ', ' ', 'Z', 'g', 'g', 'B', 'r', 'r'],
+	['M', 'B', 'M', 'z', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'g', 'g', 'M', 'r', 'r'],
+	['r', 'g', 'r', 'n', ' ', ' ', ' ', ' ', ' ', ' ', 'v', 'b', 'A', 'B', 'r', 'r'],
+	['g', 'r', 'g', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'Z', 'M', 'B', 'M'],
+	['r', 'G', 'r', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'v', 'b', 'b', 'b'],
+	['g', 'M', 'g', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	['r', 'g', 'r', 'z', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	['g', 'M', 'g', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	['r', 'g', 'r', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	['b', 'b', 'b', 'N', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'm', ' ', ' ', ' '],
+	['r', 'r', 'r ', 'B', 'g', 'g', 'g', 'B', 'r', 'r', 'r', 'B','n', ' ', ' ', ' '],
+	['r', 'G', 'r', 'B', 'g', 'g', 'g', 'B', 'r', 'G', 'r', 'B', 'z', ' ', ' ', ' '],
+	['r', 'r', 'r', 'B', 'g', 'g', 'g', 'B', 'r', 'r', 'r', 'B', 'W', 'w', 'w', 'w'],
+	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'W', 'w', 'w', 'w'],
+	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'n', ' ', ' ', ' '],
+	['r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'W', 'w', 'w', 'w'],
+	['M', 'g', 'M', 'g', 'M', 'g', 'M', 'B', 'M', 'B', 'M', 'B', 'n', ' ', ' ', ' '],
+	['r', 'g', 'r', 'g', 'r', 'g', 'a', 'b', 'b', 'b', 'b', 'b', 'N', ' ', ' ', ' '],
+	['r', 'g', 'M', 'G', 'r', 'G', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	['r', 'g', 'r', 'g', 'r', 'g', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	['M', 'g', 'r', 'g', 'M', 'g', 'n', ' ', ' ', ' ', ' ', ' ', ' ', 'V', 'K', 'L'],
+	['r', 'g', 'r', 'g', 'r', 'g', 'n', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'k', 'l'],
+	['R', 'g', 'M', 'g', 'r', 'g', 'n', ' ', ' ', ' ', ' ', ' ', ' ', 'Z', 'K', 'L'],
+	['r', 'g', 'r', 'g', 'r', 'g', 'W', 'w', 'w', 'w', 'w', 'w', 'w', 'e', 'k', 'l'],
+	['M', 'g', 'M', 'g', 'M', 'g', 'n', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'K', 'L'],
+	['r', 'g', 'r', 'g', 'r', 'g', 'n', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'k', 'l'],
+	['M', 'g', 'M', 'g', 'M', 'g', 'n', ' ', ' ', ' ', ' ', ' ', ' ', 'v', 'b', 'b'],
+	['r', 'g', 'r', 'g', 'r', 'g', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	['M', 'g', 'M', 'g', 'M', 'g', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	['b', 'b', 'b', 'A', 'r', 'g', 'z', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', 'Z', 'r', 'g', 'z', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', 'X', 'r', 'g', 'n', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', 'v', 'b', 'b', 'N', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+];
 const start = function(){
 	let menu = [
 		{label: 'start game', action: 'startGame', active: true, index: 0},
@@ -292,6 +570,7 @@ const start = function(){
 let gameLoopInterval, isGameOver = false, gameClock = 0;
 
 const initGame = function(){
+	setupLevel();
 	setupPlayer();
 	setupHighScore();
 	loop = gameLoop();
@@ -300,6 +579,8 @@ const initGame = function(){
 gameLoop = function(){
 	return function(){
 		clearGame();
+		levelLoop();
+		pointerLoop();
 		enemyShootingLoop();
 		enemiesLoop();
 		shootingLoop();
@@ -438,6 +719,381 @@ gameLoop = function(){
 // 	};
 // 	isFullscreen ? closeFullscreen() : openFullscreen();
 // };
+
+let gridPositions = [], currentPlatformAnimation = 0, groundSpeed = 0.1, cloudSpeed = 0.2;
+const levelSpeed = 0.8, introTime = 90, outroTime = 10000;
+
+const setupLevel = function(){
+	const levelStartPos = levelMap.length * grid;
+	levelMap.forEach(function(levelRow, i){
+		const rowY = (i * grid) - (levelStartPos - gameHeight);
+		let gridPosition = {y: rowY, groundY: rowY, cloudY: rowY, grids: []};
+		levelRow.forEach(function(levelGrid, j){
+			gridPosition.grids.push({x: j * grid, char: levelRow[j]});
+			// if(levelGrid.indexOf('(') > -1){
+			// 	entity = levelGrid.substring(levelGrid.indexOf('(') + 1, levelGrid.indexOf('(') + 2);
+			// 	var xPos = j * grid, yPos = (i * grid) - (levelStartPos - gameHeight);
+			// 	switch(entity){
+
+			// 		// powerup
+			// 		case 'p':
+			// 			var powerupDirection = (Math.random() >= 0.5) ? 'left' : 'right';
+			// 			powerups.push({x: xPos, y: yPos, initial: xPos, direction: powerupDirection, width: grid});
+			// 			break;
+
+			// 		// enemies
+			// 		case '1': enemies.small.one.push({x: xPos, y: yPos, initial: xPos, width: grid, height: grid}); break;
+			// 		case '2': enemies.small.two.push({x: xPos, y: yPos, initial: xPos, width: grid, height: grid}); break;
+			// 		case '3': enemies.medium.one.push({x: xPos, y: yPos, width: grid * 2, height: grid * 2, hits: 2}); break;
+			// 		case '4': enemies.small.three.push({x: xPos, y: yPos, width: grid, height: grid}); break;
+			// 		case '5': enemies.small.four.push({x: xPos, y: yPos, width: grid, height: grid}); break;
+
+			// 		// bosses
+			// 		case '!': bosses.oneA.push({x: xPos, y: yPos, width: grid * 3.5, height: grid * 3.5, sYDirection: 'up', sXDirection: 'left'}); break;
+			// 		case '@': bosses.oneB.push({x: xPos, y: yPos, width: grid * 3.5, height: grid * 3.5, sYDirection: 'up', sXDirection: 'right'}); break;
+
+			// 		// secret
+			// 		case '-': secrets.push({x: xPos, y: yPos, width: grid * 2, height: grid * 2, hits: 12});
+
+			// 	};
+			// }
+		});
+		gridPositions.push(gridPosition);
+	});
+	setupGridImages();
+};
+
+const greenBlockImg = new Image(), redBlockImg = new Image(), greenPointImg = new Image(), redPointImg = new Image(), destroyedImg = new Image(),
+	platformOneImg = new Image(), platformTwoImg = new Image(), platformBottomImg = new Image(), platformBottomLeftImg = new Image(), platformBottomRightImg = new Image(), platformLeftImg = new Image(), platformTopLeftImg = new Image(),
+	platformRightImg = new Image(), platformTopRightImg = new Image(), platformRightNubImg = new Image(), platformLeftNubImg = new Image(), platformIntersectTopLeftImg = new Image(), platformIntersectTopRightImg = new Image(),
+	pipeImg = new Image(), pipeLeftImg = new Image(), pipeRightImg = new Image(), bigBlockImg = new Image(), destroyedBigBlockImg = new Image(), bigThingImg = new Image(), destroyedSecretBlockImg = new Image();
+
+const setupGridImages = function(){
+	greenBlockImg.src = 'img/greenblock.png';
+	redBlockImg.src = 'img/redblock.png';
+	greenPointImg.src = 'img/greenpoint.png';
+	redPointImg.src = 'img/greenpoint.png';
+	destroyedImg.src = 'img/destroyed.png';
+
+	platformOneImg.src = 'img/platform1.png';
+	platformTwoImg.src = 'img/platform2.png';
+	platformBottomImg.src = 'img/platformbottom.png';
+	platformBottomLeftImg.src = 'img/platformbottomleft.png';
+	platformBottomRightImg.src = 'img/platformbottomright.png';
+	platformLeftImg.src = 'img/platformleft.png';
+	platformTopLeftImg.src = 'img/platformtopleft.png';
+	platformRightImg.src = 'img/platformright.png';
+	platformTopRightImg.src = 'img/platformtopright.png';
+	platformLeftNubImg.src = 'img/platformleftnub.png';
+	platformRightNubImg.src = 'img/platformrightnub.png';
+	platformIntersectTopLeftImg.src = 'img/platformintersecttopleft.png';
+	platformIntersectTopRightImg.src = 'img/platformintersecttopright.png';
+
+	pipeImg.src = 'img/pipe.png';
+	pipeLeftImg.src = 'img/pipeleft.png';
+	pipeRightImg.src = 'img/piperight.png';
+
+	bigBlockImg.src = 'img/bigblock.png';
+	destroyedBigBlockImg.src = 'img/destroyedbigblock.png';
+
+	bigThingImg.src = 'img/bigthing.png';
+
+	destroyedSecretBlockImg.src = 'img/destroyedsecretblock.png';
+},
+
+levelLoop = function(){
+
+	var update = function(){
+		if(gameClock % 16 == 0){
+			currentPlatformAnimation++;
+			if(currentPlatformAnimation == 4) currentPlatformAnimation = 0;
+		}
+		for(var i in gridPositions){
+			gridPositions[i].y += levelSpeed;
+			gridPositions[i].groundY += groundSpeed;
+			gridPositions[i].cloudY += cloudSpeed;
+		}
+		updateBlocks();
+	};
+
+	var draw = function(){
+
+		var drawForeground = function(row, i){
+			var rowY = gridPositions[i].y
+			if(rowY + grid >= 0 && rowY <= gameHeight){
+				row.forEach(function(levelGrid, j){
+					if(levelGrid != ' '){
+						var img;
+						if(levelGrid.indexOf('(') > -1) levelGrid = levelGrid.substring(0, levelGrid.indexOf('('));
+						levelGrid = levelGrid.trim();
+						if(levelGrid != ''){
+							switch(levelGrid){
+								case 'g': img = greenBlockImg; break;
+								case 'r': img = redBlockImg; break;
+								case 'G': img = greenPointImg; break;
+								case 'R': img = redPointImg; break;
+								case 't': img = destroyedImg; break;
+								case 'B': img = platformOneImg; break;
+								case 'M': img = platformTwoImg; break;
+								case 'b': img = platformBottomImg; break;
+								case 'v': img = platformBottomLeftImg; break;
+								case 'N': img = platformBottomRightImg; break;
+								case 'X': img = platformLeftImg; break;
+								case 'V': img = platformTopLeftImg; break;
+								case 'n': img = platformRightImg; break;
+								case 'm': img = platformTopRightImg; break;
+								case 'Z': img = platformLeftNubImg; break;
+								case 'z': img = platformRightNubImg; break;
+								case 'a': img = platformIntersectTopLeftImg; break;
+								case 'A': img = platformIntersectTopRightImg; break;
+								case 'w': img = pipeImg; break;
+								case 'W': img = pipeLeftImg; break;
+								case 'e': img = pipeRightImg; break;
+								case 'k': img = bigBlockImg; break;
+								case 'K': img = bigBlockImg; break;
+								case 'l': img = bigBlockImg; break;
+								case 'L': img = bigBlockImg; break;
+								case 'u': img = destroyedBigBlockImg; break;
+								case 'U': img = destroyedBigBlockImg; break;
+								case 'i': img = destroyedBigBlockImg; break;
+								case 'I': img = destroyedBigBlockImg; break;
+								case 'o': img = bigThingImg; break;
+								case 'O': img = bigThingImg; break;
+								case 'p': img = bigThingImg; break;
+								case 'P': img = bigThingImg; break;
+								case 'q': img = destroyedSecretBlockImg; break;
+								case 'Q': img = destroyedSecretBlockImg; break;
+								case 'y': img = destroyedSecretBlockImg; break;
+								case 'Y': img = destroyedSecretBlockImg; break;
+							}
+							if(levelGrid == 'K' || levelGrid == 'O' || levelGrid == 'U' || levelGrid == 'q') context.drawImage(img, 0, 0, grid, grid, (j * grid), rowY, grid, grid);
+							else if(levelGrid == 'k' || levelGrid == 'o' || levelGrid == 'u' || levelGrid == 'Q') context.drawImage(img, 0, grid, grid, grid, (j * grid), rowY, grid, grid);
+							else if(levelGrid == 'L' || levelGrid == 'P' || levelGrid == 'I' || levelGrid == 'y') context.drawImage(img, grid, 0, grid, grid, (j * grid), rowY, grid, grid);
+							else if(levelGrid == 'l' || levelGrid == 'p' || levelGrid == 'i' || levelGrid == 'Y') context.drawImage(img, grid, grid, grid, grid, (j * grid), rowY, grid, grid);
+							else if(levelGrid == 'b' || levelGrid == 'N' || levelGrid == 'v' || levelGrid == 'a' || levelGrid == 'A'){
+								var sX = 0;
+								switch(currentPlatformAnimation){
+									case 0: sX = 0; break;
+									case 1: sX = grid; break;
+									case 2: sX = grid * 2; break;
+									case 3: sX = grid; break;
+								};
+								context.drawImage(img, sX, 0, grid, grid, (j * grid), rowY, grid, grid);
+							}
+							else context.drawImage(img, (j * grid), rowY);
+						}
+					} else {
+						context.fillStyle = 'transparent';
+						context.fillRect((j * grid), rowY, grid, grid);
+					}
+				});
+			}
+		};
+
+		var drawLayer = function(type){
+			levelMap.forEach(function(row, i){
+				switch(type){
+					case 'ground':
+						var groundY = gridPositions[i].groundY * grid;
+						if(groundY + (grid * grid) >= 0 && groundY <= gameHeight){
+					 		var groundEl = new Image();
+					 		groundEl.src = 'img/stars1.png';
+					 		context.drawImage(groundEl, 0, groundY);
+						}
+						break;
+					case 'clouds':
+						var cloudY = gridPositions[i].cloudY * grid;
+						if(cloudY + (grid * grid) >= 0 && cloudY <= gameHeight){
+					 		var cloudEl = new Image();
+					 		cloudEl.src = 'img/stars2.png';
+					 		context.drawImage(cloudEl, 0, cloudY);
+						}
+						break;
+					case 'foreground':
+						drawForeground(row, i);
+						break;
+				};
+			});
+		};
+
+		var drawIntro = function(){
+			var newGround = 1 / 64;
+			if(gameClock < introTime - 50) newGround = 1;
+			else if(gameClock >= introTime - 50 && gameClock < introTime - 40) newGround = 1 / 2;
+			else if(gameClock >= introTime - 40 && gameClock < introTime - 30) newGround = 1 / 4;
+			else if(gameClock >= introTime - 30 && gameClock < introTime - 20) newGround = 1 / 8;
+			else if(gameClock > introTime - 20 && gameClock < introTime - 10) newGround = 1 / 16;
+			else if(gameClock > introTime - 10 && gameClock < introTime || gameClock >= outroTime && gameClock < outroTime + 10) newGround = 1 / 32;
+			else if(gameClock >= outroTime + 10 && gameClock < outroTime + 20) newGround = 1 / 16;
+			else if(gameClock >= outroTime + 20 && gameClock < outroTime + 30) newGround = 1 / 8;
+			else if(gameClock >= outroTime + 30 && gameClock < outroTime + 40) newGround = 1 / 4;
+			else if(gameClock >= outroTime + 40 && gameClock < outroTime + 50) newGround = 1 / 2;
+			else if(gameClock >= outroTime + 50) newGround = 1;
+			groundSpeed = newGround;
+			cloudSpeed = newGround * 2;
+		};
+
+		drawLayer('ground');
+		drawLayer('clouds');
+		drawLayer('foreground');
+		drawIntro();
+
+	};
+
+	update();
+	draw();
+
+};
+const updateBlocks = function(){
+	levelMap.forEach(function(row, i){
+		if(gridPositions[i].y + grid >= 0 && gridPositions[i].y <= gameHeight){
+			row.forEach(function(levelGrid, j){
+				let gridChar = gridPositions[i].grids[j].char;
+				if(gridChar.indexOf('(') > -1) gridChar = gridChar.substring(0, gridChar.indexOf('('));
+				const gridObj = {x: gridPositions[i].grids[j].x, y: gridPositions[i].y, char: gridChar};
+				gridChar = gridChar.trim();
+				if(gridChar == 'g' || gridChar == 'G' || gridChar == 'r' || gridChar == 'R') checkBlockCollision(gridObj);
+				else if(gridChar == 'k' || gridChar == 'K' || gridChar == 'l' || gridChar == 'L') checkBigBlockCollision(gridObj);
+			});
+		}
+	});
+},
+
+checkBlockCollision = function(block){
+	checkBulletCollision({x: block.x, y: block.y, width: grid, height: grid}, function(){
+		destroyBlock(block);
+	});
+},
+
+destroyBlock = function(block){
+	levelMap.forEach(function(row, i){
+		row.forEach(function(char, j){
+			let gridChar = char;
+			if(gridChar.indexOf('(') > -1) gridChar = gridChar.substring(0, gridChar.indexOf('('));
+			if(gridPositions[i].grids[j].x == block.x && gridPositions[i].y == block.y && block.char == gridChar){
+				if(block.char == 'G' || block.char == 'R') spawnPointer(block);
+				block.width = grid;
+				block.height = grid;
+				explodeEntity(block);
+				levelMap[i][j] = 't';
+				gridPositions[i].grids[j].char = 't';
+				score += 10;
+			}
+		});
+	});
+},
+
+checkBigBlockCollision = function(bigBlock){
+	checkBulletCollision({x: bigBlock.x, y: bigBlock.y, width: grid, height: grid}, function(){
+		let gridsToDestroy = {};
+		switch(bigBlock.char.trim()){
+			case 'k':
+				gridsToDestroy.topLeft = {x: bigBlock.x, y: bigBlock.y - grid};
+				gridsToDestroy.topRight = {x: bigBlock.x + grid, y: bigBlock.y - grid};
+				gridsToDestroy.bottomLeft = bigBlock;
+				gridsToDestroy.bottomRight = {x: bigBlock.x + grid, y: bigBlock.y};
+				break;
+			case 'K':
+				gridsToDestroy.topLeft = bigBlock;
+				gridsToDestroy.topRight = {x: bigBlock.x + grid, y: bigBlock.y};
+				gridsToDestroy.bottomLeft = {x: bigBlock.x, y: bigBlock.y + grid};
+				gridsToDestroy.bottomRight = {x: bigBlock.x + grid, y: bigBlock.y + grid};
+				break;
+			case 'l':
+				gridsToDestroy.topLeft = {x: bigBlock.x - grid, y: bigBlock.y - grid};
+				gridsToDestroy.topRight = {x: bigBlock.x, y: bigBlock.y - grid};
+				gridsToDestroy.bottomLeft = {x: bigBlock.x - grid, y: bigBlock.y};
+				gridsToDestroy.bottomRight = bigBlock;
+				break;
+			case 'L':
+				gridsToDestroy.topLeft = {x: bigBlock.x - grid, y: bigBlock.y};
+				gridsToDestroy.topRight = bigBlock;
+				gridsToDestroy.bottomLeft = {x: bigBlock.x - grid, y: bigBlock.y - grid};
+				gridsToDestroy.bottomRight = {x: bigBlock.x, y: bigBlock.y - grid};
+				break;
+		};
+		destroyBigBlock(gridsToDestroy);
+	});
+},
+
+destroyBigBlock = function(gridsToDestroy){
+	levelMap.forEach(function(row, i){
+		row.forEach(function(char, j){
+			let gridChar = char;
+			if(gridChar.indexOf('(') > -1) gridChar = gridChar.substring(0, gridChar.indexOf('('));
+			gridChar = gridChar.trim();
+			if(gridChar.indexOf('k') > -1 || gridChar.indexOf('K') > -1 || gridChar.indexOf('l') > -1 || gridChar.indexOf('L') > -1){
+				const otherRowIndex = (gridChar.indexOf('K') > -1 || gridChar.indexOf('L') > -1) ? i + 1 : i - 1;
+				for(let cord in gridsToDestroy){
+					if(gridPositions[i].grids[j].x == gridsToDestroy[cord].x && gridPositions[i].y == gridsToDestroy[cord].y){
+						let newChar = '', newOtherChar = '', tempGrid = levelMap[i][j], tempOtherGrid = levelMap[otherRowIndex][j];
+						if(tempGrid.indexOf('(') > -1) tempGrid = tempGrid.substring(0, tempGrid.indexOf('('));
+						if(tempOtherGrid.indexOf('(') > -1) tempOtherGrid = tempOtherGrid.substring(0, tempOtherGrid.indexOf('('));
+						tempGrid = tempGrid.trim();
+						tempOtherGrid = tempOtherGrid.trim();
+						switch(tempGrid){
+							case 'k': newChar = 'u'; break;
+							case 'K': newChar = 'U'; break;
+							case 'l': newChar = 'i'; break;
+							case 'L': newChar = 'I'; break;
+						};
+						switch(tempOtherGrid){
+							case 'k': newOtherChar = 'u'; break;
+							case 'K': newOtherChar = 'U'; break;
+							case 'l': newOtherChar = 'i'; break;
+							case 'L': newOtherChar = 'I'; break;
+						};
+						levelMap[i][j] = newChar;
+						gridPositions[i].grids[j].char = newChar;
+						levelMap[otherRowIndex][j] = newOtherChar;
+						gridPositions[otherRowIndex].grids[j].char = newOtherChar;
+					}
+				};
+			}
+		});
+	});
+	explodeEntity({x: gridsToDestroy.topLeft.x, y: gridsToDestroy.topLeft.y, width: grid * 2, height: grid * 2});
+	score += 200;
+};
+let pointers = [];
+
+const pointerImg = new Image();
+pointerImg.src = 'img/pointer.png';
+
+const spawnPointer = function(block){
+	const pointerDirection = (Math.random() >= 0.5) ? 'left' : 'right';
+	pointers.push({x: block.x + (grid / 4), y: block.y + (grid / 4), direction: pointerDirection, initial: block.x, count: 0});
+},
+
+pointerLoop = function(){
+	const draw = function(){
+		const animatePointers = function(){
+			pointers.forEach(function(pointerObj, i){
+				pointerObj.width = grid / 2;
+
+				const increase = 90 / 180 * Math.PI / (grid * 1.5),
+					offsetNum = pointerObj.initial >= gameWidth / 2 ? 0.25 : -0.25;
+				pointers[i].x = (pointerObj.x - Math.sin(pointerObj.count) * (grid * offsetNum));
+				pointers[i].count += increase;
+
+				context.drawImage(pointerImg, pointerObj.x, pointerObj.y);
+				pointers[i].y += levelSpeed;
+				if(pointerObj.y >= gameHeight) pointers.splice(i, 1);
+				checkPointerCollision(pointerObj, i);
+			});
+		},
+		checkPointerCollision = function(pointerObj, i){
+			const pointerEl = {x: pointerObj.x, y: pointerObj.y, width: grid, height: grid}, playerEl = {x: playerX, y: playerY, width: grid, height: grid};
+			checkCollision(pointerEl, playerEl, function(pointerEl, playerEl){
+				pointers.splice(i, 1);
+				score += 150;
+			});
+		};
+		animatePointers();
+	};
+	if(pointers.length) draw();
+};
+
 const enemySmallOneImg = new Image(), enemySmallTwoImg = new Image(), enemySmallFourImg = new Image(), enemySmallFiveImg = new Image(), enemyMediumOneImg = new Image();
 enemySmallOneImg.src = 'img/enemysmallone.png';
 enemySmallTwoImg.src = 'img/enemysmalltwo.png';
@@ -473,10 +1129,10 @@ enemySmallThreeAnimation = function(enemy){
 	if(!enemy.x) enemy.x = enemy.initial;
 	if(enemy.x <= playerX - 2 && enemy.y <= playerY + playerHeight && enemy.y <= grid * 2){
 		enemy.y += 1;
-		enemy.x += 3.5;
+		enemy.x += 2.5;
 	} else if(enemy.x >= playerX + 2 && enemy.y <= playerY + playerHeight && enemy.y <= grid * 2){
 		enemy.y += 1;
-		enemy.x -= 3.5;
+		enemy.x -= 2.5;
 	} else if(enemy.y <= gameHeight - (grid * 10)) enemy.y += 1;
 	else if(enemy.y > gameHeight - (grid * 10) && enemy.y <= gameHeight - (grid * 9)) enemy.y += 1.5;
 	else if(enemy.y > gameHeight - (grid * 9) && enemy.y <= gameHeight - (grid * 8)) enemy.y += 2;
@@ -544,7 +1200,6 @@ bossOneAAnimation = function(enemy, key){
 bossOneBAnimation = function(enemy){
 	if(!bossOneBActive) bossOneBActive = true;
 	enemy = bossOneAnimation(enemy);
-	// if(enemy.x <= e)
 	if(gameClock % bossOneInterval == (bossOneInterval / 2)) spawnBossOneBShot(enemy);
 	return enemy;
 };
@@ -629,8 +1284,8 @@ waveMediumOne = function(){
 		height: grid * 2,
 		width: grid * 2,
 		enemies: [
-			{x: grid * 3, y: grid * -1, hits: 10},
-			{x: gameWidth - (grid * 5), y: grid * -10, hits: 10}
+			{x: grid * 3, y: grid * -1, hits: 15},
+			{x: gameWidth - (grid * 5), y: grid * -10, hits: 15}
 		]
 	};
 },
@@ -687,7 +1342,7 @@ const waves = {
 
 enemiesLoop = function(){
 	for(waveTime in waves){
-		if(gameClock >= parseInt(waveTime)) waveLoop(waveTime);
+		if(gameClock >= parseInt(waveTime) + 150) waveLoop(waveTime);
 	};
 },
 
@@ -737,110 +1392,6 @@ waveLoop = function(waveTime){
 		if(waves[waveTime]) draw(enemy, i);
 	});
 };
-
-
-
-
-
-
-
-
-// var enemiesLoop = function(){
-
-// 	var draw = function(){
-
-// 		var drawEnemy = function(opts){
-// 			opts.arr.forEach(function(enemyObj, i){
-// 				if(enemyObj.y + opts.height < 0 && (enemyObj.direction && (enemyObj.direction != 'up') || !enemyObj.direction)) enemyObj.y += levelSpeed;
-// 				if(enemyObj.y + opts.height >= 0){
-// 				enemyObj = opts.animation(enemyObj, opts.width, opts.height, i, opts.arr);
-// 					context.drawImage(opts.img, enemyObj.x, enemyObj.y);
-// 					var enemyCollisionEl = {x: enemyObj.x, y: enemyObj.y, width: opts.width, height: opts.height};
-// 					checkBulletCollision(enemyCollisionEl, function(){
-// 						explodeEntity(enemyCollisionEl);
-// 						if(opts.hits && !opts.arr['hits']){
-// 							opts.arr['hits'] = opts.hits;
-// 						} else if(opts.arr['hits']) {
-// 							opts.arr.hits -= 1;
-// 							if(opts.arr.hits == 0){
-// 								opts.arr.splice(i, 1);
-// 								score += opts.score;
-// 								if(opts.bossType){
-// 									switch(opts.bossType){
-// 										case 'bossOneA': bossOneAActive = false; break;
-// 										case 'bossOneB': bossOneBActive = false; break;
-// 									}
-// 								}
-// 							}
-// 						} else {
-// 							opts.arr.splice(i, 1);
-// 							score += opts.score;
-// 						}
-// 					});
-// 					if(canGetHit){
-// 						checkCollision({x: playerX, y: playerY, width: playerWidth, height: playerHeight}, enemyCollisionEl, function(){
-// 							opts.onlyDestroysPlayer ? getHit(opts.arr, i, true) : getHit(opts.arr, i);
-// 						});
-// 					}
-// 					if(enemyObj.y + opts.height < 0 && enemyObj.direction){
-// 						if(enemyObj.direction == 'up') opts.arr.splice(i, 1);
-// 					}
-// 					if((enemyObj.y + opts.height >= gameHeight + (opts.height * 2))) opts.arr.splice(i, 1);
-// 				}
-// 			});
-// 		};
-
-// 		if(!bossOneAActive && !bossOneBActive){
-// 			if(enemies.small.one.length) drawEnemySmallOne(drawEnemy);
-// 			if(enemies.small.two.length) drawEnemySmallTwo(drawEnemy);
-// 			if(enemies.small.three.length) drawEnemySmallThree(drawEnemy);
-// 			if(enemies.small.four.length) drawEnemySmallFour(drawEnemy);
-// 			if(enemies.medium.one.length) drawEnemyMediumOne(drawEnemy);
-// 		}
-
-// 		if(bosses.oneA.length) drawBossOneA(drawEnemy);
-// 		if(bosses.oneB.length) drawBossOneB(drawEnemy);
-
-// 	};
-
-// 	draw();
-
-// };
-
-// // draw farm
-// var drawEnemySmallOne = function(callback){
-// 	var opts = {
-// 		arr: enemies.small.one,
-// 		img: enemySmallOneImg,
-// 		width: grid,
-// 		height: grid,
-// 		animation: enemyAnimations.smallOne,
-// 		score: 300
-// 	};
-// 	callback(opts);
-// }, drawEnemySmallFour = function(callback){
-// 	var opts = {
-// 		arr: enemies.small.four,
-// 		img: enemySmallFourImg,
-// 		width: grid,
-// 		height: grid,
-// 		animation: enemyAnimations.smallFour,
-// 		score: 200
-// 	};
-// 	callback(opts);
-// },;
-
-
-// // animations
-
-// var enemyAnimations = {
-// smallFour: function(enemyObj, enemyWidth, enemyHeight, i, enemyArr){
-// 		if(enemyObj.y + enemyHeight >= 0){
-// 			enemyObj.y += levelSpeed * 3;
-// 		}
-// 		return enemyObj;
-// 	}
-// };
 const playerSpeed = 4, playerWidth = grid, playerHeight = grid * 1.5;
 let movingUp = false, movingDown = false, movingLeft = false, movingRight = false, shot = false, player, playerIsHidden = false, playerX = (gameWidth / 2) - (playerWidth / 2), playerY = gameHeight - (playerHeight + grid);
 
@@ -1534,7 +2085,7 @@ hudLoop = function(){
 	},
 
 	drawFullscreenMessageGameOver = function(message){
-		if(gameClock == 4100) mainWindow.reload();
+		if(gameClock == 12000) mainWindow.reload();
 		const baseYPos = (gameHeight / 2) - (grid / 4);
 		const firstString = message, secondString = 'your score ' + score,
 			thirdString = (score == highScore) ? 'new high score ' + score : '';

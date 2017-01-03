@@ -1,6 +1,7 @@
 let gameLoopInterval, isGameOver = false, gameClock = 0;
 
 const initGame = function(){
+	setupLevel();
 	setupPlayer();
 	setupHighScore();
 	loop = gameLoop();
@@ -9,6 +10,8 @@ const initGame = function(){
 gameLoop = function(){
 	return function(){
 		clearGame();
+		levelLoop();
+		pointerLoop();
 		enemyShootingLoop();
 		enemiesLoop();
 		shootingLoop();

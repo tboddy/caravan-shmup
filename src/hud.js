@@ -88,7 +88,7 @@ hudLoop = function(){
 	},
 
 	drawFullscreenMessageGameOver = function(message){
-		if(gameClock == 4100) mainWindow.reload();
+		if(gameClock == 12000) mainWindow.reload();
 		const baseYPos = (gameHeight / 2) - (grid / 4);
 		const firstString = message, secondString = 'your score ' + score,
 			thirdString = (score == highScore) ? 'new high score ' + score : '';

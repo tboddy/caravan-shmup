@@ -33,10 +33,10 @@ enemySmallThreeAnimation = function(enemy){
 	if(!enemy.x) enemy.x = enemy.initial;
 	if(enemy.x <= playerX - 2 && enemy.y <= playerY + playerHeight && enemy.y <= grid * 2){
 		enemy.y += 1;
-		enemy.x += 3.5;
+		enemy.x += 2.5;
 	} else if(enemy.x >= playerX + 2 && enemy.y <= playerY + playerHeight && enemy.y <= grid * 2){
 		enemy.y += 1;
-		enemy.x -= 3.5;
+		enemy.x -= 2.5;
 	} else if(enemy.y <= gameHeight - (grid * 10)) enemy.y += 1;
 	else if(enemy.y > gameHeight - (grid * 10) && enemy.y <= gameHeight - (grid * 9)) enemy.y += 1.5;
 	else if(enemy.y > gameHeight - (grid * 9) && enemy.y <= gameHeight - (grid * 8)) enemy.y += 2;
@@ -104,7 +104,6 @@ bossOneAAnimation = function(enemy, key){
 bossOneBAnimation = function(enemy){
 	if(!bossOneBActive) bossOneBActive = true;
 	enemy = bossOneAnimation(enemy);
-	// if(enemy.x <= e)
 	if(gameClock % bossOneInterval == (bossOneInterval / 2)) spawnBossOneBShot(enemy);
 	return enemy;
 };
@@ -189,8 +188,8 @@ waveMediumOne = function(){
 		height: grid * 2,
 		width: grid * 2,
 		enemies: [
-			{x: grid * 3, y: grid * -1, hits: 10},
-			{x: gameWidth - (grid * 5), y: grid * -10, hits: 10}
+			{x: grid * 3, y: grid * -1, hits: 15},
+			{x: gameWidth - (grid * 5), y: grid * -10, hits: 15}
 		]
 	};
 },
@@ -247,7 +246,7 @@ const waves = {
 
 enemiesLoop = function(){
 	for(waveTime in waves){
-		if(gameClock >= parseInt(waveTime)) waveLoop(waveTime);
+		if(gameClock >= parseInt(waveTime) + 150) waveLoop(waveTime);
 	};
 },
 
@@ -297,107 +296,3 @@ waveLoop = function(waveTime){
 		if(waves[waveTime]) draw(enemy, i);
 	});
 };
-
-
-
-
-
-
-
-
-// var enemiesLoop = function(){
-
-// 	var draw = function(){
-
-// 		var drawEnemy = function(opts){
-// 			opts.arr.forEach(function(enemyObj, i){
-// 				if(enemyObj.y + opts.height < 0 && (enemyObj.direction && (enemyObj.direction != 'up') || !enemyObj.direction)) enemyObj.y += levelSpeed;
-// 				if(enemyObj.y + opts.height >= 0){
-// 				enemyObj = opts.animation(enemyObj, opts.width, opts.height, i, opts.arr);
-// 					context.drawImage(opts.img, enemyObj.x, enemyObj.y);
-// 					var enemyCollisionEl = {x: enemyObj.x, y: enemyObj.y, width: opts.width, height: opts.height};
-// 					checkBulletCollision(enemyCollisionEl, function(){
-// 						explodeEntity(enemyCollisionEl);
-// 						if(opts.hits && !opts.arr['hits']){
-// 							opts.arr['hits'] = opts.hits;
-// 						} else if(opts.arr['hits']) {
-// 							opts.arr.hits -= 1;
-// 							if(opts.arr.hits == 0){
-// 								opts.arr.splice(i, 1);
-// 								score += opts.score;
-// 								if(opts.bossType){
-// 									switch(opts.bossType){
-// 										case 'bossOneA': bossOneAActive = false; break;
-// 										case 'bossOneB': bossOneBActive = false; break;
-// 									}
-// 								}
-// 							}
-// 						} else {
-// 							opts.arr.splice(i, 1);
-// 							score += opts.score;
-// 						}
-// 					});
-// 					if(canGetHit){
-// 						checkCollision({x: playerX, y: playerY, width: playerWidth, height: playerHeight}, enemyCollisionEl, function(){
-// 							opts.onlyDestroysPlayer ? getHit(opts.arr, i, true) : getHit(opts.arr, i);
-// 						});
-// 					}
-// 					if(enemyObj.y + opts.height < 0 && enemyObj.direction){
-// 						if(enemyObj.direction == 'up') opts.arr.splice(i, 1);
-// 					}
-// 					if((enemyObj.y + opts.height >= gameHeight + (opts.height * 2))) opts.arr.splice(i, 1);
-// 				}
-// 			});
-// 		};
-
-// 		if(!bossOneAActive && !bossOneBActive){
-// 			if(enemies.small.one.length) drawEnemySmallOne(drawEnemy);
-// 			if(enemies.small.two.length) drawEnemySmallTwo(drawEnemy);
-// 			if(enemies.small.three.length) drawEnemySmallThree(drawEnemy);
-// 			if(enemies.small.four.length) drawEnemySmallFour(drawEnemy);
-// 			if(enemies.medium.one.length) drawEnemyMediumOne(drawEnemy);
-// 		}
-
-// 		if(bosses.oneA.length) drawBossOneA(drawEnemy);
-// 		if(bosses.oneB.length) drawBossOneB(drawEnemy);
-
-// 	};
-
-// 	draw();
-
-// };
-
-// // draw farm
-// var drawEnemySmallOne = function(callback){
-// 	var opts = {
-// 		arr: enemies.small.one,
-// 		img: enemySmallOneImg,
-// 		width: grid,
-// 		height: grid,
-// 		animation: enemyAnimations.smallOne,
-// 		score: 300
-// 	};
-// 	callback(opts);
-// }, drawEnemySmallFour = function(callback){
-// 	var opts = {
-// 		arr: enemies.small.four,
-// 		img: enemySmallFourImg,
-// 		width: grid,
-// 		height: grid,
-// 		animation: enemyAnimations.smallFour,
-// 		score: 200
-// 	};
-// 	callback(opts);
-// },;
-
-
-// // animations
-
-// var enemyAnimations = {
-// smallFour: function(enemyObj, enemyWidth, enemyHeight, i, enemyArr){
-// 		if(enemyObj.y + enemyHeight >= 0){
-// 			enemyObj.y += levelSpeed * 3;
-// 		}
-// 		return enemyObj;
-// 	}
-// };
