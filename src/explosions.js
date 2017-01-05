@@ -1,7 +1,7 @@
 let explosions = [];
 
-const explodeEntity = function(entityObj){
-	entityObj.time = gameClock;
+const explodeEntity = function(entityObj, passClock){
+	entityObj.time = passClock ? passClock : gameClock;
 	explosions.push(entityObj);
 };
 

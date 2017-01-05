@@ -28,7 +28,7 @@ destroyBlock = function(block){
 				if(block.char == 'G' || block.char == 'R') spawnPointer(block);
 				block.width = grid;
 				block.height = grid;
-				explodeEntity(block);
+				explodeEntity(block, gameClock);
 				levelMap[i][j] = 't';
 				gridPositions[i].grids[j].char = 't';
 				score += 10;

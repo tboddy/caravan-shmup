@@ -5,7 +5,7 @@ const start = function(){
 	], optionsMenu = [
 		{label: 'toggle fullscreen', action: 'toggleFullscreen', active: true, index: 0},
 		{label: 'back', action: 'cancelOptions', active: false, index: 1},
-	], currentMenuItem = {}, optionsShowing = false;
+	], currentMenuItem = {}, optionsShowing = false, canPick = true, pickTime = 0;
 
 	const startLogoImg = new Image(), creditString = '2016 decontrol';
 	startLogoImg.src = 'img/logo.png';
@@ -38,8 +38,35 @@ const start = function(){
 			if(!gamepad) setupGamepad()
 			clearGame();
 			draw();
+			updateStartGamepad();
 			window.requestAnimationFrame(loop);
 		};
+	},
+
+	updateStartGamepad = function(){
+		if(!gamepad) setupGamepad()
+		if(navigator.getGamepads()[0] && canPick){
+
+			if(gamepad.axes[9]){
+				const hatSwitch = gamepad.axes[9].toFixed(1);
+				if(hatSwitch == '-1.0') moveUpMenu();
+				else if(hatSwitch == '0.1') moveDownMenu();
+			} else {
+				if(gamepad.axes[1] < analogThresh * -1) moveUpMenu();
+				else if(gamepad.axes[1] > analogThresh) moveDownMenu();
+			}
+			if(gamepad.buttons[9].pressed || gamepad.buttons[0].pressed || gamepad.buttons[1].pressed || gamepad.buttons[3].pressed || gamepad.buttons[2].pressed) selectMenuItem();
+		} else if(!canPick){
+			doPickTime();
+		}
+	},
+
+	doPickTime = function(){
+		pickTime++;
+		if(pickTime >= fps * 0.5){
+			pickTime = 0;
+			canPick = true;
+		}
 	},
 
 	textCenter = function(string){
@@ -52,6 +79,7 @@ const start = function(){
 	},
 
 	moveUpMenu = function(){
+		canPick = false;
 		getCurrentMenuItem();
 		const menuArr = optionsShowing ? optionsMenu : menu;
 		if(menuArr[currentMenuItem.index - 1]){
@@ -61,6 +89,7 @@ const start = function(){
 	},
 
 	moveDownMenu = function(){
+		canPick = false;
 		getCurrentMenuItem();
 		const menuArr = optionsShowing ? optionsMenu : menu;
 		if(menuArr[currentMenuItem.index + 1]){
@@ -70,6 +99,7 @@ const start = function(){
 	},
 
 	selectMenuItem = function(){
+		canPick = false;
 		getCurrentMenuItem();
 		eval(currentMenuItem.action + '()');
 	},

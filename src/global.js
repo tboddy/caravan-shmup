@@ -1,5 +1,5 @@
 const fps = 60, canvas = document.getElementById('canvas'), canvasEl = $('canvas'), grid = 16, gameHeight = 240, gameWidth = 256, browserWindow = require('electron').remote, storage = require('electron-json-storage'),
-charImg = new Image();
+charImg = new Image(), analogThresh = 0.15;
 const context = canvas.getContext('2d'), mainWindow = browserWindow.getCurrentWindow();
 let gamepad = false, savedData = {}, startedGame = false, isFullscreen = false, loop, canGetHit = true;
 charImg.src = 'img/font.png';

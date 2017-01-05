@@ -1,5 +1,5 @@
 const fps = 60, canvas = document.getElementById('canvas'), canvasEl = $('canvas'), grid = 16, gameHeight = 240, gameWidth = 256, browserWindow = require('electron').remote, storage = require('electron-json-storage'),
-charImg = new Image();
+charImg = new Image(), analogThresh = 0.15;
 const context = canvas.getContext('2d'), mainWindow = browserWindow.getCurrentWindow();
 let gamepad = false, savedData = {}, startedGame = false, isFullscreen = false, loop, canGetHit = true;
 charImg.src = 'img/font.png';
@@ -366,7 +366,7 @@ const start = function(){
 	], optionsMenu = [
 		{label: 'toggle fullscreen', action: 'toggleFullscreen', active: true, index: 0},
 		{label: 'back', action: 'cancelOptions', active: false, index: 1},
-	], currentMenuItem = {}, optionsShowing = false;
+	], currentMenuItem = {}, optionsShowing = false, canPick = true, pickTime = 0;
 
 	const startLogoImg = new Image(), creditString = '2016 decontrol';
 	startLogoImg.src = 'img/logo.png';
@@ -399,8 +399,35 @@ const start = function(){
 			if(!gamepad) setupGamepad()
 			clearGame();
 			draw();
+			updateStartGamepad();
 			window.requestAnimationFrame(loop);
 		};
+	},
+
+	updateStartGamepad = function(){
+		if(!gamepad) setupGamepad()
+		if(navigator.getGamepads()[0] && canPick){
+
+			if(gamepad.axes[9]){
+				const hatSwitch = gamepad.axes[9].toFixed(1);
+				if(hatSwitch == '-1.0') moveUpMenu();
+				else if(hatSwitch == '0.1') moveDownMenu();
+			} else {
+				if(gamepad.axes[1] < analogThresh * -1) moveUpMenu();
+				else if(gamepad.axes[1] > analogThresh) moveDownMenu();
+			}
+			if(gamepad.buttons[9].pressed || gamepad.buttons[0].pressed || gamepad.buttons[1].pressed || gamepad.buttons[3].pressed || gamepad.buttons[2].pressed) selectMenuItem();
+		} else if(!canPick){
+			doPickTime();
+		}
+	},
+
+	doPickTime = function(){
+		pickTime++;
+		if(pickTime >= fps * 0.5){
+			pickTime = 0;
+			canPick = true;
+		}
 	},
 
 	textCenter = function(string){
@@ -413,6 +440,7 @@ const start = function(){
 	},
 
 	moveUpMenu = function(){
+		canPick = false;
 		getCurrentMenuItem();
 		const menuArr = optionsShowing ? optionsMenu : menu;
 		if(menuArr[currentMenuItem.index - 1]){
@@ -422,6 +450,7 @@ const start = function(){
 	},
 
 	moveDownMenu = function(){
+		canPick = false;
 		getCurrentMenuItem();
 		const menuArr = optionsShowing ? optionsMenu : menu;
 		if(menuArr[currentMenuItem.index + 1]){
@@ -431,6 +460,7 @@ const start = function(){
 	},
 
 	selectMenuItem = function(){
+		canPick = false;
 		getCurrentMenuItem();
 		eval(currentMenuItem.action + '()');
 	},
@@ -963,7 +993,7 @@ destroyBlock = function(block){
 				if(block.char == 'G' || block.char == 'R') spawnPointer(block);
 				block.width = grid;
 				block.height = grid;
-				explodeEntity(block);
+				explodeEntity(block, gameClock);
 				levelMap[i][j] = 't';
 				gridPositions[i].grids[j].char = 't';
 				score += 10;
@@ -2027,8 +2057,8 @@ checkBulletCollision = function(el, callback){
 };
 let explosions = [];
 
-const explodeEntity = function(entityObj){
-	entityObj.time = gameClock;
+const explodeEntity = function(entityObj, passClock){
+	entityObj.time = passClock ? passClock : gameClock;
 	explosions.push(entityObj);
 };
 
