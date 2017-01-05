@@ -9,15 +9,15 @@ module.exports = function(grunt) {
 					'src/game.js',
 					'src/level.js',
 					'src/blocks.js',
+					'src/secrets.js',
 					'src/pointer.js',
 					'src/enemies.js',
+					'src/powerup.js',
 					'src/player.js',
 					'src/enemyshooting.js',
 					'src/playershooting.js',
 					'src/explosions.js',
 					'src/hud.js'
-					// 'src/powerup.js',
-					// 'src/secrets.js',
 				],
 				dest: 'game.js'
 			}

@@ -55,7 +55,7 @@ enemyShootingLoop = function(){
 animateMediumOneShot = function(){
 	enemyShots.medium.one.forEach(function(shotObj, i){
 		context.drawImage(missileOneImg, shotObj.x, shotObj.y);
-		enemyShots.medium.one[i].y += 4;
+		enemyShots.medium.one[i].y += 3;
 		if(enemyShots.medium.one[i].y >= gameHeight) enemyShots.medium.one.splice(i, 1);
 		if(canGetHit) checkEnemyShotCollision(shotObj, i, enemyShots.medium.one);
 		checkEnemyPopcorn(shotObj, i, enemyShots.medium.one);

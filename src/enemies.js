@@ -32,28 +32,28 @@ enemySmallTwoAnimation = function(enemy){
 enemySmallThreeAnimation = function(enemy){
 	if(!enemy.x) enemy.x = enemy.initial;
 	if(enemy.x <= playerX - 2 && enemy.y <= playerY + playerHeight && enemy.y <= grid * 2){
-		enemy.y += 1;
+		enemy.y += 2;
 		enemy.x += 2.5;
 	} else if(enemy.x >= playerX + 2 && enemy.y <= playerY + playerHeight && enemy.y <= grid * 2){
-		enemy.y += 1;
+		enemy.y += 2;
 		enemy.x -= 2.5;
-	} else if(enemy.y <= gameHeight - (grid * 10)) enemy.y += 1;
-	else if(enemy.y > gameHeight - (grid * 10) && enemy.y <= gameHeight - (grid * 9)) enemy.y += 1.5;
-	else if(enemy.y > gameHeight - (grid * 9) && enemy.y <= gameHeight - (grid * 8)) enemy.y += 2;
-	else if(enemy.y > gameHeight - (grid * 8) && enemy.y <= gameHeight - (grid * 7)) enemy.y += 2.5;
-	else if(enemy.y > gameHeight - (grid * 7) && enemy.y <= gameHeight - (grid * 6)) enemy.y += 3;
-	else if(enemy.y > gameHeight - (grid * 6) && enemy.y <= gameHeight - (grid * 5)) enemy.y += 3.5;
-	else if(enemy.y > gameHeight - (grid * 5) && enemy.y <= gameHeight - (grid * 4)) enemy.y += 4;
-	else if(enemy.y > gameHeight - (grid * 4) && enemy.y <= gameHeight - (grid * 3)) enemy.y += 4.5;
-	else if(enemy.y > gameHeight - (grid * 3) && enemy.y <= gameHeight - (grid * 2)) enemy.y += 5;
-	else if(enemy.y > gameHeight - (grid * 2) && enemy.y <= gameHeight - grid) enemy.y += 5.5;
-	else enemy.y += 6;
+	} else if(enemy.y <= gameHeight - (grid * 10)) enemy.y += 2;
+	else if(enemy.y > gameHeight - (grid * 10) && enemy.y <= gameHeight - (grid * 9)) enemy.y += 2.5;
+	else if(enemy.y > gameHeight - (grid * 9) && enemy.y <= gameHeight - (grid * 8)) enemy.y += 3;
+	else if(enemy.y > gameHeight - (grid * 8) && enemy.y <= gameHeight - (grid * 7)) enemy.y += 3.5;
+	else if(enemy.y > gameHeight - (grid * 7) && enemy.y <= gameHeight - (grid * 6)) enemy.y += 4;
+	else if(enemy.y > gameHeight - (grid * 6) && enemy.y <= gameHeight - (grid * 5)) enemy.y += 4.5;
+	else if(enemy.y > gameHeight - (grid * 5) && enemy.y <= gameHeight - (grid * 4)) enemy.y += 5;
+	else if(enemy.y > gameHeight - (grid * 4) && enemy.y <= gameHeight - (grid * 3)) enemy.y += 5.5;
+	else if(enemy.y > gameHeight - (grid * 3) && enemy.y <= gameHeight - (grid * 2)) enemy.y += 6;
+	else if(enemy.y > gameHeight - (grid * 2) && enemy.y <= gameHeight - grid) enemy.y += 6.5;
+	else enemy.y += 7;
 	return enemy;
 },
 
 enemySmallFourAnimation = function(enemy){
 	if(!enemy.x) enemy.x = enemy.initial;
-	enemy.y += 1.5;
+	enemy.y += 1.8;
 	return enemy;
 },
 
@@ -61,7 +61,7 @@ enemyMediumOneAnimation = function(enemy){
 	if((enemy.y + enemy.height) >= (gameHeight / 4) * 3) enemy.direction = 'up';
 	if(enemy.direction == 'up'){
 		enemy.y -= 1;
-		if(gameClock % 8 == 0 && enemy.y + enemy.height >= 0) spawnMediumOneShot(enemy);
+		if(gameClock % 12 == 0 && enemy.y + enemy.height >= 0) spawnMediumOneShot(enemy);
 	}
 	else enemy.y += 1.5;
 	return enemy;

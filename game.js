@@ -134,8 +134,8 @@ var levelMap = [
 	[' ', ' ', ' ', ' ', 'X', 'r', 'r', 'g', 'g', 'r', 'r', 'n', ' ', ' ', ' ', ' '],
 	[' ', ' ', ' ', ' ', 'Z', 'M', 'M', 'g', 'g', 'M', 'M', 'z', ' ', ' ', ' ', ' '],
 	[' ', ' ', 'V', 'K', 'L', 'r', 'r', 'g', 'g', 'r', 'r', 'K', 'L', 'm', ' ', ' '],
-	['M', 'M', 'M', 'k', 'l', 'B', 'B', 'B', 'B', 'B', 'B', 'k', 'l', 'M', 'M', 'M'],
-	['g', 'g', 'g', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'g', 'g', 'g'],
+	['M', 'M', 'M', 'k', 'l', 'B', 'B', 'B', 'B', 'B', 'B', 'k' ,'l', 'M', 'M', 'M'],
+	['g', 'g', 'g', 'B(-)','B','B','B', 'B', 'B', 'B', 'B', 'B(-)','B','g','g', 'g'],
 	['r', 'g', 'r', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'r', 'g', 'r'],
 	['r', 'g', 'r', 'B', 'B', 'B', 'B', 'r', 'r', 'B', 'B', 'B', 'B', 'r', 'g', 'r'],
 	['r', 'g', 'r', 'B', 'B', 'B', 'B', 'K', 'L', 'B', 'B', 'B', 'B', 'r', 'g', 'r'],
@@ -185,7 +185,7 @@ var levelMap = [
 	['g', 'r', 'g', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'm', ' ', ' '],
 	['r', 'G', 'r', 'B', 'B', 'B', 'B', 'B', 'B', 'g', 'r', 'g', 'B', 'n', ' ', ' '],
 	['g', 'r', 'g', 'B', 'B', 'g', 'g', 'B', 'B', 'r', 'G', 'r', 'B', 'n', ' ', ' '],
-	['B', 'B', 'B', 'B', 'r', 'r', 'r', 'r', 'B', 'g', 'r', 'g', 'B', 'z', ' ', ' '],
+	['B', 'B(-)', 'B', 'B', 'r', 'r', 'r', 'r', 'B', 'g', 'r', 'g', 'B','z',' ',' '],
 	['B', 'B', 'B', 'B', 'B', 'g', 'g', 'B', 'B', 'B', 'B', 'B', 'B', 'n', ' ', ' '],
 	['B', 'B', 'B', 'K', 'L', 'K', 'L', 'K', 'L', 'B', 'B', 'B', 'B', 'W', 'w', 'w'],
 	['B', 'B', 'B', 'k', 'l', 'k', 'l', 'k', 'l', 'B', 'B', 'B', 'B', 'n', ' ', ' '],
@@ -229,7 +229,7 @@ var levelMap = [
 	['w', 'w', 'e', 'k', 'l', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'M', 'g', 'M', 'B'],
 	[' ', ' ', 'v', 'b', 'A', 'K', 'L', 'B', 'B', 'B', 'B', 'B', 'g', 'R', 'g', 'B'],
 	[' ', ' ', ' ', ' ', 'X', 'k', 'l', 'B', 'B', 'B', 'B', 'B', 'M', 'g', 'M', 'B'],
-	[' ', ' ', ' ', ' ', 'v', 'b', 'b', 'b', 'b', 'A', 'B', 'B', 'B', 'B', 'B', 'B'],
+	[' ', ' ', ' ', ' ', 'v', 'b', 'b', 'b', 'b', 'A', 'B(-)', 'B', 'B','B','B','B'],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'Z', 'B', 'B', 'B', 'B', 'B', 'B'],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'v', 'b', 'b', 'b', 'b', 'b', 'b'],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
@@ -261,7 +261,7 @@ var levelMap = [
 	['B', 'r', 'g', 'B', 'B', 'M', 'r', 'z', ' ', ' ', 'Z', 'B', 'g', 'g', 'n', ' '],
 	['b', 'b', 'b', 'A', 'r', 'g', 'r', 'n', ' ', ' ', 'X', 'B','B ', 'B', 'n', ' '],
 	[' ', ' ', ' ', 'X', 'r', 'g', 'r', 'W', 'w', 'w', 'e', 'r', 'R', 'r', 'z', ' '],
-	[' ', ' ', ' ', 'Z', 'B', 'B', 'B', 'n', ' ', ' ', 'X', 'B', 'r', 'B', 'n', ' '],
+	[' ', ' ', ' ', 'Z', 'B', 'B(-)', 'B', 'n', ' ', ' ', 'X', 'B', 'r','B','n',' '],
 	[' ', ' ', ' ', 'Z', 'B', 'B', 'B', 'n', ' ', ' ', 'X', 'K', 'L', 'r', 'n', ' '],
 	[' ', ' ', ' ', 'v', 'b', 'b', 'b', 'N', ' ', ' ', 'X', 'k', 'l', 'r', 'W', 'w'],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'B', 'M', 'B', 'W', 'w'],
@@ -289,7 +289,7 @@ var levelMap = [
 	['g', 'r', 'g', 'r', 'W', 'w', 'e', 'M', 'g', 'r', 'g', 'M', 'g', 'r', 'g', 'M'],
 	['g', 'r', 'G', 'r', 'W', 'w', 'e', 'B', 'B', 'B', 'B', 'B', 'M', 'r', 'M', 'B'],
 	['g', 'r', 'g', 'R', 'n', ' ', 'v', 'b', 'b', 'b', 'A', 'B', 'g', 'M', 'g', 'B'],
-	['b', 'b', 'b', 'b', 'N', ' ', ' ', ' ', ' ', ' ', 'X', 'B', 'M', 'r', 'M', 'B'],
+	['b', 'b', 'b', 'b', 'N', ' ', ' ', ' ', ' ', ' ', 'X', 'B(-)', 'M','r','M','B'],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'B', 'B', 'B', 'B', 'B'],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'Z', 'g', 'g', 'M', 'r', 'r'],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'g', 'g', 'B', 'r', 'r'],
@@ -319,7 +319,7 @@ var levelMap = [
 	['r', 'r', 'r ', 'B', 'g', 'g', 'g', 'B', 'r', 'r', 'r', 'B','n', ' ', ' ', ' '],
 	['r', 'G', 'r', 'B', 'g', 'g', 'g', 'B', 'r', 'G', 'r', 'B', 'z', ' ', ' ', ' '],
 	['r', 'r', 'r', 'B', 'g', 'g', 'g', 'B', 'r', 'r', 'r', 'B', 'W', 'w', 'w', 'w'],
-	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'W', 'w', 'w', 'w'],
+	['B', 'B', 'B', 'B', 'B(-)', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'W','w','w','w'],
 	['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'n', ' ', ' ', ' '],
 	['r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'W', 'w', 'w', 'w'],
 	['M', 'g', 'M', 'g', 'M', 'g', 'M', 'B', 'M', 'B', 'M', 'B', 'n', ' ', ' ', ' '],
@@ -573,6 +573,7 @@ const initGame = function(){
 	setupLevel();
 	setupPlayer();
 	setupHighScore();
+	setupBackgroundMusic();
 	loop = gameLoop();
 },
 
@@ -580,7 +581,9 @@ gameLoop = function(){
 	return function(){
 		clearGame();
 		levelLoop();
+		secretLoop();
 		pointerLoop();
+		powerupLoop();
 		enemyShootingLoop();
 		enemiesLoop();
 		shootingLoop();
@@ -590,6 +593,11 @@ gameLoop = function(){
 		gameClock++;
 		window.requestAnimationFrame(loop);
 	};
+}, setupBackgroundMusic = function(){
+	const musicEl = '<audio autoplay style="display:none;position:absolute;top:-100px;left:-100px;">\
+		<source src="sound/bg.ogg" type="audio/ogg"></source>\
+		</audio>';
+	$('body').append(musicEl);
 };
 
 
@@ -730,33 +738,14 @@ const setupLevel = function(){
 		let gridPosition = {y: rowY, groundY: rowY, cloudY: rowY, grids: []};
 		levelRow.forEach(function(levelGrid, j){
 			gridPosition.grids.push({x: j * grid, char: levelRow[j]});
-			// if(levelGrid.indexOf('(') > -1){
-			// 	entity = levelGrid.substring(levelGrid.indexOf('(') + 1, levelGrid.indexOf('(') + 2);
-			// 	var xPos = j * grid, yPos = (i * grid) - (levelStartPos - gameHeight);
-			// 	switch(entity){
-
-			// 		// powerup
-			// 		case 'p':
-			// 			var powerupDirection = (Math.random() >= 0.5) ? 'left' : 'right';
-			// 			powerups.push({x: xPos, y: yPos, initial: xPos, direction: powerupDirection, width: grid});
-			// 			break;
-
-			// 		// enemies
-			// 		case '1': enemies.small.one.push({x: xPos, y: yPos, initial: xPos, width: grid, height: grid}); break;
-			// 		case '2': enemies.small.two.push({x: xPos, y: yPos, initial: xPos, width: grid, height: grid}); break;
-			// 		case '3': enemies.medium.one.push({x: xPos, y: yPos, width: grid * 2, height: grid * 2, hits: 2}); break;
-			// 		case '4': enemies.small.three.push({x: xPos, y: yPos, width: grid, height: grid}); break;
-			// 		case '5': enemies.small.four.push({x: xPos, y: yPos, width: grid, height: grid}); break;
-
-			// 		// bosses
-			// 		case '!': bosses.oneA.push({x: xPos, y: yPos, width: grid * 3.5, height: grid * 3.5, sYDirection: 'up', sXDirection: 'left'}); break;
-			// 		case '@': bosses.oneB.push({x: xPos, y: yPos, width: grid * 3.5, height: grid * 3.5, sYDirection: 'up', sXDirection: 'right'}); break;
-
-			// 		// secret
-			// 		case '-': secrets.push({x: xPos, y: yPos, width: grid * 2, height: grid * 2, hits: 12});
-
-			// 	};
-			// }
+			if(levelGrid.indexOf('(') > -1){
+				var xPos = j * grid, yPos = (i * grid) - (levelStartPos - gameHeight);
+				secrets.push({x: xPos, y: yPos, width: grid * 2, height: grid * 2, hits: 12});
+				// entity = levelGrid.substring(levelGrid.indexOf('(') + 1, levelGrid.indexOf('(') + 2);
+				// switch(entity){
+				// 	case '-': 
+				// };
+			}
 		});
 		gridPositions.push(gridPosition);
 	});
@@ -1055,14 +1044,44 @@ destroyBigBlock = function(gridsToDestroy){
 	explodeEntity({x: gridsToDestroy.topLeft.x, y: gridsToDestroy.topLeft.y, width: grid * 2, height: grid * 2});
 	score += 200;
 };
+let secrets = [], bonusCount = 1;
+
+const secretImg = new Image(), secretDestroyedImage = new Image();
+secretImg.src = 'img/secret.png';
+secretDestroyedImage.src = 'img/destroyedsecretblock.png';
+
+const secretLoop = function(){
+	const draw = function(){
+		secrets.forEach(function(secretObj, i){
+			secretObj.y += levelSpeed;
+			if(secretObj.y + secretObj.height >= 0){
+				secretObj.hits <= 0 ? context.drawImage(secretDestroyedImage, secretObj.x, secretObj.y) : context.drawImage(secretImg, secretObj.x, secretObj.y);
+				const secretCollisionEl = {x: secretObj.x, y: secretObj.y, width: secretObj.width, height: secretObj.height};
+				if(secretObj.hits >= 0){
+					checkBulletCollision(secretCollisionEl, function(){
+						explodeEntity(secretCollisionEl);
+						secretObj.hits -= 1;
+						if(secretObj.hits == 0){
+							score += bonusCount * 1000;
+							fullscreenMessageTime = 0;
+							currentFullscreenMessage = 'bonus: ' + (bonusCount * 1000);
+							bonusCount++;
+						}
+					});
+				}
+				if(secretObj.y >= gameHeight + grid) secrets.splice(i, 1);
+			}
+		});
+	};
+	if(secrets.length) draw();
+};
 let pointers = [];
 
 const pointerImg = new Image();
 pointerImg.src = 'img/pointer.png';
 
 const spawnPointer = function(block){
-	const pointerDirection = (Math.random() >= 0.5) ? 'left' : 'right';
-	pointers.push({x: block.x + (grid / 4), y: block.y + (grid / 4), direction: pointerDirection, initial: block.x, count: 0});
+	pointers.push({x: block.x + (grid / 4), y: block.y + (grid / 4), initial: block.x, count: 0});
 },
 
 pointerLoop = function(){
@@ -1070,12 +1089,10 @@ pointerLoop = function(){
 		const animatePointers = function(){
 			pointers.forEach(function(pointerObj, i){
 				pointerObj.width = grid / 2;
-
 				const increase = 90 / 180 * Math.PI / (grid * 1.5),
 					offsetNum = pointerObj.initial >= gameWidth / 2 ? 0.25 : -0.25;
 				pointers[i].x = (pointerObj.x - Math.sin(pointerObj.count) * (grid * offsetNum));
 				pointers[i].count += increase;
-
 				context.drawImage(pointerImg, pointerObj.x, pointerObj.y);
 				pointers[i].y += levelSpeed;
 				if(pointerObj.y >= gameHeight) pointers.splice(i, 1);
@@ -1128,28 +1145,28 @@ enemySmallTwoAnimation = function(enemy){
 enemySmallThreeAnimation = function(enemy){
 	if(!enemy.x) enemy.x = enemy.initial;
 	if(enemy.x <= playerX - 2 && enemy.y <= playerY + playerHeight && enemy.y <= grid * 2){
-		enemy.y += 1;
+		enemy.y += 2;
 		enemy.x += 2.5;
 	} else if(enemy.x >= playerX + 2 && enemy.y <= playerY + playerHeight && enemy.y <= grid * 2){
-		enemy.y += 1;
+		enemy.y += 2;
 		enemy.x -= 2.5;
-	} else if(enemy.y <= gameHeight - (grid * 10)) enemy.y += 1;
-	else if(enemy.y > gameHeight - (grid * 10) && enemy.y <= gameHeight - (grid * 9)) enemy.y += 1.5;
-	else if(enemy.y > gameHeight - (grid * 9) && enemy.y <= gameHeight - (grid * 8)) enemy.y += 2;
-	else if(enemy.y > gameHeight - (grid * 8) && enemy.y <= gameHeight - (grid * 7)) enemy.y += 2.5;
-	else if(enemy.y > gameHeight - (grid * 7) && enemy.y <= gameHeight - (grid * 6)) enemy.y += 3;
-	else if(enemy.y > gameHeight - (grid * 6) && enemy.y <= gameHeight - (grid * 5)) enemy.y += 3.5;
-	else if(enemy.y > gameHeight - (grid * 5) && enemy.y <= gameHeight - (grid * 4)) enemy.y += 4;
-	else if(enemy.y > gameHeight - (grid * 4) && enemy.y <= gameHeight - (grid * 3)) enemy.y += 4.5;
-	else if(enemy.y > gameHeight - (grid * 3) && enemy.y <= gameHeight - (grid * 2)) enemy.y += 5;
-	else if(enemy.y > gameHeight - (grid * 2) && enemy.y <= gameHeight - grid) enemy.y += 5.5;
-	else enemy.y += 6;
+	} else if(enemy.y <= gameHeight - (grid * 10)) enemy.y += 2;
+	else if(enemy.y > gameHeight - (grid * 10) && enemy.y <= gameHeight - (grid * 9)) enemy.y += 2.5;
+	else if(enemy.y > gameHeight - (grid * 9) && enemy.y <= gameHeight - (grid * 8)) enemy.y += 3;
+	else if(enemy.y > gameHeight - (grid * 8) && enemy.y <= gameHeight - (grid * 7)) enemy.y += 3.5;
+	else if(enemy.y > gameHeight - (grid * 7) && enemy.y <= gameHeight - (grid * 6)) enemy.y += 4;
+	else if(enemy.y > gameHeight - (grid * 6) && enemy.y <= gameHeight - (grid * 5)) enemy.y += 4.5;
+	else if(enemy.y > gameHeight - (grid * 5) && enemy.y <= gameHeight - (grid * 4)) enemy.y += 5;
+	else if(enemy.y > gameHeight - (grid * 4) && enemy.y <= gameHeight - (grid * 3)) enemy.y += 5.5;
+	else if(enemy.y > gameHeight - (grid * 3) && enemy.y <= gameHeight - (grid * 2)) enemy.y += 6;
+	else if(enemy.y > gameHeight - (grid * 2) && enemy.y <= gameHeight - grid) enemy.y += 6.5;
+	else enemy.y += 7;
 	return enemy;
 },
 
 enemySmallFourAnimation = function(enemy){
 	if(!enemy.x) enemy.x = enemy.initial;
-	enemy.y += 1.5;
+	enemy.y += 1.8;
 	return enemy;
 },
 
@@ -1157,7 +1174,7 @@ enemyMediumOneAnimation = function(enemy){
 	if((enemy.y + enemy.height) >= (gameHeight / 4) * 3) enemy.direction = 'up';
 	if(enemy.direction == 'up'){
 		enemy.y -= 1;
-		if(gameClock % 8 == 0 && enemy.y + enemy.height >= 0) spawnMediumOneShot(enemy);
+		if(gameClock % 12 == 0 && enemy.y + enemy.height >= 0) spawnMediumOneShot(enemy);
 	}
 	else enemy.y += 1.5;
 	return enemy;
@@ -1391,6 +1408,54 @@ waveLoop = function(waveTime){
 	waves[waveTime].enemies.forEach(function(enemy, i){
 		if(waves[waveTime]) draw(enemy, i);
 	});
+};
+const powerupWaves = [0, 500, 1500, 2500, 3000, 3750, 4500],
+powerupImg = new Image();
+powerupImg.src = 'img/powerup.png';
+
+let powerups = [], powerupBonusCount = 1;
+
+const powerupLoop = function(){
+	const draw = function(){
+		const animatePowerups = function(){
+			powerups.forEach(function(powerupObj, i){
+				powerupObj.width = grid;
+				const increase = 90 / 180 * Math.PI / (grid * 1.5),
+					offsetNum = powerupObj.initial >= gameWidth / 2 ? 0.25 : -0.25;
+				powerups[i].x = (powerupObj.x - Math.sin(powerupObj.count) * (grid * offsetNum));
+				powerups[i].count += increase;
+				context.drawImage(powerupImg, powerupObj.x, powerupObj.y);
+				powerups[i].y += levelSpeed;
+				if(powerupObj.y >= gameHeight) powerups.splice(i, 1);
+				checkPowerupCollision(powerupObj, i);
+			});
+		},
+		checkPowerupCollision = function(powerupObj, i){
+			const powerupEl = {x: powerupObj.x, y: powerupObj.y, width: grid, height: grid}, playerEl = {x: playerX, y: playerY, width: grid, height: grid};
+			checkCollision(powerupEl, playerEl, function(powerupEl, playerEl){
+				powerups.splice(i, 1);
+				currentPowerup < 4 ? currentPowerup++ : powerupBonus();
+			});
+		};
+		animatePowerups();
+	};
+	if(powerupWaves.length){
+		powerupWaves.forEach(function(waveTime){
+			if(gameClock == parseInt(waveTime)) {
+				spawnPowerup();
+			}
+		});
+	}
+	if(powerups.length) draw();
+},
+
+spawnPowerup = function(){
+	powerups.push({x: grid * 11, y: -grid, initial: gameWidth / 2, count: 0});
+}, powerupBonus = function(){
+	score += powerupBonusCount * 1000;
+	fullscreenMessageTime = 0;
+	currentFullscreenMessage = 'bonus: ' + (powerupBonusCount * 1000);
+	powerupBonusCount++;
 };
 const playerSpeed = 4, playerWidth = grid, playerHeight = grid * 1.5;
 let movingUp = false, movingDown = false, movingLeft = false, movingRight = false, shot = false, player, playerIsHidden = false, playerX = (gameWidth / 2) - (playerWidth / 2), playerY = gameHeight - (playerHeight + grid);
@@ -1651,7 +1716,7 @@ enemyShootingLoop = function(){
 animateMediumOneShot = function(){
 	enemyShots.medium.one.forEach(function(shotObj, i){
 		context.drawImage(missileOneImg, shotObj.x, shotObj.y);
-		enemyShots.medium.one[i].y += 4;
+		enemyShots.medium.one[i].y += 3;
 		if(enemyShots.medium.one[i].y >= gameHeight) enemyShots.medium.one.splice(i, 1);
 		if(canGetHit) checkEnemyShotCollision(shotObj, i, enemyShots.medium.one);
 		checkEnemyPopcorn(shotObj, i, enemyShots.medium.one);
@@ -1760,7 +1825,7 @@ var checkEnemyPopcorn = function(shotObj, i, arr){
 		score += 20;
 	});
 };
-let shots = {one: [], two: [], twoBottom: [], three: [], threeBottom: [], threeLeft: [], threeRight: [], four: [], fourTopLeft: [], fourTopRight: [], fourBottomLeft: [], fourBottomRight: []}, canShoot = true, currentPowerup = 4;
+let shots = {one: [], two: [], twoBottom: [], three: [], threeBottom: [], threeLeft: [], threeRight: [], four: [], fourTopLeft: [], fourTopRight: [], fourBottomLeft: [], fourBottomRight: []}, canShoot = true, currentPowerup = 1;
 const shotSpeed = 10, shotClock = 6, shotWidth = grid / 2, shotHeight = grid / 2,
 	bulletOneImg = new Image(), bulletTwoImg = new Image(), bulletThreeImg = new Image(), bulletThreeLeftImg = new Image(), bulletThreeRightImg = new Image();
 bulletOneImg.src = 'img/playerbullet.png';

@@ -18,7 +18,7 @@ const secretLoop = function(){
 						if(secretObj.hits == 0){
 							score += bonusCount * 1000;
 							fullscreenMessageTime = 0;
-							currentFullscreenMessage = 'bonus: ' + bonusCount * 1000;
+							currentFullscreenMessage = 'bonus: ' + (bonusCount * 1000);
 							bonusCount++;
 						}
 					});
