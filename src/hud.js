@@ -4,7 +4,7 @@ let endTime = new Date(initialTime.getTime() + (2 * 60000));
 
 const setupHighScore = function(){
 	if(savedData.highScore) highScore = savedData.highScore;
-	else storage.set('savedData', {highScore: 0});
+	else storage.set('savedData', savedData);
 },
 
 hudLoop = function(){
@@ -143,5 +143,5 @@ getHit = function(enemyArr, i, destroysOnlyPlayer){
 saveHighScore = function(){
 	scoreSaved = true;
 	savedData.highScore = highScore;
-	storage.set('savedData', {highScore: highScore});
+	storage.set('savedData', savedData);
 };

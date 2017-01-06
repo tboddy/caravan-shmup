@@ -1,9 +1,9 @@
-var electron = require('electron'), path = require('path'), url = require('url'), storage = require('electron-json-storage'), mainWindow, scale = 3, barHeight = 0;
-var app = electron.app, browserWindow = electron.BrowserWindow;
+const electron = require('electron'), path = require('path'), url = require('url'), storage = require('electron-json-storage'), scale = 3, barHeight = 0;
+let mainWindow;
+const app = electron.app, browserWindow = electron.BrowserWindow,
+  winWidth = 256, winHeight = 240 + barHeight,
 
-var winWidth = 256, winHeight = 240 + barHeight;
-
-var createWindow = function(){
+createWindow = function(){
   mainWindow = new browserWindow({
     width: winWidth * scale,
     height: winHeight * scale,
@@ -21,6 +21,7 @@ var createWindow = function(){
     mainWindow = null
   });
 }
+
 app.on('ready', createWindow);
 app.on('window-all-closed', function(){
   if(process.platform != 'darwin') app.quit();

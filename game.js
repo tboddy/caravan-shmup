@@ -363,12 +363,18 @@ const start = function(){
 	let menu = [
 		{label: 'start game', action: 'startGame', active: true, index: 0},
 		{label: 'options', action: 'showOptions', active: false, index: 1},
+		{label: 'quit', action: 'quitGame', active: false, index: 2}
 	], optionsMenu = [
 		{label: 'toggle fullscreen', action: 'toggleFullscreen', active: true, index: 0},
 		{label: 'back', action: 'cancelOptions', active: false, index: 1},
-	], currentMenuItem = {}, optionsShowing = false, canPick = true, pickTime = 0;
+	], currentMenuItem = {}, optionsShowing = false, canMoveMenu = true; canPickMenu = true;
 
-	const startLogoImg = new Image(), creditString = '2016 decontrol';
+	const startLogoImg = new Image(),
+		creditString = '2016 t.boddy',
+		creditStringTwo = 'pre alpha 0.05',
+		controlString = 'arrows or joystick:move',
+		controlStringTwo = 'z or btns 1 to 4:shoot',
+		controlStringThree = 'esc or btn 9: back to menu';
 	startLogoImg.src = 'img/logo.png';
 
 	const init = function(){
@@ -376,24 +382,32 @@ const start = function(){
 		controls();
 		loop = startLoop();
 		canvasEl.show();
+		if(savedData.fullscreen){
+			mainWindow.setFullScreen(true);
+			isFullscreen = true;
+		}
 		window.requestAnimationFrame(loop);
 	},
 
 	startLoop = function(){
 		return function(){
 			const draw = function(){
-				context.drawImage(startLogoImg, (gameWidth / 2) - 64, grid * 2.5);
+				context.drawImage(startLogoImg, (gameWidth / 2) - 64, grid * 1);
 				if(optionsShowing){
 					optionsMenu.forEach(function(item, i){
 						const isActive = item.active ? true : false;
-						drawString(item.label, textCenter(item.label), grid * (9.5 + (i * .5)), isActive);
+						drawString(item.label, textCenter(item.label), grid * (8 + (i * .5)), isActive);
 					});
 				} else {
 					menu.forEach(function(item, i){
 						const isActive = item.active ? true : false;
-						drawString(item.label, textCenter(item.label), grid * (9.5 + (i * .5)), isActive);
+						drawString(item.label, textCenter(item.label), grid * (8 + (i * .5)), isActive);
 					});
-					drawString(creditString, textCenter(creditString), grid * 11.5);
+					drawString(controlString, textCenter(controlString), grid * 10.5, true);
+					drawString(controlStringTwo, textCenter(controlStringTwo), grid * 11, true);
+					drawString(controlStringThree, textCenter(controlStringThree), grid * 11.5, true);
+					drawString(creditString, textCenter(creditString), grid * 13);
+					drawString(creditStringTwo, textCenter(creditStringTwo), grid * 13.5);
 				}
 			};
 			if(!gamepad) setupGamepad()
@@ -406,27 +420,19 @@ const start = function(){
 
 	updateStartGamepad = function(){
 		if(!gamepad) setupGamepad()
-		if(navigator.getGamepads()[0] && canPick){
-
+		if(navigator.getGamepads()[0]){
 			if(gamepad.axes[9]){
 				const hatSwitch = gamepad.axes[9].toFixed(1);
-				if(hatSwitch == '-1.0') moveUpMenu();
-				else if(hatSwitch == '0.1') moveDownMenu();
+				if(hatSwitch == '-1.0' && canMoveMenu) moveUpMenu();
+				else if(hatSwitch == '0.1' && canMoveMenu) moveDownMenu();
+				else if(hatSwitch == '3.3' && !canMoveMenu) canMoveMenu = true;
 			} else {
-				if(gamepad.axes[1] < analogThresh * -1) moveUpMenu();
-				else if(gamepad.axes[1] > analogThresh) moveDownMenu();
+				if(gamepad.axes[1] <= analogThresh * -1 && canMoveMenu) moveUpMenu();
+				else if(gamepad.axes[1] >= analogThresh && canMoveMenu) moveDownMenu();
+				// else if(!canPick) canPick = true;
 			}
-			if(gamepad.buttons[9].pressed || gamepad.buttons[0].pressed || gamepad.buttons[1].pressed || gamepad.buttons[3].pressed || gamepad.buttons[2].pressed) selectMenuItem();
-		} else if(!canPick){
-			doPickTime();
-		}
-	},
-
-	doPickTime = function(){
-		pickTime++;
-		if(pickTime >= fps * 0.5){
-			pickTime = 0;
-			canPick = true;
+			if((gamepad.buttons[9].pressed || gamepad.buttons[0].pressed || gamepad.buttons[1].pressed || gamepad.buttons[3].pressed || gamepad.buttons[2].pressed) && canPickMenu) selectMenuItem();
+			else if((!gamepad.buttons[9].pressed && !gamepad.buttons[0].pressed && !gamepad.buttons[1].pressed && !gamepad.buttons[3].pressed && !gamepad.buttons[2].pressed) && !canPickMenu) canPickMenu = true;
 		}
 	},
 
@@ -440,7 +446,7 @@ const start = function(){
 	},
 
 	moveUpMenu = function(){
-		canPick = false;
+		canMoveMenu = false;
 		getCurrentMenuItem();
 		const menuArr = optionsShowing ? optionsMenu : menu;
 		if(menuArr[currentMenuItem.index - 1]){
@@ -450,7 +456,7 @@ const start = function(){
 	},
 
 	moveDownMenu = function(){
-		canPick = false;
+		canMoveMenu = false;
 		getCurrentMenuItem();
 		const menuArr = optionsShowing ? optionsMenu : menu;
 		if(menuArr[currentMenuItem.index + 1]){
@@ -460,7 +466,7 @@ const start = function(){
 	},
 
 	selectMenuItem = function(){
-		canPick = false;
+		canPickMenu = false;
 		getCurrentMenuItem();
 		eval(currentMenuItem.action + '()');
 	},
@@ -498,6 +504,7 @@ const start = function(){
 			case 38: moveUpMenu(); break;
 			case 40: moveDownMenu(); break;
 			case 13: selectMenuItem(); break;
+			case 90: selectMenuItem(); break;
 		};
 	},
 
@@ -509,15 +516,26 @@ const start = function(){
 		const openFullscreen = function(){
 			mainWindow.setFullScreen(true);
 			isFullscreen = true;
+			savedData.fullscreen = true;
+			storage.set('savedData', savedData);
 		}, closeFullscreen = function(){
 			mainWindow.setFullScreen(false);
 			isFullscreen = false;
+			savedData.fullscreen = false;
+			storage.set('savedData', savedData);
 		};
 		isFullscreen ? closeFullscreen() : openFullscreen();
 	},
 
 	cancelOptions = function(){
 		optionsShowing = false;
+		optionsMenu.forEach(function(menuItem, i){
+			menuItem.active = i == 0 ? true : false;
+		});
+	},
+
+	quitGame = function(){
+		mainWindow.close();
 	};
 
 	storage.get('savedData', function(err, data){
@@ -526,84 +544,13 @@ const start = function(){
 	});
 	
 };
-
-
-// var drawStart = function(){
-// 	var verString = 'pre alpha 0.04',
-// 		startString = 'press start or enter',
-// 		creditString = '2016 decontrol';
-// 	context.drawImage(startLogoImg, (gameWidth / 2) - 64, grid * 2.5);
-// 	drawString(verString, textCenter(verString), grid * 9.5);
-// 	drawString(creditString, textCenter(creditString), grid * 10);
-// 	drawString(startString, textCenter(startString), grid * 11.5);
-// 	// context.drawImage(studiosLogoImg, (gameWidth / 2) - 32, grid * 12);
-// };
-
-
-
-
-
-// var startedGame = false, startLoopInterval;
-
-// var initStart = function(){
-// 	// initGame()
-// 	startLoopInterval = setInterval(startLoop, 1000 / fps);
-// 	startControls();
-// };
-
-// var setupGamepad = function(){
-// 	gamepad = navigator.getGamepads()[0];
-// };
-
-// var startControls = function(){
-
-// 	var setupKeyboard = function(){
-// 		$(document).keydown(function(e){
-// 			switch(e.which){
-// 				case 13: checkStartGame(); break;
-// 				case 220: toggleFullscreen(); break;
-// 			};
-// 		});
-// 	};
-
-// 	navigator.getGamepads()[0] ? setupGamepad() : window.addEventListener('gamepadconnected', setupGamepad);
-// 	setupKeyboard();
-// };
-
-// var startLoop = function(){
-// 	clearGame();
-// 	updateStartGamepad();
-// 	drawStart();
-// };
-
-// var updateStartGamepad = function(){
-// 	if(!gamepad) setupGamepad()
-// 	if(navigator.getGamepads()[0]) if(gamepad.buttons[9].pressed) checkStartGame();
-// };
-
-// const startLogoImg = new Image(), studiosLogoImg = new Image();
-// startLogoImg.src = 'img/logo.png';
-// studiosLogoImg.src = 'img/studioslogo.png';
-
-
-// var textCenter = function(string){
-// 	return (gameWidth / 2) - (string.length * (grid / 4));
-// };
-
-// var checkStartGame = function(){
-// 	if(!startedGame){
-// 		startedGame = true;
-// 		clearInterval(startLoopInterval);
-// 		initGame();
-// 	}
-// };
 let gameLoopInterval, isGameOver = false, gameClock = 0;
 
 const initGame = function(){
 	setupLevel();
 	setupPlayer();
 	setupHighScore();
-	setupBackgroundMusic();
+	// setupBackgroundMusic();
 	loop = gameLoop();
 },
 
@@ -623,7 +570,9 @@ gameLoop = function(){
 		gameClock++;
 		window.requestAnimationFrame(loop);
 	};
-}, setupBackgroundMusic = function(){
+},
+
+setupBackgroundMusic = function(){
 	const musicEl = '<audio autoplay style="display:none;position:absolute;top:-100px;left:-100px;">\
 		<source src="sound/bg.ogg" type="audio/ogg"></source>\
 		</audio>';
@@ -1508,6 +1457,7 @@ playerKeysDown = function(e){
 		case 37: movingLeft = true; break;
 		case 39: movingRight = true; break;
 		case 90: shot = true; break;
+		case 27: mainWindow.reload(); break;
 	};
 },
 
@@ -2096,7 +2046,7 @@ let endTime = new Date(initialTime.getTime() + (2 * 60000));
 
 const setupHighScore = function(){
 	if(savedData.highScore) highScore = savedData.highScore;
-	else storage.set('savedData', {highScore: 0});
+	else storage.set('savedData', savedData);
 },
 
 hudLoop = function(){
@@ -2235,5 +2185,5 @@ getHit = function(enemyArr, i, destroysOnlyPlayer){
 saveHighScore = function(){
 	scoreSaved = true;
 	savedData.highScore = highScore;
-	storage.set('savedData', {highScore: highScore});
+	storage.set('savedData', savedData);
 };

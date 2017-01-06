@@ -19,6 +19,7 @@ playerKeysDown = function(e){
 		case 37: movingLeft = true; break;
 		case 39: movingRight = true; break;
 		case 90: shot = true; break;
+		case 27: mainWindow.reload(); break;
 	};
 },
 

@@ -4,7 +4,7 @@ const initGame = function(){
 	setupLevel();
 	setupPlayer();
 	setupHighScore();
-	setupBackgroundMusic();
+	// setupBackgroundMusic();
 	loop = gameLoop();
 },
 
@@ -24,7 +24,9 @@ gameLoop = function(){
 		gameClock++;
 		window.requestAnimationFrame(loop);
 	};
-}, setupBackgroundMusic = function(){
+},
+
+setupBackgroundMusic = function(){
 	const musicEl = '<audio autoplay style="display:none;position:absolute;top:-100px;left:-100px;">\
 		<source src="sound/bg.ogg" type="audio/ogg"></source>\
 		</audio>';
