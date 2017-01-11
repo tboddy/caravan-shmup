@@ -680,7 +680,7 @@ const initGame = function(){
 	setupLevel();
 	setupPlayer();
 	setupHighScore();
-	// setupBackgroundMusic();
+	setupBackgroundMusic();
 	loop = gameLoop();
 },
 
@@ -1106,12 +1106,12 @@ const bossOneAImg = new Image(), bossOneBImg = new Image();
 bossOneAImg.src = 'img/bossonea.png';
 bossOneBImg.src = 'img/bossoneb.png';
 
-let bossOneAActive = false, bossOneBActive = false, currentWave;
+let currentWave;
 
 const bossOneInterval = fps * 2.5;
 
 const enemySmallOneAnimation = function(enemy){
-	enemy.y += 1.33;
+	enemy.y += 1.25;
 	const increase = 90 / 180 * Math.PI / (grid * 1.5);
 	enemy.x = enemy.initial - Math.sin(enemy.count) * (grid * 5);
 	enemy.count += increase;
@@ -1119,7 +1119,7 @@ const enemySmallOneAnimation = function(enemy){
 },
 
 enemySmallTwoAnimation = function(enemy){
-	enemy.y += 1.33;
+	enemy.y += 1.5;
 	const increase = 90 / 180 * Math.PI / (grid * 1.25);
 	enemy.x = enemy.initial - Math.sin(enemy.count) * (grid * 4);
 	enemy.count += increase;
@@ -1130,10 +1130,10 @@ enemySmallThreeAnimation = function(enemy){
 	if(!enemy.x) enemy.x = enemy.initial;
 	if(enemy.x <= playerX - 2 && enemy.y <= playerY + playerHeight && enemy.y <= grid * 2){
 		enemy.y += 2;
-		enemy.x += 2.5;
-	} else if(enemy.x >= playerX + 2 && enemy.y <= playerY + playerHeight && enemy.y <= grid * 2){
+		enemy.x += 3;
+	} else if(enemy.x >= playerX + 2 && enemy.y <= playerY + playerHeight && enemy.y <= grid * 3){
 		enemy.y += 2;
-		enemy.x -= 2.5;
+		enemy.x -= 3;
 	} else if(enemy.y <= gameHeight - (grid * 10)) enemy.y += 2;
 	else if(enemy.y > gameHeight - (grid * 10) && enemy.y <= gameHeight - (grid * 9)) enemy.y += 2.5;
 	else if(enemy.y > gameHeight - (grid * 9) && enemy.y <= gameHeight - (grid * 8)) enemy.y += 3;
@@ -1150,14 +1150,14 @@ enemySmallThreeAnimation = function(enemy){
 
 enemySmallFourAnimation = function(enemy){
 	if(!enemy.x) enemy.x = enemy.initial;
-	enemy.y += 2;
+	enemy.y += 2.5;
 	return enemy;
 },
 
 enemySmallFiveAnimation = function(enemy){
-	const foundSpeed = 2;
+	const foundSpeed = 3.5;
 	if(enemy.y < enemy.changeGrid * grid){
-		enemy.y += foundSpeed;
+		enemy.y += 2.5;
 	} else if(!enemy.started){
 		enemy.started = true;
 		enemy.targetX = playerX;
@@ -1184,16 +1184,16 @@ enemySmallFiveAnimation = function(enemy){
 enemyMediumOneAnimation = function(enemy){
 	if((enemy.y + enemy.height) >= (gameHeight / 4) * 3) enemy.direction = 'up';
 	if(enemy.direction == 'up'){
-		enemy.y -= 1;
+		enemy.y -= 0.8;
 		if(gameClock % 12 == 0 && enemy.y + enemy.height >= 0) spawnMediumOneShot(enemy);
 	}
 	else enemy.y += 1.75;
 	return enemy;
 },
 
-bossOneAnimation = function(enemy){
+bossOneAnimation = function(enemy, isLast){
 	if(!enemy.started){
-		enemy.y = gameHeight;
+		enemy.y = isLast ? gameHeight + (grid * 2) : gameHeight;
 		enemy.started = true;
 	} else {
 		if(enemy.x + enemy.width <= playerX + playerWidth) enemy.x += 0.5;
@@ -1204,30 +1204,17 @@ bossOneAnimation = function(enemy){
 	return enemy;
 },
 
-bossOneAAnimation = function(enemy, key){
-	if(!bossOneAActive) bossOneAActive = true;
+bossOneAAnimation = function(enemy){
 	enemy = bossOneAnimation(enemy);
-	if(bossOneBActive){
-		let nextBoss = {}, foundThis = false;
-		for(waveTime in waves){
-			if(foundThis){
-				nextBoss = waves[waveTime];
-				foundThis = false;
-			}
-			if(waveTime == key) foundThis = true;
-		}
-		if(nextBoss.enemies){
-			nextBoss = nextBoss.enemies[0];
-			if(enemy.x + enemy.width >= nextBoss.x) enemy.x = nextBoss.x - enemy.width;
-		}
+	if(currentWave.enemies[1]){
+		if(enemy.x + enemy.width >= currentWave.enemies[1].x) enemy.x = currentWave.enemies[1].x - enemy.width;
 	}
 	if(gameClock % bossOneInterval == 0) spawnBossOneAShot(enemy);
 	return enemy;
 },
 
 bossOneBAnimation = function(enemy){
-	if(!bossOneBActive) bossOneBActive = true;
-	enemy = bossOneAnimation(enemy);
+	enemy = bossOneAnimation(enemy, true);
 	if(gameClock % bossOneInterval == (bossOneInterval / 2)) spawnBossOneBShot(enemy);
 	return enemy;
 };
@@ -1332,50 +1319,19 @@ waveMediumOne = function(){
 	};
 },
 
-waveBossOneA = function(){
+waveBossOne = function(){
 	return {
-		animation: bossOneAAnimation,
+		isBoss: true,
 		img: bossOneAImg,
 		height: grid * 3.5,
 		width: grid * 3.5,
 		score: 2000,
 		onlyDestroysPlayer: true,
 		enemies: [
-			{x: grid * 2, y: -(grid * 3.5), hits: 30}
+			{x: grid * 2, y: -(grid * 3.5), hits: 24, type: 'a', img: bossOneAImg, animation: bossOneAAnimation},
+			{x: gameWidth - (grid * 3), y: -(grid * 3.5), hits: 24, type: 'b', img: bossOneBImg, animation: bossOneBAnimation}
 		]
-	};
-},
-
-waveBossOneB = function(){
-	return {
-		animation: bossOneBAnimation,
-		img: bossOneBImg,
-		height: grid * 3.5,
-		width: grid * 3.5,
-		score: 2000,
-		onlyDestroysPlayer: true,
-		enemies: [
-			{x: gameWidth - (grid * 3), y: -(grid * 3.5), hits: 30}
-		]
-	};
-},
-
-waveBossTwoNw = function(){
-	return {
-		animation: bossTwoNwAnimation
 	}
-},
-
-waveBossTwoNe = function(){
-
-},
-
-waveBossTwoSw = function(){
-
-},
-
-waveBossTwoSe = function(){
-
 };
 
 const waves = [
@@ -1386,19 +1342,18 @@ const waves = [
 	waveMediumOne(),
 	waveSmallTwo(grid * 5),
 	waveSmallTwo(grid * 10),
-	waveSmallTwo(grid * 5),
-	waveSmallTwo(grid * 10),
-	waveSmallThree(grid),
 	waveSmallThree(grid),
 	waveSmallThree(gameWidth),
+	waveSmallThree(grid),
 	waveSmallThree(gameWidth),
 	waveSmallFour(grid * 3),
 	waveSmallFour(gameWidth - (grid * 4)),
-	waveBossOneA(),
-	waveBossOneB(),
-	waveSmallThree(grid),
+	waveSmallFour(grid * 3),
+	waveSmallFour(gameWidth - (grid * 4)),
+	waveBossOne(),
 	waveSmallThree(grid),
 	waveSmallThree(gameWidth),
+	waveSmallThree(grid),
 	waveSmallThree(gameWidth),
 	waveSmallFive(grid, gameWidth - (grid * 2)),
 	waveSmallFive(grid * 5, gameWidth - (grid * 6)),
@@ -1412,18 +1367,18 @@ enemiesLoop = function(){
 	if(waves.length){
 		currentWave = waves[0];
 		const draw = function(enemy, i){
-			enemy.animation = currentWave.animation;
-			enemy.img = currentWave.img;
 			enemy.width = currentWave.width;
 			enemy.height = currentWave.height;
+			if(!currentWave.isBoss){
+				enemy.img = currentWave.img;
+				enemy.animation = currentWave.animation;
+			}
 			if(currentWave.initial) enemy.initial = currentWave.initial;
 			enemy = enemy.animation(enemy);
 			context.drawImage(enemy.img, enemy.x, enemy.y);
 			if((enemy.y > gameHeight && i == 0) || (enemy.y <= -(grid * 10) && (i + 1) == currentWave.enemies.length)) waves.shift();
 			const enemyCollisionEl = {x: enemy.x, y: enemy.y, width: enemy.width, height: enemy.height},
 			killEnemy = function(){
-				if(enemy.animation == bossOneAAnimation) bossOneAActive = false;
-				else if(enemy.animation == bossOneBAnimation) bossOneBActive = false;
 				score += currentWave.score;
 				currentWave.enemies.splice(i, 1);
 			};
@@ -1446,57 +1401,8 @@ enemiesLoop = function(){
 			});
 		} else waves.shift();
 	}
-},
-
-// for(waveTime in waves){
-// 	if(gameClock >= parseInt(waveTime) + 50) waveLoop(waveTime);
-// };
-
-waveLoop = function(waveTime){
-	const draw = function(enemy, i){
-		enemy.animation = waves[waveTime].animation;
-		enemy.img = waves[waveTime].img;
-		enemy.width = waves[waveTime].width;
-		enemy.height = waves[waveTime].height;
-		if(waves[waveTime].initial) enemy.initial = waves[waveTime].initial;
-		const isBoss = enemy.animation == bossOneAAnimation || enemy.animation == bossOneBAnimation,
-		drawEnemy = function(){
-			enemy = enemy.animation(enemy, waveTime);
-			context.drawImage(enemy.img, enemy.x, enemy.y);
-			if(enemy.y > gameHeight && i == 0) delete waves[waveTime];
-			else if(enemy.y <= -(grid * 10) && (i + 1) == waves[waveTime].enemies.length) delete waves[waveTime];
-			const enemyCollisionEl = {x: enemy.x, y: enemy.y, width: enemy.width, height: enemy.height},
-			killEnemy = function(){
-				if(enemy.animation == bossOneAAnimation) bossOneAActive = false;
-				else if(enemy.animation == bossOneBAnimation) bossOneBActive = false;
-				score += waves[waveTime].score;
-				waves[waveTime].enemies.splice(i, 1);
-			};
-			checkBulletCollision(enemyCollisionEl, function(bulletObj){
-				explodeEntity(bulletObj);
-				if(enemy.hits) {
-					enemy.hits -= 1;
-					if(enemy.hits == 0) killEnemy();
-				} else killEnemy();
-			});
-			if(canGetHit){
-				checkCollision({x: playerX, y: playerY, width: playerWidth, height: playerHeight}, enemyCollisionEl, function(){
-					waves[waveTime].onlyDestroysPlayer ? getHit(waves[waveTime].enemies, i, true) : getHit(waves[waveTime].enemies, i);
-				});
-			}
-		};
-		if(isBoss){
-			drawEnemy();
-		} else {
-			if(!bossOneAActive && !bossOneBActive) drawEnemy();
-		}
-	};
-	waves[waveTime].enemies.forEach(function(enemy, i){
-		if(waves[waveTime]) draw(enemy, i);
-	});
 };
-const powerupWaves = [0, 350, 1000, 2500, 3000, 3750, 4500],
-powerupImg = new Image();
+const powerupImg = new Image();
 powerupImg.src = 'img/powerup.png';
 
 let powerups = [], powerupBonusCount = 1;
@@ -1525,13 +1431,8 @@ const powerupLoop = function(){
 		};
 		animatePowerups();
 	};
-	if(powerupWaves.length){
-		powerupWaves.forEach(function(waveTime){
-			if(gameClock == parseInt(waveTime)) {
-				spawnPowerup();
-			}
-		});
-	}
+	if(gameClock < (outroTime / 3) && gameClock % (fps * 6) == 0) spawnPowerup();
+	if(gameClock >= (outroTime / 3) && gameClock < (outroTime - (fps * 6)) && gameClock % (fps * 12) == 0) spawnPowerup();
 	if(powerups.length) draw();
 },
 
@@ -1652,8 +1553,7 @@ missileTwoSWImg.src = 'img/missiletwosw.png';
 missileTwoSEImg.src = 'img/missiletwose.png';
 
 const spawnMediumOneShot = function(enemy){
-	enemyShots.medium.one.push({x: enemy.x + (grid / 3), y: enemy.y + grid, width: grid / 2, height: grid});
-	enemyShots.medium.one.push({x: (enemy.x + (grid * 2)) - ((grid / 3) + (grid / 2)), y: enemy.y + grid, width: grid / 2, height: grid});
+	enemyShots.medium.one.push({x: enemy.x + (grid / 4), y: enemy.y + grid, width: grid, height: grid});
 },
 
 spawnBossOneAShot = function(enemy){
@@ -1686,6 +1586,7 @@ enemyShootingLoop = function(){
 animateMediumOneShot = function(){
 	enemyShots.medium.one.forEach(function(shotObj, i){
 		context.drawImage(missileOneImg, shotObj.x, shotObj.y);
+		context.drawImage(missileOneImg, shotObj.x + shotObj.width, shotObj.y);
 		enemyShots.medium.one[i].y += 3;
 		if(enemyShots.medium.one[i].y >= gameHeight) enemyShots.medium.one.splice(i, 1);
 		if(canGetHit) checkEnemyShotCollision(shotObj, i, enemyShots.medium.one);

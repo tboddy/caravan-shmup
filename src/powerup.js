@@ -1,5 +1,4 @@
-const powerupWaves = [0, 350, 1000, 2500, 3000, 3750, 4500],
-powerupImg = new Image();
+const powerupImg = new Image();
 powerupImg.src = 'img/powerup.png';
 
 let powerups = [], powerupBonusCount = 1;
@@ -28,13 +27,8 @@ const powerupLoop = function(){
 		};
 		animatePowerups();
 	};
-	if(powerupWaves.length){
-		powerupWaves.forEach(function(waveTime){
-			if(gameClock == parseInt(waveTime)) {
-				spawnPowerup();
-			}
-		});
-	}
+	if(gameClock < (outroTime / 3) && gameClock % (fps * 6) == 0) spawnPowerup();
+	if(gameClock >= (outroTime / 3) && gameClock < (outroTime - (fps * 6)) && gameClock % (fps * 12) == 0) spawnPowerup();
 	if(powerups.length) draw();
 },
 

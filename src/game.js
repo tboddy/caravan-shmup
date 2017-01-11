@@ -4,7 +4,7 @@ const initGame = function(){
 	setupLevel();
 	setupPlayer();
 	setupHighScore();
-	// setupBackgroundMusic();
+	setupBackgroundMusic();
 	loop = gameLoop();
 },
 

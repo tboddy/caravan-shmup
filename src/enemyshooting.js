@@ -21,8 +21,7 @@ missileTwoSWImg.src = 'img/missiletwosw.png';
 missileTwoSEImg.src = 'img/missiletwose.png';
 
 const spawnMediumOneShot = function(enemy){
-	enemyShots.medium.one.push({x: enemy.x + (grid / 3), y: enemy.y + grid, width: grid / 2, height: grid});
-	enemyShots.medium.one.push({x: (enemy.x + (grid * 2)) - ((grid / 3) + (grid / 2)), y: enemy.y + grid, width: grid / 2, height: grid});
+	enemyShots.medium.one.push({x: enemy.x + (grid / 4), y: enemy.y + grid, width: grid, height: grid});
 },
 
 spawnBossOneAShot = function(enemy){
@@ -55,6 +54,7 @@ enemyShootingLoop = function(){
 animateMediumOneShot = function(){
 	enemyShots.medium.one.forEach(function(shotObj, i){
 		context.drawImage(missileOneImg, shotObj.x, shotObj.y);
+		context.drawImage(missileOneImg, shotObj.x + shotObj.width, shotObj.y);
 		enemyShots.medium.one[i].y += 3;
 		if(enemyShots.medium.one[i].y >= gameHeight) enemyShots.medium.one.splice(i, 1);
 		if(canGetHit) checkEnemyShotCollision(shotObj, i, enemyShots.medium.one);
