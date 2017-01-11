@@ -28,7 +28,8 @@ drawString = function(input, x, y, isRed){
 },
 
 drawChar = function(input, x, y, isRed){
-	var charLeft = 0, charTop = 0, size = grid / 2;
+	let charLeft = 0, charTop = 0;
+	const size = grid / 2;
 
 	switch(input){
 		// case '0': charLeft = numStart; break;
@@ -72,9 +73,12 @@ drawChar = function(input, x, y, isRed){
 		case '.': charLeft = size * 37; break;
 		case ' ': charLeft = size * 38; break;
 	};
+
+
 	if(isRed) charTop = size;
 	context.drawImage(charImg, charLeft, charTop, size, size, x, y, size, size);
 },
+
 
 checkCollision = function(elA, elB, callback){
 	if(elA.x + elA.width >= elB.x && elA.x <= elB.x + elB.width && elA.y <= elB.y + elB.height && elA.y + elA.height >= elB.y){

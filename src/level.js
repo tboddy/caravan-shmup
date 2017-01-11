@@ -1,6 +1,6 @@
 
 let gridPositions = [], currentPlatformAnimation = 0, groundSpeed = 0.1, cloudSpeed = 0.2;
-const levelSpeed = 0.8, introTime = 90, outroTime = 10000;
+const levelSpeed = 0.8, introTime = 90, outroTime = 5050;
 
 const setupLevel = function(){
 	const levelStartPos = levelMap.length * grid;

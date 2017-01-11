@@ -1,6 +1,5 @@
 let score = 0, highScore = 0, fullscreenMessageTime = 0, currentFullscreenMessage = 'score attack: 2 min', initialTime = new Date(), canTime = true, livesLeft = 4, isFinished = false, isDead = false,
 	hitClock = 0, scoreSaved = false;
-let endTime = new Date(initialTime.getTime() + (2 * 60000));
 
 const setupHighScore = function(){
 	if(savedData.highScore) highScore = savedData.highScore;
@@ -88,7 +87,7 @@ hudLoop = function(){
 	},
 
 	drawFullscreenMessageGameOver = function(message){
-		if(gameClock == 12000) mainWindow.reload();
+		if(gameClock == 8200) mainWindow.reload();
 		const baseYPos = (gameHeight / 2) - (grid / 4);
 		const firstString = message, secondString = 'your score ' + score,
 			thirdString = (score == highScore) ? 'new high score ' + score : '';

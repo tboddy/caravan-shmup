@@ -9,8 +9,8 @@ const start = function(){
 	], currentMenuItem = {}, optionsShowing = false, canMoveMenu = true; canPickMenu = true;
 
 	const startLogoImg = new Image(),
-		creditString = '2016 t.boddy',
-		creditStringTwo = 'pre alpha 0.05',
+		creditString = '2017 t.boddy',
+		creditStringTwo = 'pre alpha 0.08',
 		controlString = 'arrows or joystick:move',
 		controlStringTwo = 'z or btns 1 to 4:shoot',
 		controlStringThree = 'esc or btn 9: back to menu';

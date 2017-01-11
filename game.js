@@ -28,7 +28,8 @@ drawString = function(input, x, y, isRed){
 },
 
 drawChar = function(input, x, y, isRed){
-	var charLeft = 0, charTop = 0, size = grid / 2;
+	let charLeft = 0, charTop = 0;
+	const size = grid / 2;
 
 	switch(input){
 		// case '0': charLeft = numStart; break;
@@ -72,9 +73,12 @@ drawChar = function(input, x, y, isRed){
 		case '.': charLeft = size * 37; break;
 		case ' ': charLeft = size * 38; break;
 	};
+
+
 	if(isRed) charTop = size;
 	context.drawImage(charImg, charLeft, charTop, size, size, x, y, size, size);
 },
+
 
 checkCollision = function(elA, elB, callback){
 	if(elA.x + elA.width >= elB.x && elA.x <= elB.x + elB.width && elA.y <= elB.y + elB.height && elA.y + elA.height >= elB.y){
@@ -82,6 +86,132 @@ checkCollision = function(elA, elB, callback){
 	}
 };
 var levelMap = [
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
 	[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
@@ -370,8 +500,8 @@ const start = function(){
 	], currentMenuItem = {}, optionsShowing = false, canMoveMenu = true; canPickMenu = true;
 
 	const startLogoImg = new Image(),
-		creditString = '2016 t.boddy',
-		creditStringTwo = 'pre alpha 0.05',
+		creditString = '2017 t.boddy',
+		creditStringTwo = 'pre alpha 0.08',
 		controlString = 'arrows or joystick:move',
 		controlStringTwo = 'z or btns 1 to 4:shoot',
 		controlStringThree = 'esc or btn 9: back to menu';
@@ -579,136 +709,8 @@ setupBackgroundMusic = function(){
 	$('body').append(musicEl);
 };
 
-
-
-
-
-// var canvas = document.getElementById('canvas'), canvasEl = $('canvas'), fps = 29.97, gameClock = 0, grid = 16, gameHeight = 240, gameWidth = 256, isFullscreen = false, gameLoopInterval, gamepad = false,
-// 	browserWindow = require('electron').remote, dropXSpeed = grid  / 2, dropXMax = grid * 8, storage = require('electron-json-storage'), savedData = {};
-// var context = canvas.getContext('2d'), mainWindow = browserWindow.getCurrentWindow();
-
-// var init = function(){
-// 	storage.get('savedData', function(err, data){
-// 		savedData = data;
-// 		initStart();
-// 	});
-// };
-
-// var initGame = function(){
-// 	$(window).resize(resizeGame);
-// 	setupLevel();
-// 	setupPlayer();
-// 	setupHighScore();
-// 	setupBackgroundMusic();
-// 	gameLoopInterval = setInterval(gameLoop, 1000 / fps);
-// 	gameLoop();
-// };
-
-// var gameLoop = function(){
-// 	clearGame();
-// 	levelLoop();
-// 	secretLoop();
-// 	enemiesLoop();
-// 	explosionsLoop();
-// 	enemyShootingLoop();
-// 	pointerLoop();
-// 	powerupLoop();
-// 	shootingLoop();
-// 	playerLoop();
-// 	hudLoop();
-// 	gameClock++;
-// };
-
-// const setupBackgroundMusic = function(){
-// 	const musicEl = '<audio autoplay style="display:none;position:absolute;top:-100px;left:-100px;">\
-// 		<source src="sound/bg.ogg" type="audio/ogg"></source>\
-// 		</audio>';
-// 	$('body').append(musicEl);
-// };
-
-// var resizeGame = function(){
-// 	var canvasWidth = getAspect().width, canvasHeight = getAspect().height;
-// 	canvasEl.css('width', canvasWidth + 'px').css('height', canvasHeight + 'px').css('margin-left', -(canvasWidth / 2) + 'px').css('margin-top', -(canvasHeight / 2) + 'px');
-// };
-
-// var clearGame = function(){
-// 	resizeGame();
-// 	context.clearRect(0, 0, getAspect().width, getAspect().height);
-// };
-
-// var getAspect = function(){
-// 	var newWidth = $(window).width(), newHeight = $(window).height(), remHeight = $(window).width() * 0.9375, remWidth = $(window).height() * 1.066666666667;
-// 	if(newWidth >= remWidth) newWidth = remWidth;
-// 	else if(newHeight > remHeight) newHeight = remHeight;
-// 	return {width: newWidth, height: newHeight};
-// };
-
-// var checkCollision = function(elA, elB, callback){
-// 	if(elA.x + elA.width >= elB.x && elA.x <= elB.x + elB.width && elA.y <= elB.y + elB.height && elA.y + elA.height >= elB.y){
-// 		callback(elA, elB);
-// 	}
-// };
-
-// var checkBulletCollision = function(el, callback){
-// 	for(var group in shots){
-// 		if(shots[group].length){
-// 			shots[group].forEach(function(shot, i){
-// 				var shotObj = {x: shot.x, y: shot.y, width: grid / 2, height: grid / 2};
-// 				if(group == 'twoBottom' || group == 'three' || group == 'threeBottom') shotObj.width = grid / 4;
-// 				checkCollision(el, shotObj, function(el, shotObj){
-// 					shots[group].splice(i, 1);
-// 					callback(el);
-// 				});
-// 			});
-// 		}
-// 	};
-// };
-
-// var sineCurve = function(inputObj, baseSpeed, baseMax){
-// 	if(inputObj.x <= 0 || inputObj.x <= inputObj.initial - baseMax) inputObj.direction = 'right';
-// 	else if(inputObj.x + grid >= gameWidth || inputObj.x >= inputObj.initial + baseMax) inputObj.direction = 'left';
-// 	if(baseMax == grid * 99){
-
-// 		if((inputObj.x <= gameWidth / 4 && inputObj.x > gameWidth / 8) || 
-// 			(inputObj.x + inputObj.width >= gameWidth - (gameWidth / 4) && inputObj.x + inputObj.width < gameWidth - (gameWidth / 8))){
-// 			baseSpeed = (baseSpeed / 4) * 3;
-// 		} else if(inputObj.x <= (gameWidth / 8) ||
-// 			inputObj.x + inputObj.width >= gameWidth - (gameWidth / 8)){
-// 			baseSpeed = baseSpeed / 2;
-// 		} else {
-// 			baseSpeed = baseSpeed;
-// 		}
-
-// 	} else {
-// 		if((inputObj.x <= inputObj.initial - (baseMax * 0.25) && inputObj.x > inputObj.initial - (baseMax * 0.75)) ||
-// 			(inputObj.x >= inputObj.initial + (baseMax * 0.25) && inputObj.x < inputObj.initial + (baseMax * 0.75))){
-// 			baseSpeed = (baseSpeed / 4) * 3;
-// 		} else if(inputObj.x <= inputObj.initial - (baseMax * 0.75) ||
-// 			inputObj.x >= inputObj.initial + (baseMax * 0.75)){
-// 			baseSpeed = baseSpeed / 2;
-// 		} else {
-// 			baseSpeed = baseSpeed;
-// 		}
-// 	}
-
-// 	if(inputObj.direction == 'left') inputObj.x -= baseSpeed;
-// 	else inputObj.x += baseSpeed;
-// 	return inputObj;
-// };
-
-// var toggleFullscreen = function(){
-// 	var openFullscreen = function(){
-// 		mainWindow.setFullScreen(true);
-// 		isFullscreen = true;
-// 	}, closeFullscreen = function(){
-// 		mainWindow.setFullScreen(false);
-// 		isFullscreen = false;
-// 	};
-// 	isFullscreen ? closeFullscreen() : openFullscreen();
-// };
-
 let gridPositions = [], currentPlatformAnimation = 0, groundSpeed = 0.1, cloudSpeed = 0.2;
-const levelSpeed = 0.8, introTime = 90, outroTime = 10000;
+const levelSpeed = 0.8, introTime = 90, outroTime = 5050;
 
 const setupLevel = function(){
 	const levelStartPos = levelMap.length * grid;
@@ -1090,23 +1092,26 @@ pointerLoop = function(){
 	if(pointers.length) draw();
 };
 
-const enemySmallOneImg = new Image(), enemySmallTwoImg = new Image(), enemySmallFourImg = new Image(), enemySmallFiveImg = new Image(), enemyMediumOneImg = new Image();
+const enemySmallOneImg = new Image(), enemySmallTwoImg = new Image(), enemySmallFourImg = new Image(), enemySmallFiveImg = new Image(), enemySmallFiveBottomLeftImg = new Image(),
+enemySmallFiveBottomRightImg = new Image(), enemyMediumOneImg = new Image();
 enemySmallOneImg.src = 'img/enemysmallone.png';
 enemySmallTwoImg.src = 'img/enemysmalltwo.png';
 enemyMediumOneImg.src = 'img/enemymediumone.png';
 enemySmallFourImg.src = 'img/enemysmallthree.png';
 enemySmallFiveImg.src = 'img/enemysmallfive.png';
+enemySmallFiveBottomLeftImg.src = 'img/enemysmallfivebottomleft.png';
+enemySmallFiveBottomRightImg.src = 'img/enemysmallfivebottomright.png';
 
 const bossOneAImg = new Image(), bossOneBImg = new Image();
 bossOneAImg.src = 'img/bossonea.png';
 bossOneBImg.src = 'img/bossoneb.png';
 
-let bossOneAActive = false, bossOneBActive = false;
+let bossOneAActive = false, bossOneBActive = false, currentWave;
 
 const bossOneInterval = fps * 2.5;
 
 const enemySmallOneAnimation = function(enemy){
-	enemy.y += 0.8;
+	enemy.y += 1.33;
 	const increase = 90 / 180 * Math.PI / (grid * 1.5);
 	enemy.x = enemy.initial - Math.sin(enemy.count) * (grid * 5);
 	enemy.count += increase;
@@ -1114,9 +1119,9 @@ const enemySmallOneAnimation = function(enemy){
 },
 
 enemySmallTwoAnimation = function(enemy){
-	enemy.y += 0.8;
+	enemy.y += 1.33;
 	const increase = 90 / 180 * Math.PI / (grid * 1.25);
-	enemy.x = enemy.initial - Math.sin(enemy.count) * (grid * 3.5);
+	enemy.x = enemy.initial - Math.sin(enemy.count) * (grid * 4);
 	enemy.count += increase;
 	return enemy;
 },
@@ -1145,7 +1150,34 @@ enemySmallThreeAnimation = function(enemy){
 
 enemySmallFourAnimation = function(enemy){
 	if(!enemy.x) enemy.x = enemy.initial;
-	enemy.y += 1.8;
+	enemy.y += 2;
+	return enemy;
+},
+
+enemySmallFiveAnimation = function(enemy){
+	const foundSpeed = 2;
+	if(enemy.y < enemy.changeGrid * grid){
+		enemy.y += foundSpeed;
+	} else if(!enemy.started){
+		enemy.started = true;
+		enemy.targetX = playerX;
+		enemy.targetY = playerY;
+		enemy.initialX = enemy.x;
+		enemy.initialY = enemy.y;
+	}
+	if(enemy.started){
+		if(enemy.initialX + enemy.width <= enemy.targetX){
+			enemy.x += foundSpeed;
+			enemy.img = enemySmallFiveBottomRightImg;
+		}
+		else if(enemy.initialX > enemy.targetX + playerWidth){
+			enemy.x -= foundSpeed;
+			enemy.img = enemySmallFiveBottomLeftImg;
+		}
+		if(enemy.initialY < enemy.targetY) enemy.y += foundSpeed;
+		else if(enemy.initialY >= enemy.targetY + playerHeight) enemy.y -= foundSpeed;
+		else enemy.y += foundSpeed;
+	}
 	return enemy;
 },
 
@@ -1155,7 +1187,7 @@ enemyMediumOneAnimation = function(enemy){
 		enemy.y -= 1;
 		if(gameClock % 12 == 0 && enemy.y + enemy.height >= 0) spawnMediumOneShot(enemy);
 	}
-	else enemy.y += 1.5;
+	else enemy.y += 1.75;
 	return enemy;
 },
 
@@ -1269,7 +1301,21 @@ waveSmallFour = function(initialPos){
 			{y: grid * -3},
 			{y: grid * -1},
 		]
-	}
+	};
+},
+
+waveSmallFive = function(initialPosA, initialPosB){
+	return {
+		animation: enemySmallFiveAnimation,
+		img: enemySmallFiveImg,
+		width: grid,
+		height: grid,
+		score: 500,
+		enemies: [
+			{x: initialPosA, y: grid * -1, started: false, changeGrid: Math.floor((Math.random() * 6) + 1)},
+			{x: initialPosB, y: grid * -1, started: false, changeGrid: Math.floor((Math.random() * 6) + 1)}
+		]
+	};
 },
 
 waveMediumOne = function(){
@@ -1295,7 +1341,7 @@ waveBossOneA = function(){
 		score: 2000,
 		onlyDestroysPlayer: true,
 		enemies: [
-			{x: grid * 2, y: -(grid * 3.5), hits: 25}
+			{x: grid * 2, y: -(grid * 3.5), hits: 30}
 		]
 	};
 },
@@ -1312,35 +1358,99 @@ waveBossOneB = function(){
 			{x: gameWidth - (grid * 3), y: -(grid * 3.5), hits: 30}
 		]
 	};
+},
+
+waveBossTwoNw = function(){
+	return {
+		animation: bossTwoNwAnimation
+	}
+},
+
+waveBossTwoNe = function(){
+
+},
+
+waveBossTwoSw = function(){
+
+},
+
+waveBossTwoSe = function(){
+
 };
 
-const waves = {
-	0: waveSmallOne(grid * 6),
-	200: waveSmallOne(grid * 9),
-	500: waveMediumOne(),
-	800: waveSmallTwo(grid * 5),
-	1000: waveSmallTwo(grid * 10),
-	1250: waveSmallThree(grid),
-	1400: waveSmallThree(grid),
-	1550: waveSmallThree(gameWidth),
-	1700: waveSmallThree(gameWidth),
-	1900: waveSmallFour(grid * 3),
-	2000: waveSmallFour(gameWidth - (grid * 4)),
-	2100: waveSmallFour(grid * 3),
-	2200: waveSmallFour(gameWidth - (grid * 4)),
-	2500: waveBossOneA(),
-	2600: waveBossOneB(),
-	3000: waveSmallThree(grid),
-	3150: waveSmallThree(grid),
-	3300: waveSmallThree(gameWidth),
-	3450: waveSmallThree(gameWidth),
-},
+const waves = [
+	waveSmallOne(grid * 6),
+	waveSmallOne(grid * 9),
+	waveSmallOne(grid * 6),
+	waveSmallOne(grid * 9),
+	waveMediumOne(),
+	waveSmallTwo(grid * 5),
+	waveSmallTwo(grid * 10),
+	waveSmallTwo(grid * 5),
+	waveSmallTwo(grid * 10),
+	waveSmallThree(grid),
+	waveSmallThree(grid),
+	waveSmallThree(gameWidth),
+	waveSmallThree(gameWidth),
+	waveSmallFour(grid * 3),
+	waveSmallFour(gameWidth - (grid * 4)),
+	waveBossOneA(),
+	waveBossOneB(),
+	waveSmallThree(grid),
+	waveSmallThree(grid),
+	waveSmallThree(gameWidth),
+	waveSmallThree(gameWidth),
+	waveSmallFive(grid, gameWidth - (grid * 2)),
+	waveSmallFive(grid * 5, gameWidth - (grid * 6)),
+	waveSmallFive(grid, gameWidth - (grid * 2)),
+	waveSmallFive(grid * 5, gameWidth - (grid * 6)),
+	waveSmallFive(grid, gameWidth - (grid * 2)),
+	waveSmallFive(grid * 5, gameWidth - (grid * 6)),
+];
 
 enemiesLoop = function(){
-	for(waveTime in waves){
-		if(gameClock >= parseInt(waveTime) + 150) waveLoop(waveTime);
-	};
+	if(waves.length){
+		currentWave = waves[0];
+		const draw = function(enemy, i){
+			enemy.animation = currentWave.animation;
+			enemy.img = currentWave.img;
+			enemy.width = currentWave.width;
+			enemy.height = currentWave.height;
+			if(currentWave.initial) enemy.initial = currentWave.initial;
+			enemy = enemy.animation(enemy);
+			context.drawImage(enemy.img, enemy.x, enemy.y);
+			if((enemy.y > gameHeight && i == 0) || (enemy.y <= -(grid * 10) && (i + 1) == currentWave.enemies.length)) waves.shift();
+			const enemyCollisionEl = {x: enemy.x, y: enemy.y, width: enemy.width, height: enemy.height},
+			killEnemy = function(){
+				if(enemy.animation == bossOneAAnimation) bossOneAActive = false;
+				else if(enemy.animation == bossOneBAnimation) bossOneBActive = false;
+				score += currentWave.score;
+				currentWave.enemies.splice(i, 1);
+			};
+			checkBulletCollision(enemyCollisionEl, function(bulletObj){
+				explodeEntity(bulletObj);
+				if(enemy.hits) {
+					enemy.hits -= 1;
+					if(enemy.hits == 0) killEnemy();
+				} else killEnemy();
+			});
+			if(canGetHit){
+				checkCollision({x: playerX, y: playerY, width: playerWidth, height: playerHeight}, enemyCollisionEl, function(){
+					currentWave.onlyDestroysPlayer ? getHit(currentWave.enemies, i, true) : getHit(currentWave.enemies, i);
+				});
+			}
+		};
+		if(currentWave.enemies.length){
+			currentWave.enemies.forEach(function(enemy, i){
+				draw(enemy, i);
+			});
+		} else waves.shift();
+	}
 },
+
+// for(waveTime in waves){
+// 	if(gameClock >= parseInt(waveTime) + 50) waveLoop(waveTime);
+// };
 
 waveLoop = function(waveTime){
 	const draw = function(enemy, i){
@@ -1380,15 +1490,12 @@ waveLoop = function(waveTime){
 		} else {
 			if(!bossOneAActive && !bossOneBActive) drawEnemy();
 		}
-
-
-
 	};
 	waves[waveTime].enemies.forEach(function(enemy, i){
 		if(waves[waveTime]) draw(enemy, i);
 	});
 };
-const powerupWaves = [0, 500, 1500, 2500, 3000, 3750, 4500],
+const powerupWaves = [0, 350, 1000, 2500, 3000, 3750, 4500],
 powerupImg = new Image();
 powerupImg.src = 'img/powerup.png';
 
@@ -1522,123 +1629,6 @@ playerLoop = function(){
 	update();
 	draw();
 };
-
-
-
-
-
-
-// var movingUp = false, movingDown = false, movingLeft = false, movingRight = false, shot = false, isPaused = false, player, inputStopped = false,  playerSpeed = grid / 2, playerWidth = grid, playerHeight = grid * 1.5, playerIsHidden = false;
-// var playerX = (gameWidth / 2) - (playerWidth / 2), playerY = gameHeight - (playerHeight + grid);
-
-// const playerImg = new Image();
-
-// const playerKeysDown = function(e){
-// 	switch(e.which){
-// 		case 38: movingUp = true; break;
-// 		case 40: movingDown = true; break;
-// 		case 37: movingLeft = true; break;
-// 		case 39: movingRight = true; break;
-// 		case 90: shot = true; break;
-// 		case 191: mainWindow.reload(); break;
-// 	};
-// }, playerKeysUp = function(e){
-// 	switch(e.which){
-// 		case 38: movingUp = false; break;
-// 		case 40: movingDown = false; break;
-// 		case 37: movingLeft = false; break;
-// 		case 39: movingRight = false; break;
-// 		case 90: shot = false; break;
-// 	};
-// }, playerReloadOnly = function(e){
-// 	switch(e.which){
-// 		case 191: mainWindow.reload(); break;
-// 	};
-// };
-
-// const setupPlayer = function(){
-// 	const setupKeyboard = function(){
-// 		document.addEventListener('keydown', playerKeysDown);
-// 		document.addEventListener('keyup', playerKeysUp);
-// 	}, buildPlayer = function(){
-// 		player = new Image();
-// 	};
-// 	setupKeyboard();
-// 	buildPlayer();
-// };
-
-// var stopInput = function(){
-// 	document.removeEventListener('keydown', playerKeysDown);
-// 	document.removeEventListener('keyup', playerKeysUp);
-// 	document.addEventListener('playerReloadOnly', playerKeysUp);
-// 	inputStopped = true;
-// };
-
-// const analogThresh = 0.15;
-
-// var playerLoop = function(){
-
-// 	var update = function(){
-
-// 		var updateGamepad = function(){
-// 			if(inputStopped && navigator.getGamepads()[0]){
-// 				gamepad = navigator.getGamepads()[0];
-// 				movingUp = false, movingDown = false, movingDown = false, movingLeft = false, movingRight = false, shot = false;
-// 				if(gamepad.buttons[2].pressed) mainWindow.reload();
-// 			} else if(navigator.getGamepads()[0]){
-// 				gamepad = navigator.getGamepads()[0];
-// 				if(gamepad.axes[9]){
-// 					var hatSwitch = gamepad.axes[9].toFixed(1);
-// 					movingUp = hatSwitch == '-1.0' || hatSwitch == '1.0' || hatSwitch == '-0.7' ? true : false;
-// 					movingDown = hatSwitch == '0.1' || hatSwitch == '-0.1' || hatSwitch == '0.4' ? true : false;
-// 					movingLeft = hatSwitch == '0.7' || hatSwitch == '1.0' || hatSwitch == '0.4' ? true : false;
-// 					movingRight = hatSwitch == '-0.4' || hatSwitch == '-0.1' || hatSwitch == '-0.7' ? true : false; 
-// 				} else {
-// 					movingUp = gamepad.axes[1] < analogThresh * -1 ? true : false;
-// 					movingDown = gamepad.axes[1] > analogThresh ? true : false;
-// 					movingLeft = gamepad.axes[0] < analogThresh * -1 ? true : false;
-// 					movingRight = gamepad.axes[0] > analogThresh ? true : false;
-// 				}
-// 				shot = gamepad.buttons[0].pressed || gamepad.buttons[1].pressed || gamepad.buttons[3].pressed || gamepad.buttons[2].pressed ? true : false;
-// 				if(gamepad.buttons[8].pressed) mainWindow.reload();
-// 			}
-// 		};
-
-// 		var move = function(){
-// 			if(movingRight) playerX += playerSpeed;
-// 			else if(movingLeft) playerX -= playerSpeed;
-// 			if(movingUp) playerY -= playerSpeed;
-// 			else if(movingDown) playerY += playerSpeed;
-// 			if(playerX <= 0) playerX = 0;
-// 			else if(playerX + playerWidth >= gameWidth) playerX = gameWidth - playerWidth;
-// 			if(playerY <= 0) playerY = 0;
-// 			else if(playerY + playerHeight >= gameHeight) playerY = gameHeight - playerHeight;
-// 		};
-
-// 		updateGamepad();
-// 		move();
-
-// 	};
-
-// 	var draw = function(){
-// 		if(!isGameOver){
-// 			if(!canGetHit){
-// 				if(gameClock % 10 == 0) player.src = 'img/playerblank.png';
-// 				else if(gameClock % 10 == 5) player.src = 'img/player.png';
-// 			} else if(player.src != 'img/player.png') {
-// 				player.src = 'img/player.png';
-// 			}
-// 			var offset = 0;
-// 			if(movingLeft) offset = grid;
-// 			else if(movingRight) offset = grid * 2;
-// 			context.drawImage(player, offset, 0, grid, grid * 1.5, playerX, playerY, grid, grid * 1.5);
-// 		}
-// 	};
-
-// 	update();
-// 	draw();
-
-// };
 let enemyShots = {
 	medium: {one: []}
 },
@@ -2042,7 +2032,6 @@ const explosionsLoop = function(){
 };
 let score = 0, highScore = 0, fullscreenMessageTime = 0, currentFullscreenMessage = 'score attack: 2 min', initialTime = new Date(), canTime = true, livesLeft = 4, isFinished = false, isDead = false,
 	hitClock = 0, scoreSaved = false;
-let endTime = new Date(initialTime.getTime() + (2 * 60000));
 
 const setupHighScore = function(){
 	if(savedData.highScore) highScore = savedData.highScore;
@@ -2130,7 +2119,7 @@ hudLoop = function(){
 	},
 
 	drawFullscreenMessageGameOver = function(message){
-		if(gameClock == 12000) mainWindow.reload();
+		if(gameClock == 8200) mainWindow.reload();
 		const baseYPos = (gameHeight / 2) - (grid / 4);
 		const firstString = message, secondString = 'your score ' + score,
 			thirdString = (score == highScore) ? 'new high score ' + score : '';

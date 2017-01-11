@@ -1,4 +1,4 @@
-const powerupWaves = [0, 500, 1500, 2500, 3000, 3750, 4500],
+const powerupWaves = [0, 350, 1000, 2500, 3000, 3750, 4500],
 powerupImg = new Image();
 powerupImg.src = 'img/powerup.png';
 
