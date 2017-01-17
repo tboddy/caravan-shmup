@@ -9,6 +9,10 @@ const resizeGame = function(){
 	canvasEl.css('width', canvasWidth + 'px').css('height', canvasHeight + 'px').css('margin-left', -(canvasWidth / 2) + 'px').css('margin-top', -(canvasHeight / 2) + 'px');
 },
 
+degToRad = function(d) {
+	return d * 0.0174532925199432957;
+},
+
 clearGame = function(){
 	resizeGame();
 	context.clearRect(0, 0, getAspect().width, getAspect().height);

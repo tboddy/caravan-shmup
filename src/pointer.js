@@ -12,12 +12,12 @@ pointerLoop = function(){
 		const animatePointers = function(){
 			pointers.forEach(function(pointerObj, i){
 				pointerObj.width = grid / 2;
-				const increase = 90 / 180 * Math.PI / (grid * 1.5),
-					offsetNum = pointerObj.initial >= gameWidth / 2 ? 0.25 : -0.25;
+				const increase = 90 / 180 * Math.PI / (grid * 2),
+					offsetNum = pointerObj.initial >= gameWidth / 2 ? 0.2 : -0.2;
 				pointers[i].x = (pointerObj.x - Math.sin(pointerObj.count) * (grid * offsetNum));
 				pointers[i].count += increase;
 				context.drawImage(pointerImg, pointerObj.x, pointerObj.y);
-				pointers[i].y += levelSpeed;
+				pointers[i].y += 0.67;
 				if(pointerObj.y >= gameHeight) pointers.splice(i, 1);
 				checkPointerCollision(pointerObj, i);
 			});
