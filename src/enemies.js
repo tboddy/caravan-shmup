@@ -275,19 +275,16 @@ const enemyAnimations = {
 			return enemy;
 		},
 		three: function(enemy){
-			enemy.y += 2.5;
+			enemy.y += 2;
 			if(!enemy.dAngle){
 				enemy.dAngle = Math.atan2(playerY - enemy.y, playerX - enemy.x);
 			}
 			enemy.x += 2 * Math.cos(enemy.dAngle);
-
-
 			context.save();
 			context.translate(enemy.x, enemy.y);
 			context.rotate(enemy.dAngle - degToRad(90));
 			context.drawImage(enemySmallFourImg, enemy.width / -2, enemy.height / -2);
 			context.restore();
-
 			return enemy;
 		},
 		four: function(enemy){
@@ -295,7 +292,7 @@ const enemyAnimations = {
 			else if(enemy.direction == 'upRight' && enemy.y <= gameHeight / 3) enemy.direction = 'downAgain';
 			if(enemy.y >= (gameHeight / 3) * 2 && enemy.direction == 'downLeft') enemy.direction = 'upLeft';
 			else if(enemy.direction == 'upLeft' && enemy.y <= gameHeight / 3) enemy.direction = 'downAgain';
-			const yVel = 2, xVel = 1;
+			const yVel = 2, xVel = 0.75;
 			switch(enemy.direction){
 				case 'downRight':
 					enemy.y += yVel;
@@ -318,17 +315,17 @@ const enemyAnimations = {
 			return enemy;
 		},
 		five: function(enemy){
-			const vel = 2.67, rotateSpeed = 0.033, rotateRadius = grid * 5;
+			const vel = 3, rotateSpeed = 0.035, rotateRadius = grid * 5;
 			if(!enemy.angle) enemy.angle = 0;
 			if(!enemy.initial) enemy.initial = enemy.x;
 			if(enemy.y <= gameHeight / 2 && !enemy.startedCircle){
 				enemy.y += vel;
 			} else {
 				if(!enemy.startedCircle) enemy.startedCircle = true;
-				if(enemy.angle >= 4.7){
+				if(enemy.y <= grid * 2.55){
 					enemy.x += vel;
 				} else {
-					enemy.x = (gameWidth / 2) + Math.cos(enemy.angle) * rotateRadius;
+					enemy.x = ((gameWidth / 2) - grid) + Math.cos(enemy.angle) * rotateRadius;
 					enemy.y = (gameHeight / 2) + Math.sin(enemy.angle) * rotateRadius;
 					enemy.angle += rotateSpeed;
 				}
@@ -372,6 +369,33 @@ const enemyAnimations = {
 					enemy.hasShot = true;
 				}
 			}
+			return enemy;
+		},
+		eight: function(enemy){
+			if(enemy.y <= (gameHeight / 3) && enemy.direction == 'downRight') enemy.direction = 'upRight';
+			else if(enemy.direction == 'upRight' && enemy.y >= (gameHeight / 3) * 2) enemy.direction = 'upAgain';
+			if(enemy.y <= (gameHeight / 3) && enemy.direction == 'downLeft') enemy.direction = 'upLeft';
+			else if(enemy.direction == 'upLeft' && enemy.y >= (gameHeight / 3) * 2) enemy.direction = 'upAgain';
+			const yVel = 2, xVel = 0.75;
+			switch(enemy.direction){
+				case 'downRight':
+					enemy.y -= yVel;
+					break;
+				case 'downLeft':
+					enemy.y -= yVel;
+					break;
+				case 'upRight':
+					enemy.y += yVel;
+					enemy.x += xVel;
+					break;
+				case 'upLeft':
+					enemy.y += yVel;
+					enemy.x -= xVel;
+					break;
+				case 'upAgain':
+					enemy.y -= yVel;
+					break;
+			};
 			return enemy;
 		}
 	},
@@ -490,10 +514,6 @@ const enemyWaves = {
 					{x: grid * Math.floor(Math.random() * 15), y: -grid * Math.floor(Math.random() * 10)},
 					{x: grid * Math.floor(Math.random() * 15), y: -grid * Math.floor(Math.random() * 10)},
 					{x: grid * Math.floor(Math.random() * 15), y: -grid * Math.floor(Math.random() * 10)},
-					{x: grid * Math.floor(Math.random() * 15), y: -grid * Math.floor(Math.random() * 10)},
-					{x: grid * Math.floor(Math.random() * 15), y: -grid * Math.floor(Math.random() * 10)},
-					{x: grid * Math.floor(Math.random() * 15), y: -grid * Math.floor(Math.random() * 10)},
-					{x: grid * Math.floor(Math.random() * 15), y: -grid * Math.floor(Math.random() * 10)},
 				]
 			}
 		},
@@ -520,7 +540,7 @@ const enemyWaves = {
 			}
 		},
 		five: function(){
-			const step = grid + (grid / 4), startX = gameWidth - (grid * 3);
+			const step = grid + (grid / 4), startX = gameWidth - (grid * 4);
 			return {
 				animation: enemyAnimations.small.five,
 				img: enemySmallTwoImg,
@@ -571,6 +591,29 @@ const enemyWaves = {
 					{x: gameWidth - (grid * 5), y: -grid, direction: 'left'},
 				]
 			}
+		},
+		eight: function(){
+			const step = grid * 1.25;
+			return {
+				animation: enemyAnimations.small.eight,
+				width: grid,
+				height: grid,
+				img: enemySmallTwoImg,
+				fromBottom: true,
+				score: 300,
+				enemies: [
+					{x: grid * 2, y: gameHeight + (step * 4), direction: 'downRight'},
+					{x: grid * 2, y: gameHeight + (step * 3), direction: 'downRight'},
+					{x: grid * 2, y: gameHeight + (step * 2), direction: 'downRight'},
+					{x: grid * 2, y: gameHeight + step, direction: 'downRight'},
+					{x: grid * 2, y: gameHeight, direction: 'downRight'},
+					{x: gameWidth - (grid * 3), y: gameHeight + (step * 4), direction: 'downLeft'},
+					{x: gameWidth - (grid * 3), y: gameHeight + (step * 3), direction: 'downLeft'},
+					{x: gameWidth - (grid * 3), y: gameHeight + (step * 2), direction: 'downLeft'},
+					{x: gameWidth - (grid * 3), y: gameHeight + step, direction: 'downLeft'},
+					{x: gameWidth - (grid * 3), y: gameHeight, direction: 'downLeft'},
+				]
+			}
 		}
 	},
 	medium: {
@@ -618,7 +661,8 @@ const waves = [
 	// enemyWaves.medium.one(),
 	// enemyWaves.small.seven(),
 	// enemyWaves.small.seven(),
-	enemyWaves.medium.two()
+	enemyWaves.medium.two(),
+	// enemyWaves.small.eight()
 
 
 
@@ -653,7 +697,7 @@ const waves = [
 
 enemiesLoop = function(){
 	//  && gameClock >= 150
-	if(waves.length){
+	if(waves.length && gameClock >= 150){
 		currentWave = waves[0];
 		if(!currentWave.chain){
 			currentWave.chain = 0;
@@ -681,7 +725,11 @@ enemiesLoop = function(){
 					context.drawImage(enemy.img, enemy.x, enemy.y);
 				}
 			}
-			if(enemy.y > gameHeight || enemy.y <= -(grid * 10) || enemy.x + enemy.width <= -(grid * 4) || enemy.x >= gameWidth + (grid * 4)) currentWave.enemies.splice(i, 1);
+			if(currentWave.fromBottom){
+				if(enemy.y <= -(grid * 10) || enemy.x + enemy.width <= -(grid * 4) || enemy.x >= gameWidth + (grid * 4)) currentWave.enemies.splice(i, 1);
+			} else {
+				if(enemy.y <= -(grid * 10) || enemy.x + enemy.width <= -(grid * 4) || enemy.x >= gameWidth + (grid * 4) || enemy.y > gameHeight) currentWave.enemies.splice(i, 1);
+			}
 			if(!currentWave.enemies.length) waves.shift();
 			const enemyCollisionEl = {x: enemy.x, y: enemy.y, width: enemy.width, height: enemy.height},
 			killEnemy = function(bulletObj){

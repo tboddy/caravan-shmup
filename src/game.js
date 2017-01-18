@@ -14,7 +14,7 @@ gameLoop = function(){
 		levelLoop();
 		secretLoop();
 		pointerLoop();
-		// powerupLoop();
+		powerupLoop();
 		enemyShootingLoop();
 		enemiesLoop();
 		shootingLoop();

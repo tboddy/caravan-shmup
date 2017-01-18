@@ -21,7 +21,7 @@ const powerupLoop = function(){
 
 
 
-				powerupObj.y += 0.5;
+				powerupObj.y += 0.67;
 				const increase = 90 / 180 * Math.PI / (grid * 1.75);
 				powerupObj.x = powerupObj.initial - Math.sin(powerupObj.count) * (grid * 6.5);
 				context.drawImage(powerupImg, powerupObj.x, powerupObj.y);
