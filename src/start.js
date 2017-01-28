@@ -10,7 +10,7 @@ const start = function(){
 
 	const startLogoImg = new Image(),
 		creditString = '2017 t.boddy',
-		creditStringTwo = 'pre alpha 0.08',
+		creditStringTwo = 'pre alpha 0.12',
 		controlString = 'arrows or joystick:move',
 		controlStringTwo = 'z or btns 1 to 4:shoot',
 		controlStringThree = 'esc or btn 9: back to menu';

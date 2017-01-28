@@ -1,4 +1,4 @@
-const playerSpeed = 4, playerWidth = grid, playerHeight = grid * 1.5;
+const playerSpeed = 3.5, playerWidth = grid, playerHeight = grid * 1.5;
 let movingUp = false, movingDown = false, movingLeft = false, movingRight = false, shot = false, player, playerIsHidden = false, playerX = (gameWidth / 2) - (playerWidth / 2), playerY = gameHeight - (playerHeight + grid);
 
 const setupPlayer = function(){

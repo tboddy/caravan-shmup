@@ -55,7 +55,7 @@ shotAnimations = {
 		},
 		two: function(){
 			enemyShots.medium.two.forEach(function(shotObj, i){
-				shotObj.y += 2;
+				shotObj.y += 1.5;
 				context.drawImage(missileOneImg, shotObj.x, shotObj.y);
 				if(canGetHit) checkEnemyShotCollision(shotObj, i, enemyShots.medium.one);
 				checkEnemyPopcorn(shotObj, i, enemyShots.medium.two);
