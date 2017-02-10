@@ -918,10 +918,10 @@ levelLoop = function(){
 	draw();
 
 };
-const updateBlocks = function(){
-	levelMap.forEach(function(row, i){
+const updateBlocks = () => {
+	levelMap.forEach((row, i) => {
 		if(gridPositions[i].y + grid >= 0 && gridPositions[i].y <= gameHeight){
-			row.forEach(function(levelGrid, j){
+			row.forEach((levelGrid, j) => {
 				let gridChar = gridPositions[i].grids[j].char;
 				if(gridChar.indexOf('(') > -1) gridChar = gridChar.substring(0, gridChar.indexOf('('));
 				const gridObj = {x: gridPositions[i].grids[j].x, y: gridPositions[i].y, char: gridChar};
@@ -933,15 +933,15 @@ const updateBlocks = function(){
 	});
 },
 
-checkBlockCollision = function(block){
-	checkBulletCollision({x: block.x, y: block.y, width: grid, height: grid}, function(){
+checkBlockCollision = (block) => {
+	checkBulletCollision({x: block.x, y: block.y, width: grid, height: grid}, () => {
 		destroyBlock(block);
 	});
 },
 
-destroyBlock = function(block){
-	levelMap.forEach(function(row, i){
-		row.forEach(function(char, j){
+destroyBlock = (block) => {
+	levelMap.forEach((row, i) => {
+		row.forEach((char, j) => {
 			let gridChar = char;
 			if(gridChar.indexOf('(') > -1) gridChar = gridChar.substring(0, gridChar.indexOf('('));
 			if(gridPositions[i].grids[j].x == block.x && gridPositions[i].y == block.y && block.char == gridChar){
@@ -957,8 +957,8 @@ destroyBlock = function(block){
 	});
 },
 
-checkBigBlockCollision = function(bigBlock){
-	checkBulletCollision({x: bigBlock.x, y: bigBlock.y, width: grid, height: grid}, function(){
+checkBigBlockCollision = (bigBlock) => {
+	checkBulletCollision({x: bigBlock.x, y: bigBlock.y, width: grid, height: grid}, () => {
 		let gridsToDestroy = {};
 		switch(bigBlock.char.trim()){
 			case 'k':
@@ -990,9 +990,9 @@ checkBigBlockCollision = function(bigBlock){
 	});
 },
 
-destroyBigBlock = function(gridsToDestroy){
-	levelMap.forEach(function(row, i){
-		row.forEach(function(char, j){
+destroyBigBlock = (gridsToDestroy) => {
+	levelMap.forEach((row, i) => {
+		row.forEach((char, j) => {
 			let gridChar = char;
 			if(gridChar.indexOf('(') > -1) gridChar = gridChar.substring(0, gridChar.indexOf('('));
 			gridChar = gridChar.trim();
@@ -1393,7 +1393,7 @@ const enemyAnimations = {
 const enemyWaves = {
 	small: {
 		one: function(){
-			const step = grid * .5;
+			const step = grid * .75;
 			return {
 				animation: enemyAnimations.small.one,
 				img: enemySmallOneImg,
@@ -1402,11 +1402,13 @@ const enemyWaves = {
 				score: 300,
 				initial: (gameWidth / 2) - (grid /2),
 				enemies: [
-					{count: 0, y: -grid - (step * 10)},
-					{count: 0.2, y: -grid - (step * 8)},
-					{count: 0.4, y: -grid - (step * 6)},
-					{count: 0.6, y: -grid - (step * 4)},
-					{count: 0.8, y: -grid - (step * 2)},
+					{count: -0.4, y: -grid - (step * 7)},
+					{count: -0.2, y: -grid - (step * 6)},
+					{count: 0, y: -grid - (step * 5)},
+					{count: 0.2, y: -grid - (step * 4)},
+					{count: 0.4, y: -grid - (step * 3)},
+					{count: 0.6, y: -grid - (step * 2)},
+					{count: 0.8, y: -grid - step},
 					{count: 1, y: -grid}
 				]
 			}
@@ -1573,7 +1575,7 @@ const enemyWaves = {
 				onlyDestroysPlayer: true,
 				fromBottom: true,
 				enemies: [
-					{x: grid * 4, y: grid * -2, hits: 25},
+					{x: grid * 4, y: grid * -2, hits: 15},
 				]
 			}
 		},
@@ -1586,8 +1588,8 @@ const enemyWaves = {
 				width: grid * 2,
 				onlyDestroysPlayer: true,
 				enemies: [
-					{x: gameWidth + grid, y: 0, hits: 10, initialY: (gameHeight / 3) - grid, angle: 4.7, radiusMulti: 7.5, rotateSpeed: 0.022},
-					{x: gameWidth + grid, y: 0, hits: 10, initialY: (gameHeight / 3) + grid, angle: 5, radiusMulti: 6.5, rotateSpeed: 0.026}
+					{x: gameWidth + grid, y: 0, hits: 6, initialY: (gameHeight / 3) - grid, angle: 4.7, radiusMulti: 7.5, rotateSpeed: 0.022},
+					{x: gameWidth + grid, y: 0, hits: 6, initialY: (gameHeight / 3) + grid, angle: 5, radiusMulti: 6.5, rotateSpeed: 0.026}
 				]
 			}
 		},
@@ -1615,8 +1617,8 @@ const enemyWaves = {
 				width: grid * 2,
 				onlyDestroysPlayer: true,
 				enemies: [
-					{x: grid * -1, y: 0, hits: 10, initialY: (gameHeight / 3), angle: 4.7, radiusMulti: 7.5, rotateSpeed: 0.022},
-					{x: gameWidth + grid, y: 0, hits: 10, initialY: (gameHeight / 3), angle: 4.7, radiusMulti: 7.5, rotateSpeed: 0.022, goesRight: true}
+					{x: grid * -1, y: 0, hits: 6, initialY: (gameHeight / 3), angle: 4.7, radiusMulti: 7.5, rotateSpeed: 0.022},
+					{x: gameWidth + grid, y: 0, hits: 6, initialY: (gameHeight / 3), angle: 4.7, radiusMulti: 7.5, rotateSpeed: 0.022, goesRight: true}
 				]
 			}
 		},
@@ -1775,18 +1777,18 @@ spawnPowerup = function(){
 const playerSpeed = 3.5, playerWidth = grid, playerHeight = grid * 1.5;
 let movingUp = false, movingDown = false, movingLeft = false, movingRight = false, shot = false, player, playerIsHidden = false, playerX = (gameWidth / 2) - (playerWidth / 2), playerY = gameHeight - (playerHeight + grid);
 
-const setupPlayer = function(){
-	const setupKeyboard = function(){
+const setupPlayer = () => {
+	const setupKeyboard = () => {
 		document.addEventListener('keydown', playerKeysDown);
 		document.addEventListener('keyup', playerKeysUp);
-	}, buildPlayer = function(){
+	}, buildPlayer = () => {
 		player = new Image();
 	};
 	setupKeyboard();
 	buildPlayer();
 },
 
-playerKeysDown = function(e){
+playerKeysDown = (e) => {
 	switch(e.which){
 		case 38: movingUp = true; break;
 		case 40: movingDown = true; break;
@@ -1797,7 +1799,7 @@ playerKeysDown = function(e){
 	};
 },
 
-playerKeysUp = function(e){
+playerKeysUp = (e) => {
 	switch(e.which){
 		case 38: movingUp = false; break;
 		case 40: movingDown = false; break;
@@ -1805,11 +1807,11 @@ playerKeysUp = function(e){
 		case 39: movingRight = false; break;
 		case 90: shot = false; break;
 	};
-};
+},
 
-playerLoop = function(){
-	const update = function(){
-		const updateGamepad = function(){
+playerLoop = () => {
+	const update = () => {
+		const updateGamepad = () => {
 			if(navigator.getGamepads()[0]){
 				gamepad = navigator.getGamepads()[0];
 				if(gamepad.axes[9]){
@@ -1828,7 +1830,7 @@ playerLoop = function(){
 				if(gamepad.buttons[8].pressed) mainWindow.reload();
 			}
 		},
-		updateKeyboard = function(){
+		updateKeyboard = () => {
 			if(movingRight) playerX += playerSpeed;
 			else if(movingLeft) playerX -= playerSpeed;
 			if(movingUp) playerY -= playerSpeed;
@@ -1841,7 +1843,7 @@ playerLoop = function(){
 		updateGamepad();
 		updateKeyboard();
 	},
-	draw = function(){
+	draw = () => {
 		if(!isGameOver){
 			if(!canGetHit){
 				if(gameClock % 10 == 0) player.src = 'img/playerblank.png';

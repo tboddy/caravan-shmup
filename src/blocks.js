@@ -1,7 +1,7 @@
-const updateBlocks = function(){
-	levelMap.forEach(function(row, i){
+const updateBlocks = () => {
+	levelMap.forEach((row, i) => {
 		if(gridPositions[i].y + grid >= 0 && gridPositions[i].y <= gameHeight){
-			row.forEach(function(levelGrid, j){
+			row.forEach((levelGrid, j) => {
 				let gridChar = gridPositions[i].grids[j].char;
 				if(gridChar.indexOf('(') > -1) gridChar = gridChar.substring(0, gridChar.indexOf('('));
 				const gridObj = {x: gridPositions[i].grids[j].x, y: gridPositions[i].y, char: gridChar};
@@ -13,15 +13,15 @@ const updateBlocks = function(){
 	});
 },
 
-checkBlockCollision = function(block){
-	checkBulletCollision({x: block.x, y: block.y, width: grid, height: grid}, function(){
+checkBlockCollision = (block) => {
+	checkBulletCollision({x: block.x, y: block.y, width: grid, height: grid}, () => {
 		destroyBlock(block);
 	});
 },
 
-destroyBlock = function(block){
-	levelMap.forEach(function(row, i){
-		row.forEach(function(char, j){
+destroyBlock = (block) => {
+	levelMap.forEach((row, i) => {
+		row.forEach((char, j) => {
 			let gridChar = char;
 			if(gridChar.indexOf('(') > -1) gridChar = gridChar.substring(0, gridChar.indexOf('('));
 			if(gridPositions[i].grids[j].x == block.x && gridPositions[i].y == block.y && block.char == gridChar){
@@ -37,8 +37,8 @@ destroyBlock = function(block){
 	});
 },
 
-checkBigBlockCollision = function(bigBlock){
-	checkBulletCollision({x: bigBlock.x, y: bigBlock.y, width: grid, height: grid}, function(){
+checkBigBlockCollision = (bigBlock) => {
+	checkBulletCollision({x: bigBlock.x, y: bigBlock.y, width: grid, height: grid}, () => {
 		let gridsToDestroy = {};
 		switch(bigBlock.char.trim()){
 			case 'k':
@@ -70,9 +70,9 @@ checkBigBlockCollision = function(bigBlock){
 	});
 },
 
-destroyBigBlock = function(gridsToDestroy){
-	levelMap.forEach(function(row, i){
-		row.forEach(function(char, j){
+destroyBigBlock = (gridsToDestroy) => {
+	levelMap.forEach((row, i) => {
+		row.forEach((char, j) => {
 			let gridChar = char;
 			if(gridChar.indexOf('(') > -1) gridChar = gridChar.substring(0, gridChar.indexOf('('));
 			gridChar = gridChar.trim();

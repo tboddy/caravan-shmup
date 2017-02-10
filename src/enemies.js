@@ -295,7 +295,7 @@ const enemyAnimations = {
 const enemyWaves = {
 	small: {
 		one: function(){
-			const step = grid * .5;
+			const step = grid * .75;
 			return {
 				animation: enemyAnimations.small.one,
 				img: enemySmallOneImg,
@@ -304,11 +304,13 @@ const enemyWaves = {
 				score: 300,
 				initial: (gameWidth / 2) - (grid /2),
 				enemies: [
-					{count: 0, y: -grid - (step * 10)},
-					{count: 0.2, y: -grid - (step * 8)},
-					{count: 0.4, y: -grid - (step * 6)},
-					{count: 0.6, y: -grid - (step * 4)},
-					{count: 0.8, y: -grid - (step * 2)},
+					{count: -0.4, y: -grid - (step * 7)},
+					{count: -0.2, y: -grid - (step * 6)},
+					{count: 0, y: -grid - (step * 5)},
+					{count: 0.2, y: -grid - (step * 4)},
+					{count: 0.4, y: -grid - (step * 3)},
+					{count: 0.6, y: -grid - (step * 2)},
+					{count: 0.8, y: -grid - step},
 					{count: 1, y: -grid}
 				]
 			}
@@ -475,7 +477,7 @@ const enemyWaves = {
 				onlyDestroysPlayer: true,
 				fromBottom: true,
 				enemies: [
-					{x: grid * 4, y: grid * -2, hits: 25},
+					{x: grid * 4, y: grid * -2, hits: 15},
 				]
 			}
 		},
@@ -488,8 +490,8 @@ const enemyWaves = {
 				width: grid * 2,
 				onlyDestroysPlayer: true,
 				enemies: [
-					{x: gameWidth + grid, y: 0, hits: 10, initialY: (gameHeight / 3) - grid, angle: 4.7, radiusMulti: 7.5, rotateSpeed: 0.022},
-					{x: gameWidth + grid, y: 0, hits: 10, initialY: (gameHeight / 3) + grid, angle: 5, radiusMulti: 6.5, rotateSpeed: 0.026}
+					{x: gameWidth + grid, y: 0, hits: 6, initialY: (gameHeight / 3) - grid, angle: 4.7, radiusMulti: 7.5, rotateSpeed: 0.022},
+					{x: gameWidth + grid, y: 0, hits: 6, initialY: (gameHeight / 3) + grid, angle: 5, radiusMulti: 6.5, rotateSpeed: 0.026}
 				]
 			}
 		},
@@ -517,8 +519,8 @@ const enemyWaves = {
 				width: grid * 2,
 				onlyDestroysPlayer: true,
 				enemies: [
-					{x: grid * -1, y: 0, hits: 10, initialY: (gameHeight / 3), angle: 4.7, radiusMulti: 7.5, rotateSpeed: 0.022},
-					{x: gameWidth + grid, y: 0, hits: 10, initialY: (gameHeight / 3), angle: 4.7, radiusMulti: 7.5, rotateSpeed: 0.022, goesRight: true}
+					{x: grid * -1, y: 0, hits: 6, initialY: (gameHeight / 3), angle: 4.7, radiusMulti: 7.5, rotateSpeed: 0.022},
+					{x: gameWidth + grid, y: 0, hits: 6, initialY: (gameHeight / 3), angle: 4.7, radiusMulti: 7.5, rotateSpeed: 0.022, goesRight: true}
 				]
 			}
 		},

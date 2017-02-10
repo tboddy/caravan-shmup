@@ -1,18 +1,18 @@
 const playerSpeed = 3.5, playerWidth = grid, playerHeight = grid * 1.5;
 let movingUp = false, movingDown = false, movingLeft = false, movingRight = false, shot = false, player, playerIsHidden = false, playerX = (gameWidth / 2) - (playerWidth / 2), playerY = gameHeight - (playerHeight + grid);
 
-const setupPlayer = function(){
-	const setupKeyboard = function(){
+const setupPlayer = () => {
+	const setupKeyboard = () => {
 		document.addEventListener('keydown', playerKeysDown);
 		document.addEventListener('keyup', playerKeysUp);
-	}, buildPlayer = function(){
+	}, buildPlayer = () => {
 		player = new Image();
 	};
 	setupKeyboard();
 	buildPlayer();
 },
 
-playerKeysDown = function(e){
+playerKeysDown = (e) => {
 	switch(e.which){
 		case 38: movingUp = true; break;
 		case 40: movingDown = true; break;
@@ -23,7 +23,7 @@ playerKeysDown = function(e){
 	};
 },
 
-playerKeysUp = function(e){
+playerKeysUp = (e) => {
 	switch(e.which){
 		case 38: movingUp = false; break;
 		case 40: movingDown = false; break;
@@ -31,11 +31,11 @@ playerKeysUp = function(e){
 		case 39: movingRight = false; break;
 		case 90: shot = false; break;
 	};
-};
+},
 
-playerLoop = function(){
-	const update = function(){
-		const updateGamepad = function(){
+playerLoop = () => {
+	const update = () => {
+		const updateGamepad = () => {
 			if(navigator.getGamepads()[0]){
 				gamepad = navigator.getGamepads()[0];
 				if(gamepad.axes[9]){
@@ -54,7 +54,7 @@ playerLoop = function(){
 				if(gamepad.buttons[8].pressed) mainWindow.reload();
 			}
 		},
-		updateKeyboard = function(){
+		updateKeyboard = () => {
 			if(movingRight) playerX += playerSpeed;
 			else if(movingLeft) playerX -= playerSpeed;
 			if(movingUp) playerY -= playerSpeed;
@@ -67,7 +67,7 @@ playerLoop = function(){
 		updateGamepad();
 		updateKeyboard();
 	},
-	draw = function(){
+	draw = () => {
 		if(!isGameOver){
 			if(!canGetHit){
 				if(gameClock % 10 == 0) player.src = 'img/playerblank.png';
