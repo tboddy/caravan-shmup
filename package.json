@@ -14,8 +14,6 @@
     "grunt-contrib-watch": "1.0.0"
   },
   "devDependencies": {
-    "electron": "^1.4.1",
-    "electron-cookies": "^1.1.0",
-    "grunt-contrib-concat": "^1.0.1"
+    "electron-cookies": "^1.1.0"
   }
 }

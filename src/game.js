@@ -13,10 +13,10 @@ gameLoop = function(){
 		clearGame();
 		levelLoop();
 		secretLoop();
-		pointerLoop();
-		powerupLoop();
 		enemyShootingLoop();
 		enemiesLoop();
+		pointerLoop();
+		powerupLoop();
 		shootingLoop();
 		playerLoop();
 		explosionsLoop();

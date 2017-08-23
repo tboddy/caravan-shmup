@@ -154,17 +154,17 @@ levelLoop = function(){
 			levelMap.forEach(function(row, i){
 				switch(type){
 					case 'ground':
-						var groundY = gridPositions[i].groundY * grid;
+						const groundY = gridPositions[i].groundY * grid;
 						if(groundY + (grid * grid) >= 0 && groundY <= gameHeight){
-					 		var groundEl = new Image();
+					 		const groundEl = new Image();
 					 		groundEl.src = 'img/stars1.png';
 					 		context.drawImage(groundEl, 0, groundY);
 						}
 						break;
 					case 'clouds':
-						var cloudY = gridPositions[i].cloudY * grid;
+						const cloudY = gridPositions[i].cloudY * grid;
 						if(cloudY + (grid * grid) >= 0 && cloudY <= gameHeight){
-					 		var cloudEl = new Image();
+					 		const cloudEl = new Image();
 					 		cloudEl.src = 'img/stars2.png';
 					 		context.drawImage(cloudEl, 0, cloudY);
 						}
